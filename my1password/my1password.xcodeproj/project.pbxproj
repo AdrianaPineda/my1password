@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A01C3D71A92B52700905C16 /* AccountTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */; };
 		7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF311A927101001EF48C /* AppDelegate.swift */; };
-		7AFECF341A927101001EF48C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF331A927101001EF48C /* ViewController.swift */; };
 		7AFECF371A927101001EF48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF351A927101001EF48C /* Main.storyboard */; };
 		7AFECF391A927101001EF48C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF381A927101001EF48C /* Images.xcassets */; };
 		7AFECF3C1A927101001EF48C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF3A1A927101001EF48C /* LaunchScreen.xib */; };
 		7AFECF481A927101001EF48C /* my1passwordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF471A927101001EF48C /* my1passwordTests.swift */; };
+		7AFECF521A927DB1001EF48C /* pass-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF511A927DB1001EF48C /* pass-icon.png */; };
+		7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF541A92941C001EF48C /* LoginViewController.swift */; };
+		7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF561A92A650001EF48C /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +29,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTabBarController.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF301A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFECF311A927101001EF48C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7AFECF331A927101001EF48C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7AFECF361A927101001EF48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7AFECF381A927101001EF48C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7AFECF3B1A927101001EF48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7AFECF411A927101001EF48C /* my1passwordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = my1passwordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF461A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFECF471A927101001EF48C /* my1passwordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my1passwordTests.swift; sourceTree = "<group>"; };
+		7AFECF511A927DB1001EF48C /* pass-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pass-icon.png"; path = "Resources/pass-icon.png"; sourceTree = SOURCE_ROOT; };
+		7AFECF541A92941C001EF48C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7AFECF561A92A650001EF48C /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +83,12 @@
 		7AFECF2E1A927101001EF48C /* my1password */ = {
 			isa = PBXGroup;
 			children = (
+				7AFECF531A9293FC001EF48C /* Controllers */,
 				7AFECF311A927101001EF48C /* AppDelegate.swift */,
-				7AFECF331A927101001EF48C /* ViewController.swift */,
 				7AFECF351A927101001EF48C /* Main.storyboard */,
 				7AFECF381A927101001EF48C /* Images.xcassets */,
 				7AFECF3A1A927101001EF48C /* LaunchScreen.xib */,
+				7AFECF511A927DB1001EF48C /* pass-icon.png */,
 				7AFECF2F1A927101001EF48C /* Supporting Files */,
 			);
 			path = my1password;
@@ -110,6 +117,16 @@
 				7AFECF461A927101001EF48C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7AFECF531A9293FC001EF48C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7AFECF541A92941C001EF48C /* LoginViewController.swift */,
+				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
+				7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFECF371A927101001EF48C /* Main.storyboard in Resources */,
+				7AFECF521A927DB1001EF48C /* pass-icon.png in Resources */,
 				7AFECF3C1A927101001EF48C /* LaunchScreen.xib in Resources */,
 				7AFECF391A927101001EF48C /* Images.xcassets in Resources */,
 			);
@@ -212,7 +230,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AFECF341A927101001EF48C /* ViewController.swift in Sources */,
+				7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */,
+				7A01C3D71A92B52700905C16 /* AccountTabBarController.swift in Sources */,
+				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
 				7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +359,7 @@
 				INFOPLIST_FILE = my1password/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -349,6 +370,7 @@
 				INFOPLIST_FILE = my1password/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -405,6 +427,7 @@
 				7AFECF4D1A927101001EF48C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AFECF4E1A927101001EF48C /* Build configuration list for PBXNativeTarget "my1passwordTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +436,7 @@
 				7AFECF501A927101001EF48C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
