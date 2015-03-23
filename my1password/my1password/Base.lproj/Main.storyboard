@@ -243,10 +243,10 @@
             </objects>
             <point key="canvasLocation" x="1605" y="367"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Account View Controller-->
         <scene sceneID="kC9-2b-Dnj">
             <objects>
-                <viewController id="nLD-HR-LKL" sceneMemberID="viewController">
+                <viewController id="nLD-HR-LKL" customClass="AddAccountViewController" customModule="my1password" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ax2-FH-g5A"/>
                         <viewControllerLayoutGuide type="bottom" id="qWm-KE-Zoo"/>
@@ -301,18 +301,23 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8p-Z1-QF3">
-                                <rect key="frame" x="16" y="373" width="568" height="30"/>
+                                <rect key="frame" x="270" y="373" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="byd-hw-Wds"/>
+                                </constraints>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.1046959388" green="0.62467721529999998" blue="0.81782863449999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveAccount:" destination="nLD-HR-LKL" eventType="touchUpInside" id="ZVn-u0-FKO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="trailing" secondItem="a2V-JX-HHH" secondAttribute="trailingMargin" id="3uX-5I-gu2"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="leading" secondItem="17C-ob-8B4" secondAttribute="leading" id="5sh-wL-rI8"/>
-                            <constraint firstItem="iDq-47-sLW" firstAttribute="leading" secondItem="v8p-Z1-QF3" secondAttribute="leading" id="6e2-d9-cep"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="trailing" secondItem="vdL-Qq-hnq" secondAttribute="trailing" id="6nE-pF-TSq"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="leading" secondItem="QoM-3C-9OT" secondAttribute="leading" id="E36-Bw-SzY"/>
                             <constraint firstItem="vdL-Qq-hnq" firstAttribute="top" secondItem="QoM-3C-9OT" secondAttribute="bottom" constant="16" id="GYq-ue-6uA"/>
@@ -323,6 +328,8 @@
                             <constraint firstItem="17C-ob-8B4" firstAttribute="top" secondItem="X5i-KB-yTu" secondAttribute="bottom" constant="16" id="UJo-na-6tV"/>
                             <constraint firstItem="v8p-Z1-QF3" firstAttribute="top" secondItem="vdL-Qq-hnq" secondAttribute="bottom" constant="29" id="bmV-kq-9j1"/>
                             <constraint firstItem="QoM-3C-9OT" firstAttribute="top" secondItem="Ax2-FH-g5A" secondAttribute="bottom" constant="214" id="deM-xm-d1O"/>
+                            <constraint firstItem="v8p-Z1-QF3" firstAttribute="top" secondItem="Ax2-FH-g5A" secondAttribute="bottom" constant="309" id="eNf-ai-5Xw"/>
+                            <constraint firstItem="v8p-Z1-QF3" firstAttribute="centerX" secondItem="vdL-Qq-hnq" secondAttribute="centerX" id="eiF-yL-05h"/>
                             <constraint firstItem="QoM-3C-9OT" firstAttribute="top" secondItem="17C-ob-8B4" secondAttribute="bottom" constant="28" id="fqM-FW-Bs4"/>
                             <constraint firstItem="X5i-KB-yTu" firstAttribute="top" secondItem="VKf-rE-DpQ" secondAttribute="bottom" constant="28" id="ixf-ta-Rmo"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="top" secondItem="Ax2-FH-g5A" secondAttribute="bottom" constant="26" id="jK6-qK-smy"/>
@@ -333,11 +340,15 @@
                             <constraint firstItem="VKf-rE-DpQ" firstAttribute="top" secondItem="Ax2-FH-g5A" secondAttribute="bottom" constant="62" id="rKs-1h-rGj"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="trailing" secondItem="QoM-3C-9OT" secondAttribute="trailing" id="rZD-dg-YmL"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="leading" secondItem="vdL-Qq-hnq" secondAttribute="leading" id="tt3-no-69S"/>
-                            <constraint firstItem="iDq-47-sLW" firstAttribute="trailing" secondItem="v8p-Z1-QF3" secondAttribute="trailing" id="uNr-Gb-BP4"/>
                             <constraint firstItem="VKf-rE-DpQ" firstAttribute="top" secondItem="iDq-47-sLW" secondAttribute="bottom" constant="16" id="ur7-ZG-0PQ"/>
                             <constraint firstItem="iDq-47-sLW" firstAttribute="leading" secondItem="VKf-rE-DpQ" secondAttribute="leading" id="yLV-0F-vgu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="password" destination="17C-ob-8B4" id="Vpq-8H-DBQ"/>
+                        <outlet property="url" destination="vdL-Qq-hnq" id="7i4-Nq-aKH"/>
+                        <outlet property="username" destination="VKf-rE-DpQ" id="aHp-J0-VVD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zTr-C3-eUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
