@@ -14,16 +14,28 @@ class AccountTabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.hidesBackButton = true
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "barButtonItemClicked:"), animated: true)
-        
-        navigationItem.setLeftBarButtonItem(UIBarButtonItem(title: "Sign out", style: UIBarButtonItemStyle.Plain, target: self, action: "signOut:"), animated: true)
+//        navigationItem.hidesBackButton = true
+//        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "barButtonItemClicked"), animated: true)
+//        
+//        navigationItem.setLeftBarButtonItem(UIBarButtonItem(title: "Sign out", style: UIBarButtonItemStyle.Plain, target: self, action: "signOut"), animated: true)
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func addAccount(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func signOut(sender: AnyObject) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func barButtonItemClicked () -> Void {
+        
     }
     
     func signOut () -> Void {

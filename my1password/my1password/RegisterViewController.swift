@@ -52,6 +52,7 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func verifyCode(sender: AnyObject) {
+        
     }
     
     @IBAction func back(sender: AnyObject) {
