@@ -12,7 +12,7 @@ private let sharedInstance = UserAccountsManager()
 
 class UserAccountsManager: NSObject {
     
-    var user: User = User()
+    var user: User? = nil
     
     class var userAccounts: UserAccountsManager {
         return sharedInstance
@@ -20,9 +20,17 @@ class UserAccountsManager: NSObject {
    
     func loadUserAccountsFromConfig() -> Void {
         
+        user = User(email: "", password: "", accounts: NSMutableArray())
+        
     }
     
     func getUserAccounts() -> NSArray {
+        
+        if let currentUser = user {
+            
+            return currentUser.accounts
+        }
+        
         return NSArray()
     }
     
