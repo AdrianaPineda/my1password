@@ -101,5 +101,14 @@ class AccountsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Add Account
+    func addAccount() {
+//        let addAccountTableViewController = NSBundle.mainBundle().loadNibNamed("addAccountTableViewController", owner: self, options: nil).last as! AddAccountTableViewController
+        
+        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addAccountTableViewController") as! AddAccountTableViewController
+        self.navigationController?.pushViewController(addAccountTableViewController, animated: true)
+//        self.presentViewController(addAccountTableViewController, animated: true, completion: nil)
+    }
 
 }

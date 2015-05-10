@@ -217,9 +217,6 @@
                         <barButtonItem title="Item" id="BRd-R8-IZC"/>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="WZe-pp-dut" kind="show" id="VYG-lx-1fH"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRC-hQ-Qgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -255,12 +252,12 @@
         <scene sceneID="iqm-PY-me3">
             <objects>
                 <tableViewController id="Zcm-T8-cau" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="b4z-Wc-Q0V">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="b4z-Wc-Q0V">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="irU-tg-utE">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsRow" id="irU-tg-utE">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="irU-tg-utE" id="wOw-la-qGQ">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -281,7 +278,7 @@
         <!--Add Account-->
         <scene sceneID="VfO-2f-RRM">
             <objects>
-                <tableViewController title="Add Account" id="WZe-pp-dut" customClass="AddAccountTableViewController" customModule="my1password" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="addAccountTableViewController" title="Add Account" id="WZe-pp-dut" customClass="AddAccountTableViewController" customModule="my1password" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KBl-2X-wKY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -370,7 +367,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RLy-qA-1mU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2353" y="1116"/>
+            <point key="canvasLocation" x="1605" y="1791"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OhA-g7-Mvk">
