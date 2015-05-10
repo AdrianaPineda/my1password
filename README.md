@@ -1,4 +1,4 @@
-My 1 password
+My 1password
 =============
 
 Password manager for iOS
