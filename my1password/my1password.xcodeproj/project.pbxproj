@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */; };
 		01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DABA1B00180700421693 /* accounts_icon@2x.png */; };
-		7A01C3D71A92B52700905C16 /* AccountTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */; };
+		01B7DABD1B001A8000421693 /* AccountsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */; };
+		7A01C3D71A92B52700905C16 /* UserAccountTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* UserAccountTabBarController.swift */; };
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
-		7A4F21401AC07FFE00D4AB8C /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213F1AC07FFE00D4AB8C /* AddAccountViewController.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
 		7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */; };
 		7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF311A927101001EF48C /* AppDelegate.swift */; };
@@ -38,10 +38,10 @@
 /* Begin PBXFileReference section */
 		01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
 		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
-		7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTabBarController.swift; sourceTree = "<group>"; };
+		01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTableViewController.swift; sourceTree = "<group>"; };
+		7A01C3D61A92B52700905C16 /* UserAccountTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTabBarController.swift; sourceTree = "<group>"; };
 		7A4F213B1AC0594C00D4AB8C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		7A4F213F1AC07FFE00D4AB8C /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountsManager.swift; sourceTree = "<group>"; };
 		7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,9 +175,9 @@
 			children = (
 				7AFECF541A92941C001EF48C /* LoginViewController.swift */,
 				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
-				7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */,
-				7A4F213F1AC07FFE00D4AB8C /* AddAccountViewController.swift */,
+				7A01C3D61A92B52700905C16 /* UserAccountTabBarController.swift */,
 				01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */,
+				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -286,12 +286,12 @@
 			files = (
 				7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */,
 				01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */,
-				7A4F21401AC07FFE00D4AB8C /* AddAccountViewController.swift in Sources */,
-				7A01C3D71A92B52700905C16 /* AccountTabBarController.swift in Sources */,
+				7A01C3D71A92B52700905C16 /* UserAccountTabBarController.swift in Sources */,
 				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
 				7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */,
 				7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */,
 				7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */,
+				01B7DABD1B001A8000421693 /* AccountsTableViewController.swift in Sources */,
 				7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */,
 				7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */,
 			);

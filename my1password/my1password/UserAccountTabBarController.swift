@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountTabBarController: UITabBarController {
+class UserAccountTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
