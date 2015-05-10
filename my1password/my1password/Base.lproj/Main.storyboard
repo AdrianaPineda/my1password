@@ -191,7 +191,7 @@
             </objects>
             <point key="canvasLocation" x="124" y="1149"/>
         </scene>
-        <!--View Controller-->
+        <!--Accounts-->
         <scene sceneID="DL3-BL-r9Q">
             <objects>
                 <viewController id="09g-nX-Drz" sceneMemberID="viewController">
@@ -204,7 +204,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="yRU-Yi-LW2"/>
+                    <tabBarItem key="tabBarItem" title="Accounts" image="accounts_icon.png" id="yRU-Yi-LW2"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -467,4 +467,7 @@
             <point key="canvasLocation" x="124" y="360"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="accounts_icon.png" width="25" height="25"/>
+    </resources>
 </document>

@@ -52,26 +52,7 @@ class AddAccountTableViewController: UITableViewController {
 //        // Return the number of rows in the section.
 //        return 1
 //    }
-//
-//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        
-//        var sectionTitle = ""
-//        if section == AccountFields.Username.rawValue {
-//            
-//            sectionTitle = "Username/Email"
-//            
-//        } else if section == AccountFields.Password.rawValue {
-//            
-//            sectionTitle = "Password"
-//            
-//        } else if section == AccountFields.URL.rawValue {
-//            
-//            sectionTitle = "URL"
-//            
-//        }
-//        
-//        return sectionTitle
-//    }
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -137,13 +118,32 @@ class AddAccountTableViewController: UITableViewController {
     
     func areAllFieldsComplete() -> Bool {
         
+        if isUsernameComplete() && isPasswordComplete() && isURLComplete() {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isUsernameComplete() -> Bool {
+        
         if username.text == nil || username.text == "" {
             return false
         }
         
+        return true
+    }
+    
+    func isPasswordComplete() -> Bool {
+        
         if password.text == nil || password.text == "" {
             return false
         }
+        
+        return true
+    }
+
+    func isURLComplete() -> Bool {
         
         if url.text == nil || url.text == "" {
             return false
@@ -151,5 +151,4 @@ class AddAccountTableViewController: UITableViewController {
         
         return true
     }
-
 }

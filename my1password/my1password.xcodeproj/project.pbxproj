@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */; };
+		01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DABA1B00180700421693 /* accounts_icon@2x.png */; };
 		7A01C3D71A92B52700905C16 /* AccountTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */; };
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
+		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
 		7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTabBarController.swift; sourceTree = "<group>"; };
 		7A4F213B1AC0594C00D4AB8C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -81,11 +83,21 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		01B7DAB51B00172600421693 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				01B7DABA1B00180700421693 /* accounts_icon@2x.png */,
+				7AFECF511A927DB1001EF48C /* pass-icon.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		7A4F213A1AC0593E00D4AB8C /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7A4F213B1AC0594C00D4AB8C /* User.swift */,
 				7A4F213D1AC0595800D4AB8C /* Account.swift */,
+				7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -123,11 +135,11 @@
 				7A4F213A1AC0593E00D4AB8C /* Models */,
 				7AFECF531A9293FC001EF48C /* Controllers */,
 				01B7DAB01B000B0B00421693 /* Views */,
+				01B7DAB51B00172600421693 /* Resources */,
 				7AFECF311A927101001EF48C /* AppDelegate.swift */,
 				7AFECF351A927101001EF48C /* Main.storyboard */,
 				7AFECF381A927101001EF48C /* Images.xcassets */,
 				7AFECF3A1A927101001EF48C /* LaunchScreen.xib */,
-				7AFECF511A927DB1001EF48C /* pass-icon.png */,
 				7AFECF2F1A927101001EF48C /* Supporting Files */,
 			);
 			path = my1password;
@@ -165,7 +177,6 @@
 				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
 				7A01C3D61A92B52700905C16 /* AccountTabBarController.swift */,
 				7A4F213F1AC07FFE00D4AB8C /* AddAccountViewController.swift */,
-				7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */,
 				01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */,
 			);
 			name = Controllers;
@@ -252,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFECF371A927101001EF48C /* Main.storyboard in Resources */,
+				01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */,
 				7AFECF521A927DB1001EF48C /* pass-icon.png in Resources */,
 				7AFECF3C1A927101001EF48C /* LaunchScreen.xib in Resources */,
 				7AFECF391A927101001EF48C /* Images.xcassets in Resources */,
