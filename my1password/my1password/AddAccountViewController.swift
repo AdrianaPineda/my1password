@@ -9,7 +9,6 @@
 import UIKit
 
 class AddAccountViewController: UIViewController {
-
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!

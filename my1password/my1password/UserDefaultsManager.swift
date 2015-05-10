@@ -12,7 +12,7 @@ private let sharedInstance = UserDefaultsManager()
 
 class UserDefaultsManager: NSObject {
 
-    //TODO check if userdefaults is initialize every time
+    //TODO check if userdefaults is initialized every time
     var userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     class var userDefaults: UserDefaultsManager {
@@ -21,13 +21,13 @@ class UserDefaultsManager: NSObject {
     
     func setObject(value: AnyObject?, forKey key: NSString) {
         
-        userDefaults.setObject(value, forKey: key)
+        userDefaults.setObject(value, forKey: key as String)
         userDefaults.synchronize()
     }
     
     func getObjectForKey(key: NSString) -> AnyObject? {
         
-        if let currentObject: AnyObject = userDefaults.objectForKey(key) as AnyObject? {
+        if let currentObject: AnyObject = userDefaults.objectForKey(key as String) as AnyObject? {
             return currentObject
         } else {
             return nil
