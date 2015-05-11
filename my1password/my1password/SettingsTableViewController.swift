@@ -1,5 +1,5 @@
 //
-//  AccountsTableViewController.swift
+//  SettingsTableViewController.swift
 //  my1password
 //
 //  Created by Adriana Pineda on 5/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,46 +16,39 @@ class AccountsTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        self.tabBarController?.navigationController
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addAccount")
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
-    }
 
-    override func viewWillDisappear(animated: Bool) {
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-    }
-    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 1
+        return 0
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("accountRow", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
         // Configure the cell...
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -101,14 +94,5 @@ class AccountsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    // MARK: - Add Account
-    func addAccount() {
-//        let addAccountTableViewController = NSBundle.mainBundle().loadNibNamed("addAccountTableViewController", owner: self, options: nil).last as! AddAccountTableViewController
-        
-        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addAccountTableViewController") as! AddAccountTableViewController
-        self.navigationController?.pushViewController(addAccountTableViewController, animated: true)
-//        self.presentViewController(addAccountTableViewController, animated: true, completion: nil)
-    }
 
 }

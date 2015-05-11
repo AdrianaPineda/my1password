@@ -222,10 +222,10 @@
             </objects>
             <point key="canvasLocation" x="1605" y="1116"/>
         </scene>
-        <!--User Account Tab Bar Controller-->
+        <!--User Home Tab Bar Controller-->
         <scene sceneID="hFE-lq-3a1">
             <objects>
-                <tabBarController storyboardIdentifier="accountsId" id="HZ9-1x-Uuj" customClass="UserAccountTabBarController" customModule="my1password" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="accountsId" id="HZ9-1x-Uuj" customClass="UserHomeTabBarController" customModule="my1password" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="jmY-rU-Kkg">
                         <barButtonItem key="leftBarButtonItem" title="Sign out" id="r45-WR-WRL">
                             <connections>
@@ -248,7 +248,7 @@
             </objects>
             <point key="canvasLocation" x="1605" y="367"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Settings-->
         <scene sceneID="iqm-PY-me3">
             <objects>
                 <tableViewController id="Zcm-T8-cau" sceneMemberID="viewController">
@@ -269,7 +269,7 @@
                             <outlet property="delegate" destination="Zcm-T8-cau" id="wZd-p5-XPt"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="CtK-W9-mvU"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings.png" id="CtK-W9-mvU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dc-L8-1cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -390,5 +390,6 @@
     </scenes>
     <resources>
         <image name="accounts_icon.png" width="25" height="25"/>
+        <image name="settings.png" width="25" height="25"/>
     </resources>
 </document>

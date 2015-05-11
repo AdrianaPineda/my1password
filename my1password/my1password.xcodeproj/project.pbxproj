@@ -10,7 +10,9 @@
 		01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */; };
 		01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DABA1B00180700421693 /* accounts_icon@2x.png */; };
 		01B7DABD1B001A8000421693 /* AccountsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */; };
-		7A01C3D71A92B52700905C16 /* UserAccountTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* UserAccountTabBarController.swift */; };
+		01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */; };
+		01B7DAD01B00286300421693 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DACF1B00286300421693 /* settings@2x.png */; };
+		7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */; };
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
@@ -39,7 +41,9 @@
 		01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
 		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
 		01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTableViewController.swift; sourceTree = "<group>"; };
-		7A01C3D61A92B52700905C16 /* UserAccountTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTabBarController.swift; sourceTree = "<group>"; };
+		01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		01B7DACF1B00286300421693 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHomeTabBarController.swift; sourceTree = "<group>"; };
 		7A4F213B1AC0594C00D4AB8C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountsManager.swift; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 		01B7DAB51B00172600421693 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01B7DACF1B00286300421693 /* settings@2x.png */,
 				01B7DABA1B00180700421693 /* accounts_icon@2x.png */,
 				7AFECF511A927DB1001EF48C /* pass-icon.png */,
 			);
@@ -175,9 +180,10 @@
 			children = (
 				7AFECF541A92941C001EF48C /* LoginViewController.swift */,
 				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
-				7A01C3D61A92B52700905C16 /* UserAccountTabBarController.swift */,
+				7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */,
 				01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */,
 				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
+				01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFECF371A927101001EF48C /* Main.storyboard in Resources */,
+				01B7DAD01B00286300421693 /* settings@2x.png in Resources */,
 				01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */,
 				7AFECF521A927DB1001EF48C /* pass-icon.png in Resources */,
 				7AFECF3C1A927101001EF48C /* LaunchScreen.xib in Resources */,
@@ -286,7 +293,8 @@
 			files = (
 				7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */,
 				01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */,
-				7A01C3D71A92B52700905C16 /* UserAccountTabBarController.swift in Sources */,
+				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
+				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
 				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
 				7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */,
 				7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */,
