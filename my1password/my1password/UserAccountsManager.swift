@@ -36,6 +36,7 @@ class UserAccountsManager: NSObject {
     
     func addAccount(account: Account) -> Bool {
         
+        user?.addAccount(account)
         return true
     }
 }
