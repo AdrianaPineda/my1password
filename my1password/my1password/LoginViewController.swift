@@ -32,5 +32,9 @@ class LoginViewController: UIViewController {
         
     }
     
+    @IBAction func login(sender: AnyObject) {
+
+        UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
+    }
 
 }
