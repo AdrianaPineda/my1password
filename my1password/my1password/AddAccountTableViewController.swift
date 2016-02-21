@@ -30,7 +30,7 @@ class AddAccountTableViewController: UITableViewController {
         let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
         self.navigationItem.rightBarButtonItem = saveButtonItem
         
-        var gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.tableView.addGestureRecognizer(gestureRecognizer)
     }
 
@@ -108,7 +108,7 @@ class AddAccountTableViewController: UITableViewController {
     func saveAccount() {
         
         if !areAllFieldsComplete() {
-            var alert = UIAlertController(title: "Incomplete form", message: "Please fill all fields before saving", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Incomplete form", message: "Please fill all fields before saving", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)

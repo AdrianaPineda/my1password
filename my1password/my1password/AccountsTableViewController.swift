@@ -48,7 +48,7 @@ class AccountsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("accountRow", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("accountRow", forIndexPath: indexPath) 
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         // Configure the cell...
