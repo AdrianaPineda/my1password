@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */; };
+		0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */; };
 		01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DABA1B00180700421693 /* accounts_icon@2x.png */; };
 		01B7DABD1B001A8000421693 /* AccountsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */; };
 		01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
+		0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadTableViewDelegate.swift; sourceTree = "<group>"; };
 		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
 		01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTableViewController.swift; sourceTree = "<group>"; };
 		01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -181,9 +183,10 @@
 				7AFECF541A92941C001EF48C /* LoginViewController.swift */,
 				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
 				7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */,
-				01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */,
 				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
+				01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */,
 				01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */,
+				0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */,
+				0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */,
 				01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */,
 				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
 				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
