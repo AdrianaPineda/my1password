@@ -10,6 +10,8 @@ import UIKit
 
 class AddAccountTableViewController: UITableViewController {
 
+    weak var delegate: ReloadTableViewDelegate?
+
     enum AccountFields: Int {
         case Username = 0
         case Password = 1
@@ -29,7 +31,10 @@ class AddAccountTableViewController: UITableViewController {
 
         let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
         self.navigationItem.rightBarButtonItem = saveButtonItem
-        
+
+        let cancelButtomItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancel")
+        self.navigationItem.leftBarButtonItem = cancelButtomItem
+
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.tableView.addGestureRecognizer(gestureRecognizer)
     }
@@ -112,8 +117,19 @@ class AddAccountTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
+
+        } else {
+
+            let account: Account = Account(username: username.text!, password: password.text!, url: url.text!)
+
+            let userAccountsManager = UserAccountsManager.userAccounts
+            let wasAccountAdded = userAccountsManager.addAccount(account)
+
+            if wasAccountAdded {
+                delegate?.reloadTable(self)
+            }
         }
-        
+
     }
     
     func areAllFieldsComplete() -> Bool {
@@ -150,5 +166,10 @@ class AddAccountTableViewController: UITableViewController {
         }
         
         return true
+    }
+
+    // MARK: - Cancel action
+    func cancel() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

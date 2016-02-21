@@ -8,7 +8,10 @@
 
 import UIKit
 
-class AccountsTableViewController: UITableViewController {
+class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate {
+
+    var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
+    var accounts: NSArray = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +27,12 @@ class AccountsTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        accounts = userAccountsManager.getUserAccounts()
+
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addAccount")
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
+
+        self.tableView.reloadData()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -43,7 +50,11 @@ class AccountsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 1
+        if accounts.count > 0 {
+            return accounts.count
+        } else {
+            return 0
+        }
     }
 
     
@@ -52,6 +63,9 @@ class AccountsTableViewController: UITableViewController {
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         // Configure the cell...
+
+        let currentAccount: Account = accounts[indexPath.row] as! Account
+        cell.textLabel?.text = currentAccount.username
 
         return cell
     }
@@ -104,11 +118,21 @@ class AccountsTableViewController: UITableViewController {
     
     // MARK: - Add Account
     func addAccount() {
-//        let addAccountTableViewController = NSBundle.mainBundle().loadNibNamed("addAccountTableViewController", owner: self, options: nil).last as! AddAccountTableViewController
-        
+
         let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addAccountTableViewController") as! AddAccountTableViewController
-        self.navigationController?.pushViewController(addAccountTableViewController, animated: true)
-//        self.presentViewController(addAccountTableViewController, animated: true, completion: nil)
+
+        addAccountTableViewController.delegate = self
+
+        let navigationController = UINavigationController(rootViewController: addAccountTableViewController)
+
+        self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
+    }
+
+    // MARK: - ReloadTableViewDelegate
+    func reloadTable(sender: UIViewController) {
+
+        sender.dismissViewControllerAnimated(true, completion: nil)
+        self.tableView.reloadData()
     }
 
 }
