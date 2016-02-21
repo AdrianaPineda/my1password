@@ -8,6 +8,8 @@
 
 import UIKit
 
-class ReloadTableViewDelegate: NSObject {
+protocol ReloadTableViewDelegate: class {
+
+    func reloadTable(sender: UIViewController)
 
 }
