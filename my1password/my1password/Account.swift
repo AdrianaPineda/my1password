@@ -9,5 +9,15 @@
 import Foundation
 
 class Account: NSObject {
-    
+
+    var username: String = ""
+    var password: String = ""
+    var url: String = ""
+
+    init(username:String, password:String, url:String) {
+        self.username = username
+        self.password = password
+        self.url = url
+    }
+
 }
