@@ -111,7 +111,9 @@ class AddAccountTableViewController: UITableViewController {
     
     // MARK: Save 
     func saveAccount() {
-        
+
+        self.dismissKeyboard()
+
         if !areAllFieldsComplete() {
             let alert = UIAlertController(title: "Incomplete form", message: "Please fill all fields before saving", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -126,7 +128,16 @@ class AddAccountTableViewController: UITableViewController {
             let wasAccountAdded = userAccountsManager.addAccount(account)
 
             if wasAccountAdded {
-                delegate?.reloadTable(self)
+                let alert = UIAlertController(title: "Account added", message: "Your account was successfully added", preferredStyle: UIAlertControllerStyle.Alert)
+
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alertAction: UIAlertAction) -> Void in
+
+                    self.delegate?.reloadTable(self)
+
+                }))
+
+                self.presentViewController(alert, animated: true, completion:nil)
+
             }
         }
 
