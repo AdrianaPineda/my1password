@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SSKeychain
 
 class LoginViewController: UIViewController {
 
@@ -40,10 +41,14 @@ class LoginViewController: UIViewController {
         self.hideKeyBoard()
 
         if self.areFieldsValid() {
+
             UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
+
         } else {
 
-            let alertController: UIAlertController = UIAlertController(title: "Invalid email/password", message: "Your email and/or password are invalids", preferredStyle: UIAlertControllerStyle.Alert)
+            self.resetFields()
+
+            let alertController: UIAlertController = UIAlertController(title: "Invalid email/password", message: "Your email and/or password are invalid", preferredStyle: UIAlertControllerStyle.Alert)
 
             let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
 
@@ -54,19 +59,41 @@ class LoginViewController: UIViewController {
 
     }
 
-    func areFieldsValid() -> Bool {
+    func resetFields() {
 
-        return self.isPasswordValid() && self.isEmailValid()
-
+        self.email.text = ""
+        self.password.text = ""
     }
 
-    func isPasswordValid() -> Bool {
+    func areFieldsValid() -> Bool {
 
-        if password.text != "" {
-            return true
+        if self.isEmailValid() {
+
+            if !self.isPasswordEmpty() {
+
+                let savedPassword: String? = SSKeychain.passwordForService("com.adrianapineda", account: self.email.text)
+
+                if savedPassword != nil && self.password.text == savedPassword {
+
+                    return true
+                }
+
+            }
+
         }
 
         return false
+
+    }
+
+    func isPasswordEmpty() -> Bool {
+
+        if password.text != "" {
+            return false
+        }
+
+        return true
+
     }
 
     func isEmailValid() -> Bool {
