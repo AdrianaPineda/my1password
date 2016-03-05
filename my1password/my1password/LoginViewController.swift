@@ -10,6 +10,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +37,43 @@ class LoginViewController: UIViewController {
     
     @IBAction func login(sender: AnyObject) {
 
-        UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
+        if self.areFieldsValid() {
+            UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
+        } else {
+
+            let alertController: UIAlertController = UIAlertController(title: "Invalid email/password", message: "Your email and/or password are invalids", preferredStyle: UIAlertControllerStyle.Alert)
+
+            let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+
+            alertController.addAction(alertAction)
+
+            self.presentViewController(alertController, animated: false, completion: nil)
+        }
+
+    }
+
+    func areFieldsValid() -> Bool {
+
+        return self.isPasswordValid() && self.isEmailValid()
+
+    }
+
+    func isPasswordValid() -> Bool {
+
+        if password.text != "" {
+            return true
+        }
+
+        return false
+    }
+
+    func isEmailValid() -> Bool {
+
+        if email.text != "" {
+            return true
+        }
+
+        return false
     }
 
 }
