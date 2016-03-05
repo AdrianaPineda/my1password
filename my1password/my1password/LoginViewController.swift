@@ -67,17 +67,13 @@ class LoginViewController: UIViewController {
 
     func areFieldsValid() -> Bool {
 
-        if self.isEmailValid() {
+        if !self.isEmailEmpty() && !self.isPasswordEmpty(){
 
-            if !self.isPasswordEmpty() {
+            let savedPassword: String? = SSKeychain.passwordForService("com.adrianapineda", account: self.email.text)
 
-                let savedPassword: String? = SSKeychain.passwordForService("com.adrianapineda", account: self.email.text)
+            if savedPassword != nil && self.password.text == savedPassword {
 
-                if savedPassword != nil && self.password.text == savedPassword {
-
-                    return true
-                }
-
+                return true
             }
 
         }
@@ -88,17 +84,17 @@ class LoginViewController: UIViewController {
 
     func isPasswordEmpty() -> Bool {
 
-        if password.text != "" {
-            return false
+        if password.text == "" {
+            return true
         }
 
-        return true
+        return false
 
     }
 
-    func isEmailValid() -> Bool {
+    func isEmailEmpty() -> Bool {
 
-        if email.text != "" {
+        if email.text == "" {
             return true
         }
 
