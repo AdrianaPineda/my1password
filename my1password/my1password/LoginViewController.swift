@@ -37,6 +37,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func login(sender: AnyObject) {
 
+        self.hideKeyBoard()
+
         if self.areFieldsValid() {
             UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
         } else {
@@ -47,7 +49,7 @@ class LoginViewController: UIViewController {
 
             alertController.addAction(alertAction)
 
-            self.presentViewController(alertController, animated: false, completion: nil)
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
 
     }
@@ -74,6 +76,23 @@ class LoginViewController: UIViewController {
         }
 
         return false
+    }
+
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if self.areFieldsValid() {
+            return true
+        }
+
+        return false
+    }
+
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.hideKeyBoard()
+    }
+
+    func hideKeyBoard() -> Void {
+        self.email.resignFirstResponder()
+        self.password.resignFirstResponder()
     }
 
 }
