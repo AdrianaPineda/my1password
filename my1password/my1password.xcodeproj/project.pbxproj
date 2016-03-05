@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */; };
 		0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */; };
+		0165F9A71C8B26EC0047ADAB /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */; };
+		0165F9A81C8B26EC0047ADAB /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DABA1B00180700421693 /* accounts_icon@2x.png */; };
 		01B7DABD1B001A8000421693 /* AccountsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */; };
 		01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */; };
@@ -38,9 +40,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0165F9931C8B230B0047ADAB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0165F9A51C8B266A0047ADAB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0165F9A81C8B26EC0047ADAB /* SSKeychain.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
 		0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadTableViewDelegate.swift; sourceTree = "<group>"; };
+		0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = "<group>"; };
 		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
 		01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTableViewController.swift; sourceTree = "<group>"; };
 		01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0165F9A71C8B26EC0047ADAB /* SSKeychain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +147,7 @@
 		7AFECF231A927101001EF48C = {
 			isa = PBXGroup;
 			children = (
+				0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */,
 				7AFECF2E1A927101001EF48C /* my1password */,
 				7AFECF441A927101001EF48C /* my1passwordTests */,
 				7AFECF2D1A927101001EF48C /* Products */,
@@ -201,6 +229,8 @@
 				7AFECF281A927101001EF48C /* Sources */,
 				7AFECF291A927101001EF48C /* Frameworks */,
 				7AFECF2A1A927101001EF48C /* Resources */,
+				0165F9931C8B230B0047ADAB /* CopyFiles */,
+				0165F9A51C8B266A0047ADAB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -431,10 +461,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = my1password/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adrianapineda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -443,6 +479,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = my1password/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adrianapineda.$(PRODUCT_NAME:rfc1034identifier)";
