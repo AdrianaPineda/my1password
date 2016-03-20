@@ -12,9 +12,9 @@ class User: NSObject {
     
     var email: NSString = ""
     var password: NSString = ""
-    var accounts: NSMutableArray = NSMutableArray()
+    var accounts: [Account] = []
     
-    init(email: NSString, password: NSString, accounts: NSMutableArray) {
+    init(email: NSString, password: NSString, accounts: [Account]) {
         
         self.email = email
         self.password = password
@@ -24,7 +24,7 @@ class User: NSObject {
     
     func addAccount(account: Account) -> Bool {
         
-        accounts.addObject(account)
+        accounts.append(account)
         
         return true
     }
