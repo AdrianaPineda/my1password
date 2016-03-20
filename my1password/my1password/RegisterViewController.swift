@@ -19,6 +19,8 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var back: UIButton!
     
+    var currentEmail:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +35,6 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -45,10 +46,30 @@ class RegisterViewController: UIViewController {
     */
 
     @IBAction func registerUser(sender: AnyObject) {
-        verifyCode.hidden = false
-        verificationCode.hidden = false
-        sendVerificationCode.hidden = false
-        register.hidden = true
+        
+        if self.isEmailValid() {
+            self.currentEmail = self.userEmail.text!
+            
+            verifyCode.hidden = false
+            verificationCode.hidden = false
+            sendVerificationCode.hidden = false
+            register.hidden = true
+            
+        } else {
+            let alertController: UIAlertController = UIAlertController(title: "Invalid email", message: "Your email is invalid", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alertController.addAction(alertAction)
+        }
+    }
+    
+    func isEmailValid() -> Bool {
+        if (self.userEmail.text ?? "").isEmpty {
+            return false
+        }
+        
+        return true
     }
     
     @IBAction func verifyCode(sender: AnyObject) {
@@ -57,5 +78,14 @@ class RegisterViewController: UIViewController {
     
     @IBAction func back(sender: AnyObject) {
         presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.hideKeyBoard()
+    }
+    
+    func hideKeyBoard() -> Void {
+        self.userEmail.resignFirstResponder()
+        self.verificationCode.resignFirstResponder()
     }
 }

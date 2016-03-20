@@ -11,6 +11,9 @@ import SSKeychain
 
 class LoginViewController: UIViewController {
 
+    let loginSegueIdentifier: String = "login"
+    let registerSegueIdentifier: String = "register"
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
 
@@ -33,7 +36,7 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
+        NSLog("")
     }
     
     @IBAction func login(sender: AnyObject) {
@@ -102,11 +105,16 @@ class LoginViewController: UIViewController {
     }
 
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if self.areFieldsValid() {
-            return true
+        
+        if identifier == self.loginSegueIdentifier {
+            if self.areFieldsValid() {
+                return true
+            } else {
+                return false
+            }
         }
-
-        return false
+        
+        return true
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
