@@ -12,6 +12,14 @@ private let sharedInstance = UserAccountsManager()
 
 class UserAccountsManager: NSObject {
     
+    let currentAccountUsername: String = "USER_ACCOUNT_USERNAME_"
+    let currentAccountPassword: String = "USER_ACCOUNT_PASSWORD_"
+    let currentAccountUrl: String = "USER_ACCOUNT_URL_"
+    let currentUserKey: String = "USER"
+    let currentUserEmail: String = "USER_EMAIL"
+    let currentUserPassword: String = "USER_PASSWORD"
+    let currentUserAccounts: String = "USER_ACCOUNTS"
+
     var user: User? = nil
     
     class var userAccounts: UserAccountsManager {
@@ -20,7 +28,8 @@ class UserAccountsManager: NSObject {
    
     func loadUserAccountsFromConfig() -> Void {
         
-        user = User(email: "", password: "", accounts: NSMutableArray())
+        let userAccouts: [Account] = self.loadAccounts()
+        user = User(email: "", password: "", accounts: userAccouts)
         
     }
     
@@ -48,9 +57,9 @@ class UserAccountsManager: NSObject {
             let userDefaults = NSUserDefaults.standardUserDefaults()
 
             let userDict: NSMutableDictionary = NSMutableDictionary()
-            userDict.setObject(currentUser.email, forKey: "USER_EMAIL")
-            userDict.setObject(currentUser.password, forKey: "USER_PASSWORD")
-            userDict.setObject(currentUser.accounts.count, forKey: "USER_ACCOUNTS")
+            userDict.setObject(currentUser.email, forKey: currentUserEmail)
+            userDict.setObject(currentUser.password, forKey: currentUserPassword)
+            userDict.setObject(currentUser.accounts.count, forKey: currentUserAccounts)
 
             let accountsSize = currentUser.accounts.count
             for var index = 0; index < accountsSize; index++ {
@@ -76,11 +85,11 @@ class UserAccountsManager: NSObject {
 
             let accountDict = self.saveAccountForUserAndIndex(currentUser, index: indexForAccount)
 
-            let currentUserDict = userDefaults.objectForKey("USER")
+            let currentUserDict = userDefaults.objectForKey(currentUserKey)
             currentUserDict?.addEntriesFromDictionary(accountDict as [NSObject : AnyObject])
 
-            userDefaults.removeObjectForKey("USER")
-            userDefaults.setObject(currentUserDict, forKey: "USER")
+            userDefaults.removeObjectForKey(currentUserKey)
+            userDefaults.setObject(currentUserDict, forKey: currentUserKey)
             userDefaults.synchronize()
         }
 
@@ -90,17 +99,42 @@ class UserAccountsManager: NSObject {
 
         let userDict: NSMutableDictionary = NSMutableDictionary()
 
-        let currentAccount: Account = user.accounts[index] as! Account
+        let currentAccount: Account = user.accounts[index]
 
-        let currentAccountUsername: String = "USER_ACCOUNT_USERNAME_"
         userDict.setObject(currentAccount.username, forKey: currentAccountUsername + String(index))
-
-        let currentAccountPassword: String = "USER_ACCOUNT_PASSWORD_"
         userDict.setObject(currentAccount.password, forKey: currentAccountPassword + String(index))
-
-        let currentAccountUrl: String = "USER_ACCOUNT_URL_"
         userDict.setObject(currentAccount.url, forKey: currentAccountUrl + String(index))
 
         return userDict
+    }
+
+    func loadAccounts() -> [Account] {
+
+        var accounts: [Account] = []
+
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+
+        if let numberOfAccounts: Int = userDefaults.objectForKey(currentUserAccounts) as? Int {
+
+            if let userDict: NSDictionary = userDefaults.objectForKey(currentUserKey) as? NSDictionary {
+
+                let index: Int = 0
+
+                while index < numberOfAccounts {
+
+                    let accountUsername: String = userDict.objectForKey(currentAccountUsername + String(index)) as! String
+                    let accountPassword: String = userDict.objectForKey(currentAccountPassword + String(index)) as! String
+                    let accountUrl: String = userDict.objectForKey(currentAccountUrl + String(index)) as! String
+
+                    let currentUserAccount: Account = Account(username: accountUsername, password: accountPassword, url: accountUrl)
+
+                    accounts.append(currentUserAccount)
+                }
+
+            }
+
+        }
+
+        return accounts
     }
 }
