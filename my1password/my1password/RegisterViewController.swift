@@ -19,7 +19,6 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var masterPassword: UITextField!
     @IBOutlet weak var savePassword: UIButton!
-    @IBOutlet weak var back: UIButton!
 
     let emailInvalidAlertTitle: String = "Invalid email"
     let emailInvalidAlertMessage: String = "Your email is invalid"
@@ -158,10 +157,6 @@ class RegisterViewController: UIViewController {
         }
 
         return true
-    }
-    
-    @IBAction func back(sender: AnyObject) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
