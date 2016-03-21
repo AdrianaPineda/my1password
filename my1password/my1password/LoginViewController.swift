@@ -13,8 +13,7 @@ class LoginViewController: UIViewController {
 
     let loginSegueIdentifier: String = "login"
     let registerSegueIdentifier: String = "register"
-    
-    @IBOutlet weak var email: UITextField!
+
     @IBOutlet weak var password: UITextField!
 
     override func viewDidLoad() {
@@ -51,7 +50,7 @@ class LoginViewController: UIViewController {
 
             self.resetFields()
 
-            let alertController: UIAlertController = UIAlertController(title: "Invalid email/password", message: "Your email and/or password are invalid", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController: UIAlertController = UIAlertController(title: "Invalid password", message: "Your master password is invalid", preferredStyle: UIAlertControllerStyle.Alert)
 
             let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
 
@@ -64,15 +63,14 @@ class LoginViewController: UIViewController {
 
     func resetFields() {
 
-        self.email.text = ""
         self.password.text = ""
     }
 
     func areFieldsValid() -> Bool {
 
-        if !self.isEmailEmpty() && !self.isPasswordEmpty(){
+        if !self.isPasswordEmpty(){
 
-            let savedPassword: String? = SSKeychain.passwordForService("com.adrianapineda", account: self.email.text)
+            let savedPassword: String? = SSKeychain.passwordForService("com.adrianapineda", account: "TODO")
 
             if savedPassword != nil && self.password.text == savedPassword {
 
@@ -95,15 +93,6 @@ class LoginViewController: UIViewController {
 
     }
 
-    func isEmailEmpty() -> Bool {
-
-        if email.text == "" {
-            return true
-        }
-
-        return false
-    }
-
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         
         if identifier == self.loginSegueIdentifier {
@@ -122,7 +111,6 @@ class LoginViewController: UIViewController {
     }
 
     func hideKeyBoard() -> Void {
-        self.email.resignFirstResponder()
         self.password.resignFirstResponder()
     }
 
