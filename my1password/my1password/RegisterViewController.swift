@@ -77,11 +77,7 @@ class RegisterViewController: UIViewController {
             register.hidden = true
             
         } else {
-            let alertController: UIAlertController = UIAlertController(title: emailInvalidAlertTitle, message: emailInvalidAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
-            
-            alertController.addAction(alertAction)
+            self.showAlert(forAlertTitle: emailInvalidAlertTitle, alertMessage: emailInvalidAlertMessage, withActionTitle: okAlertActionTitle)
         }
     }
     
@@ -121,19 +117,20 @@ class RegisterViewController: UIViewController {
                 } else {
 
                     self.masterPassword.text = ""
-                    self.showPasswordsDontMatchAlert()
+                    self.showAlert(forAlertTitle: errorAlertTitle, alertMessage: passwordsDontMatchAlertMessage, withActionTitle: okAlertActionTitle)
 
                 }
             }
 
         } else {
-            self.showInvalidPasswordAlert()
+            self.showAlert(forAlertTitle: errorAlertTitle, alertMessage: invalidPasswordAlertMessage, withActionTitle: okAlertActionTitle)
         }
     }
 
     func configureView(forRegistrationStep registrationStep:RegistrationStep) {
 
         if registrationStep == RegistrationStep.firstPassword {
+
             self.masterPassword.text = ""
             self.currentStep = RegistrationStep.secondPassword
             self.savePassword.setTitle(reenterPasswordText, forState: UIControlState.Normal)
@@ -145,18 +142,14 @@ class RegisterViewController: UIViewController {
         }
     }
 
-    func showPasswordsDontMatchAlert() {
-        let alertController: UIAlertController = UIAlertController(title: errorAlertTitle, message: passwordsDontMatchAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
+    func showAlert(forAlertTitle alertTitle: String, alertMessage: String, withActionTitle actionTitle: String) {
 
-    func showInvalidPasswordAlert() {
-        let alertController: UIAlertController = UIAlertController(title: errorAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
+        let alertController: UIAlertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction: UIAlertAction = UIAlertAction(title: actionTitle, style: UIAlertActionStyle.Default, handler: nil)
         alertController.addAction(okAction)
+
         self.presentViewController(alertController, animated: true, completion: nil)
+
     }
 
     func isPasswordValid() -> Bool {
