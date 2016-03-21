@@ -97,7 +97,7 @@
                                 <rect key="frame" x="266" y="329" width="69" height="32"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                 <state key="normal" title="Register!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="registerUser:" destination="05o-VE-dbS" eventType="touchUpInside" id="3Sw-6i-HIc"/>
@@ -130,7 +130,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owf-RN-YsK">
-                                <rect key="frame" x="204" y="369" width="192" height="30"/>
+                                <rect key="frame" x="204" y="372" width="192" height="30"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Send verification code again">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -152,8 +152,11 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ae0-su-9oa">
-                                <rect key="frame" x="249" y="331" width="103" height="30"/>
-                                <state key="normal" title="Save password"/>
+                                <rect key="frame" x="244" y="331" width="113" height="33"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Save password">
+                                    <color key="titleShadowColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="savePassword:" destination="05o-VE-dbS" eventType="touchUpInside" id="D7L-Yq-stj"/>
                                 </connections>
@@ -170,7 +173,6 @@
                             <constraint firstAttribute="centerX" secondItem="uPj-70-QsA" secondAttribute="centerX" id="9qL-Bq-4lu"/>
                             <constraint firstItem="Ae0-su-9oa" firstAttribute="top" secondItem="8hv-hy-c6d" secondAttribute="bottom" constant="10" id="AXh-JF-FIp"/>
                             <constraint firstItem="8hv-hy-c6d" firstAttribute="top" secondItem="Kog-vg-psc" secondAttribute="bottom" constant="11" id="CXh-VJ-4KJ"/>
-                            <constraint firstItem="Owf-RN-YsK" firstAttribute="top" secondItem="V80-VV-kWB" secondAttribute="bottom" constant="6" id="De5-dZ-hxR"/>
                             <constraint firstItem="Ae0-su-9oa" firstAttribute="centerX" secondItem="pwX-Lm-qTU" secondAttribute="centerX" id="GZ4-IE-P0x"/>
                             <constraint firstItem="Kog-vg-psc" firstAttribute="top" secondItem="kxj-Qx-wfm" secondAttribute="bottom" constant="22" id="JG7-F2-W9d"/>
                             <constraint firstItem="2kr-CF-5LZ" firstAttribute="top" secondItem="uPj-70-QsA" secondAttribute="bottom" constant="8" id="MOh-dR-yIh"/>
