@@ -146,6 +146,18 @@
                                     <action selector="back:" destination="05o-VE-dbS" eventType="touchUpInside" id="dev-RP-fpl"/>
                                 </connections>
                             </button>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Master password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hv-hy-c6d">
+                                <rect key="frame" x="207" y="291" width="187" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ae0-su-9oa">
+                                <rect key="frame" x="249" y="331" width="103" height="30"/>
+                                <state key="normal" title="Save password"/>
+                                <connections>
+                                    <action selector="savePassword:" destination="05o-VE-dbS" eventType="touchUpInside" id="D7L-Yq-stj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -153,12 +165,18 @@
                             <constraint firstItem="V80-VV-kWB" firstAttribute="top" secondItem="uPj-70-QsA" secondAttribute="bottom" constant="10" id="1O2-sk-7Tm"/>
                             <constraint firstAttribute="centerX" secondItem="Owf-RN-YsK" secondAttribute="centerX" id="2u7-iP-Mit"/>
                             <constraint firstItem="hLD-eF-Lcj" firstAttribute="leading" secondItem="pwX-Lm-qTU" secondAttribute="leadingMargin" id="3hg-Le-x8b"/>
+                            <constraint firstItem="8hv-hy-c6d" firstAttribute="centerX" secondItem="pwX-Lm-qTU" secondAttribute="centerX" id="4Ip-2U-Wnc"/>
                             <constraint firstAttribute="centerX" secondItem="kxj-Qx-wfm" secondAttribute="centerX" id="7IW-9v-id3"/>
                             <constraint firstAttribute="centerX" secondItem="uPj-70-QsA" secondAttribute="centerX" id="9qL-Bq-4lu"/>
+                            <constraint firstItem="Ae0-su-9oa" firstAttribute="top" secondItem="8hv-hy-c6d" secondAttribute="bottom" constant="10" id="AXh-JF-FIp"/>
+                            <constraint firstItem="8hv-hy-c6d" firstAttribute="top" secondItem="Kog-vg-psc" secondAttribute="bottom" constant="11" id="CXh-VJ-4KJ"/>
                             <constraint firstItem="Owf-RN-YsK" firstAttribute="top" secondItem="V80-VV-kWB" secondAttribute="bottom" constant="6" id="De5-dZ-hxR"/>
+                            <constraint firstItem="Ae0-su-9oa" firstAttribute="centerX" secondItem="pwX-Lm-qTU" secondAttribute="centerX" id="GZ4-IE-P0x"/>
                             <constraint firstItem="Kog-vg-psc" firstAttribute="top" secondItem="kxj-Qx-wfm" secondAttribute="bottom" constant="22" id="JG7-F2-W9d"/>
                             <constraint firstItem="2kr-CF-5LZ" firstAttribute="top" secondItem="uPj-70-QsA" secondAttribute="bottom" constant="8" id="MOh-dR-yIh"/>
                             <constraint firstItem="hLD-eF-Lcj" firstAttribute="top" secondItem="pwX-Lm-qTU" secondAttribute="topMargin" constant="32" id="Mk0-M2-Dz3"/>
+                            <constraint firstItem="8hv-hy-c6d" firstAttribute="width" secondItem="Kog-vg-psc" secondAttribute="width" id="c42-sy-38b"/>
+                            <constraint firstItem="Owf-RN-YsK" firstAttribute="top" secondItem="Ae0-su-9oa" secondAttribute="bottom" constant="8" id="dcM-Ll-Eyk"/>
                             <constraint firstItem="hLD-eF-Lcj" firstAttribute="top" secondItem="dYo-CO-REq" secondAttribute="bottom" id="deo-QA-bcx"/>
                             <constraint firstAttribute="centerX" secondItem="2kr-CF-5LZ" secondAttribute="centerX" id="kVo-O3-oDs"/>
                             <constraint firstItem="uPj-70-QsA" firstAttribute="top" secondItem="Kog-vg-psc" secondAttribute="bottom" constant="11" id="nZc-nN-OdA"/>
@@ -175,7 +193,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="back" destination="hLD-eF-Lcj" id="j3T-b6-T9T"/>
+                        <outlet property="masterPassword" destination="8hv-hy-c6d" id="ZrS-Yw-WoV"/>
                         <outlet property="register" destination="2kr-CF-5LZ" id="fru-IP-UaO"/>
+                        <outlet property="savePassword" destination="Ae0-su-9oa" id="HkX-ux-NXw"/>
                         <outlet property="sendVerificationCode" destination="Owf-RN-YsK" id="SWw-sq-v3G"/>
                         <outlet property="userEmail" destination="Kog-vg-psc" id="V17-Cn-Zqe"/>
                         <outlet property="verificationCode" destination="uPj-70-QsA" id="mN1-Ed-c5n"/>

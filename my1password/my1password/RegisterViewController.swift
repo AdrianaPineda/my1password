@@ -17,6 +17,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var register: UIButton!
     @IBOutlet weak var sendVerificationCode: UIButton!
     
+    @IBOutlet weak var masterPassword: UITextField!
+    @IBOutlet weak var savePassword: UIButton!
     @IBOutlet weak var back: UIButton!
     
     var currentEmail:String = ""
@@ -28,6 +30,8 @@ class RegisterViewController: UIViewController {
         verificationCode.hidden = true
         verifyCode.hidden = true
         sendVerificationCode.hidden = true
+        masterPassword.hidden = true
+        savePassword.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +77,16 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func verifyCode(sender: AnyObject) {
-        
+
+        self.verificationCode.hidden = true
+        self.verifyCode.hidden = true
+        self.sendVerificationCode.hidden = true
+        self.masterPassword.hidden = false
+        self.savePassword.hidden = false
+    }
+
+    @IBAction func savePassword(sender: AnyObject) {
+
     }
     
     @IBAction func back(sender: AnyObject) {
