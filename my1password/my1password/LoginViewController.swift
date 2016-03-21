@@ -70,12 +70,8 @@ class LoginViewController: UIViewController {
 
         if !self.isPasswordEmpty(){
 
-            let savedPassword: String? = SSKeychain.passwordForService("com.adrianapineda", account: "TODO")
-
-            if savedPassword != nil && self.password.text == savedPassword {
-
-                return true
-            }
+            let userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
+            return userAccountsManager.isMasterPasswordValid(forPassword: self.password.text!)
 
         }
 

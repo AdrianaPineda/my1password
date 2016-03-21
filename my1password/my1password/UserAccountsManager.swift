@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import SSKeychain
 
 private let sharedInstance = UserAccountsManager()
 
 class UserAccountsManager: NSObject {
-    
+
+    let keychainServiceId: String = "com.adrianapineda"
+
     let currentAccountUsername: String = "USER_ACCOUNT_USERNAME_"
     let currentAccountPassword: String = "USER_ACCOUNT_PASSWORD_"
     let currentAccountUrl: String = "USER_ACCOUNT_URL_"
@@ -136,5 +139,20 @@ class UserAccountsManager: NSObject {
         }
 
         return accounts
+    }
+
+    func isMasterPasswordValid(forPassword password: String) -> Bool {
+
+        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if let userEmail: String = userDefaults.objectForKey(currentUserEmail) as? String {
+
+            let savedPassword: String? = SSKeychain.passwordForService(keychainServiceId, account: userEmail)
+
+            if savedPassword != nil && password == savedPassword {
+                return true
+            }
+        }
+
+        return false
     }
 }
