@@ -53,6 +53,13 @@ class UserAccountsManager: NSObject {
         return true
     }
 
+    func configureUser(withEmail email: String, andPassword password: String) {
+        let user: User = User(email: email, password: password, accounts: [])
+        self.user = user
+
+        self.saveUser()
+    }
+
     func saveUser() {
 
         if let currentUser = user {
@@ -72,7 +79,7 @@ class UserAccountsManager: NSObject {
 
             }
 
-            userDefaults.setObject(userDict, forKey: "USER")
+            userDefaults.setObject(userDict, forKey: currentUserKey)
             userDefaults.synchronize()
         }
     }
@@ -144,9 +151,10 @@ class UserAccountsManager: NSObject {
     func isMasterPasswordValid(forPassword password: String) -> Bool {
 
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        if let userEmail: String = userDefaults.objectForKey(currentUserEmail) as? String {
+        if let userDict: [String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
 
-            let savedPassword: String? = SSKeychain.passwordForService(keychainServiceId, account: userEmail)
+            let savedPassword: String? = userDict[currentUserPassword]! as? String
+//            let savedPassword: String? = SSKeychain.passwordForService(keychainServiceId, account: userEmail)
 
             if savedPassword != nil && password == savedPassword {
                 return true

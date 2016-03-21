@@ -111,6 +111,8 @@ class RegisterViewController: UIViewController {
 
                 if secondPass == self.currentMasterPassword {
 
+                    UserAccountsManager.userAccounts.configureUser(withEmail: self.currentEmail, andPassword: self.currentMasterPassword)
+
                     self.configureView(forRegistrationStep: self.currentStep)
 
                 } else {
