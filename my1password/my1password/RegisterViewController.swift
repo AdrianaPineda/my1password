@@ -22,6 +22,13 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var back: UIButton!
 
     let emailInvalidAlertTitle: String = "Invalid email"
+    let emailInvalidAlertMessage: String = "Your email is invalid"
+    let okAlertActionTitle: String = "OK"
+    let reenterPasswordText: String = "Re-enter password"
+    let toUserHomeSegueId: String = "showHomeView"
+    let errorAlertTitle: String = "Error"
+    let passwordsDontMatchAlertMessage: String = "Passwords don't match"
+    let invalidPasswordAlertMessage: String = "Invalid password"
     
     var currentEmail:String = ""
     var currentMasterPassword: String = ""
@@ -70,9 +77,9 @@ class RegisterViewController: UIViewController {
             register.hidden = true
             
         } else {
-            let alertController: UIAlertController = UIAlertController(title: emailInvalidAlertTitle, message: "Your email is invalid", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController: UIAlertController = UIAlertController(title: emailInvalidAlertTitle, message: emailInvalidAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
             
-            let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
             
             alertController.addAction(alertAction)
         }
@@ -129,25 +136,25 @@ class RegisterViewController: UIViewController {
         if registrationStep == RegistrationStep.firstPassword {
             self.masterPassword.text = ""
             self.currentStep = RegistrationStep.secondPassword
-            self.savePassword.setTitle("Re-enter password", forState: UIControlState.Normal)
+            self.savePassword.setTitle(reenterPasswordText, forState: UIControlState.Normal)
 
         } else if registrationStep == RegistrationStep.secondPassword {
 
             self.currentStep = RegistrationStep.finish
-            self.performSegueWithIdentifier("showHomeView", sender: self)
+            self.performSegueWithIdentifier(toUserHomeSegueId, sender: self)
         }
     }
 
     func showPasswordsDontMatchAlert() {
-        let alertController: UIAlertController = UIAlertController(title: "Error", message: "Passwords don't match", preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        let alertController: UIAlertController = UIAlertController(title: errorAlertTitle, message: passwordsDontMatchAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     func showInvalidPasswordAlert() {
-        let alertController: UIAlertController = UIAlertController(title: "Error", message: "Invalid password", preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        let alertController: UIAlertController = UIAlertController(title: errorAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
