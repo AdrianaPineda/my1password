@@ -149,7 +149,7 @@
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Master password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hv-hy-c6d">
                                 <rect key="frame" x="207" y="291" width="187" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ae0-su-9oa">
                                 <rect key="frame" x="249" y="331" width="103" height="30"/>
@@ -200,6 +200,7 @@
                         <outlet property="userEmail" destination="Kog-vg-psc" id="V17-Cn-Zqe"/>
                         <outlet property="verificationCode" destination="uPj-70-QsA" id="mN1-Ed-c5n"/>
                         <outlet property="verifyCode" destination="V80-VV-kWB" id="XVP-o6-4Ux"/>
+                        <segue destination="HZ9-1x-Uuj" kind="show" identifier="showHomeView" id="0x1-ax-CBx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LxJ-Dd-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -417,4 +418,7 @@
         <image name="accounts_icon.png" width="25" height="25"/>
         <image name="settings.png" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0x1-ax-CBx"/>
+    </inferredMetricsTieBreakers>
 </document>

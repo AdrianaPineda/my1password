@@ -31,7 +31,7 @@ class UserHomeTabBarController: UITabBarController {
     }
     
     @IBAction func signOut(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func barButtonItemClicked () -> Void {

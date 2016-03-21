@@ -20,9 +20,19 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var masterPassword: UITextField!
     @IBOutlet weak var savePassword: UIButton!
     @IBOutlet weak var back: UIButton!
+
+    let emailInvalidAlertTitle: String = "Invalid email"
     
     var currentEmail:String = ""
-    
+    var currentMasterPassword: String = ""
+    var currentStep: RegistrationStep = RegistrationStep.firstPassword
+
+    enum RegistrationStep {
+        case firstPassword
+        case secondPassword
+        case finish
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,7 +70,7 @@ class RegisterViewController: UIViewController {
             register.hidden = true
             
         } else {
-            let alertController: UIAlertController = UIAlertController(title: "Invalid email", message: "Your email is invalid", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController: UIAlertController = UIAlertController(title: emailInvalidAlertTitle, message: "Your email is invalid", preferredStyle: UIAlertControllerStyle.Alert)
             
             let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
             
@@ -72,7 +82,6 @@ class RegisterViewController: UIViewController {
         if (self.userEmail.text ?? "").isEmpty {
             return false
         }
-        
         return true
     }
     
@@ -87,6 +96,68 @@ class RegisterViewController: UIViewController {
 
     @IBAction func savePassword(sender: AnyObject) {
 
+        if isPasswordValid() {
+
+            if self.currentStep == RegistrationStep.firstPassword {
+
+                self.currentMasterPassword = self.masterPassword.text!
+                self.configureView(forRegistrationStep: self.currentStep)
+
+            } else {
+
+                let secondPass: String = self.masterPassword.text!
+
+                if secondPass == self.currentMasterPassword {
+
+                    self.configureView(forRegistrationStep: self.currentStep)
+
+                } else {
+
+                    self.masterPassword.text = ""
+                    self.showPasswordsDontMatchAlert()
+
+                }
+            }
+
+        } else {
+            self.showInvalidPasswordAlert()
+        }
+    }
+
+    func configureView(forRegistrationStep registrationStep:RegistrationStep) {
+
+        if registrationStep == RegistrationStep.firstPassword {
+            self.masterPassword.text = ""
+            self.currentStep = RegistrationStep.secondPassword
+            self.savePassword.setTitle("Re-enter password", forState: UIControlState.Normal)
+
+        } else if registrationStep == RegistrationStep.secondPassword {
+
+            self.currentStep = RegistrationStep.finish
+            self.performSegueWithIdentifier("showHomeView", sender: self)
+        }
+    }
+
+    func showPasswordsDontMatchAlert() {
+        let alertController: UIAlertController = UIAlertController(title: "Error", message: "Passwords don't match", preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    func showInvalidPasswordAlert() {
+        let alertController: UIAlertController = UIAlertController(title: "Error", message: "Invalid password", preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    func isPasswordValid() -> Bool {
+        if (self.masterPassword.text ?? "").isEmpty {
+            return false
+        }
+
+        return true
     }
     
     @IBAction func back(sender: AnyObject) {
