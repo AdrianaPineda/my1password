@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SSKeychain
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+//        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        userDefaults.removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!)
+//        userDefaults.synchronize()
+//
+//
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_PASSWORD")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_0")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_1")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_2")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_3")
+
+
         // Override point for customization after application launch.
 
 //        var userIsLoggedIn: Bool = false
