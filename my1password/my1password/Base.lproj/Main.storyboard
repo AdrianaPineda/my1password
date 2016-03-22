@@ -32,7 +32,6 @@
                                 </state>
                                 <connections>
                                     <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OZx-T9-dxG"/>
-                                    <segue destination="HZ9-1x-Uuj" kind="show" identifier="login" id="j8u-Sy-uhM"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dgk-Pu-HiE">
@@ -69,11 +68,12 @@
                     <navigationItem key="navigationItem" id="nc6-wT-NdO"/>
                     <connections>
                         <outlet property="password" destination="Dgk-Pu-HiE" id="xep-Wl-3J5"/>
+                        <segue destination="HZ9-1x-Uuj" kind="show" identifier="login" id="3gM-3d-cnq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="284"/>
+            <point key="canvasLocation" x="864" y="360"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="TYn-dl-dsq">
@@ -402,6 +402,6 @@
         <image name="settings.png" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0x1-ax-CBx"/>
+        <segue reference="3gM-3d-cnq"/>
     </inferredMetricsTieBreakers>
 </document>

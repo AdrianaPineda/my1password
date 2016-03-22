@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         if self.areFieldsValid() {
 
             UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
+            self.performSegueWithIdentifier(loginSegueIdentifier, sender: self)
 
         } else {
 
@@ -87,19 +88,6 @@ class LoginViewController: UIViewController {
 
         return false
 
-    }
-
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        
-        if identifier == self.loginSegueIdentifier {
-            if self.areFieldsValid() {
-                return true
-            } else {
-                return false
-            }
-        }
-        
-        return true
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
