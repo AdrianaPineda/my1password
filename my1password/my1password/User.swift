@@ -10,11 +10,11 @@ import Foundation
 
 class User: NSObject {
     
-    var email: NSString = ""
-    var password: NSString = ""
+    var email: String = ""
+    var password: String = ""
     var accounts: [Account] = []
     
-    init(email: NSString, password: NSString, accounts: [Account]) {
+    init(email: String, password: String, accounts: [Account]) {
         
         self.email = email
         self.password = password
