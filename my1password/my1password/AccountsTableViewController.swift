@@ -13,6 +13,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     var accounts: NSArray = []
 
+    let addAccountTableViewControllerId: String = "addAccountTableViewController"
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -119,7 +121,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - Add Account
     func addAccount() {
 
-        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addAccountTableViewController") as! AddAccountTableViewController
+        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier(addAccountTableViewControllerId) as! AddAccountTableViewController
 
         addAccountTableViewController.delegate = self
 

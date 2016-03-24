@@ -108,8 +108,6 @@ class UserAccountsManager: NSObject {
             let accountsSize = currentUser.accounts.count
             let indexForAccount = accountsSize - 1
 
-//            let accountDict = self.saveAccountForUserAndIndex(currentUser, index: indexForAccount)
-
             let currentUserDict = NSMutableDictionary(dictionary: userDefaults.objectForKey(currentUserKey) as! NSDictionary)
             var accountsSaved: [[String: AnyObject]] = []
 
@@ -123,8 +121,6 @@ class UserAccountsManager: NSObject {
             let currentAccountDict: [String: String] = [currentAccountUsername + String(indexForAccount): currentAccount.username, currentAccountUrl + String(indexForAccount): currentAccount.url]
             accountsSaved.append(currentAccountDict)
             self.saveSensitiveData(currentAccount.password, forKey: currentAccountPassword + String(indexForAccount))
-
-//            currentUserDict.addEntriesFromDictionary(accountDict as [NSObject : AnyObject])
 
             currentUserDict[currentUserAccounts] = accountsSaved
             userDefaults.removeObjectForKey(currentUserKey)

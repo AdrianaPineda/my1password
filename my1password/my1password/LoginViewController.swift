@@ -14,6 +14,10 @@ class LoginViewController: UIViewController {
     let loginSegueIdentifier: String = "login"
     let registerSegueIdentifier: String = "register"
 
+    let invalidPasswordAlertTitle: String = "Invalid password"
+    let invalidPasswordAlertMessage: String = "Your master password is invalid"
+    let okAlertActionTitle: String = "OK"
+
     @IBOutlet weak var password: UITextField!
 
     override func viewDidLoad() {
@@ -35,7 +39,6 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        NSLog("")
     }
     
     @IBAction func login(sender: AnyObject) {
@@ -51,9 +54,9 @@ class LoginViewController: UIViewController {
 
             self.resetFields()
 
-            let alertController: UIAlertController = UIAlertController(title: "Invalid password", message: "Your master password is invalid", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController: UIAlertController = UIAlertController(title: invalidPasswordAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
 
-            let alertAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
 
             alertController.addAction(alertAction)
 
