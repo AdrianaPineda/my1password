@@ -46,6 +46,8 @@ class AccountInfoTableViewController: UITableViewController {
             let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
             self.navigationItem.rightBarButtonItem = saveButtonItem
 
+            self.username.becomeFirstResponder()
+
         } else {
             self.navigationItem.title = "Edit"
             let editButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
@@ -129,6 +131,8 @@ class AccountInfoTableViewController: UITableViewController {
         self.username.enabled = true
         self.password.enabled = true
         self.url.enabled = true
+
+        self.username.becomeFirstResponder()
 
         let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
         self.navigationItem.rightBarButtonItem = saveButtonItem
