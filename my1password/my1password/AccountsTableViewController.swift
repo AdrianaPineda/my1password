@@ -158,7 +158,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - ReloadTableViewDelegate
     func reloadTable(sender: UIViewController) {
 
-        if let accountViewSender: AddAccountTableViewController = sender as! AddAccountTableViewController {
+        if let accountViewSender: AddAccountTableViewController = sender as? AddAccountTableViewController {
             if accountViewSender.viewType == .Add {
                 sender.dismissViewControllerAnimated(true, completion: nil)
             } else {
