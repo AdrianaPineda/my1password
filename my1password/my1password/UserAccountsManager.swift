@@ -149,7 +149,7 @@ class UserAccountsManager: NSObject {
         if let currentUser: User = self.user {
 
             currentUser.addAccount(account)
-            self.saveAccount(account)
+            self.saveAccounts()
             return true
 
         }
