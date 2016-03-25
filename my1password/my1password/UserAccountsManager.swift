@@ -218,9 +218,7 @@ class UserAccountsManager: NSObject {
 
         if let currentUser = user {
 
-            let index: Int = currentUser.accounts.indexOf(account)!
-            currentUser.accounts[index] = account
-
+            currentUser.updateAccount(account)
             self.saveAccounts()
 
             return true

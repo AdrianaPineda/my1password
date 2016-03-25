@@ -35,4 +35,16 @@ class User: NSObject {
         
         return true
     }
+
+    func updateAccount(account: Account) -> Bool {
+
+        if let index: Int = self.accounts.indexOf(account) {
+
+            self.accounts[index] = account
+            return true
+
+        }
+
+        return false
+    }
 }
