@@ -125,7 +125,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         // Pass the selected object to the new view controller.
         if segue.identifier == showAccountSegueId {
 
-            let nextController: AddAccountTableViewController = segue.destinationViewController as! AddAccountTableViewController
+            let nextController: AccountInfoTableViewController = segue.destinationViewController as! AccountInfoTableViewController
             nextController.viewType = .Edit
 
             let accountRow: Int = (self.tableView.indexPathForSelectedRow?.row)!
@@ -146,7 +146,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - Add Account
     func addAccount() {
 
-        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier(addAccountTableViewControllerId) as! AddAccountTableViewController
+        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier(addAccountTableViewControllerId) as! AccountInfoTableViewController
 
         addAccountTableViewController.delegate = self
 
@@ -158,7 +158,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - ReloadTableViewDelegate
     func reloadTable(sender: UIViewController) {
 
-        if let accountViewSender: AddAccountTableViewController = sender as? AddAccountTableViewController {
+        if let accountViewSender: AccountInfoTableViewController = sender as? AccountInfoTableViewController {
             if accountViewSender.viewType == .Add {
                 sender.dismissViewControllerAnimated(true, completion: nil)
             } else {

@@ -1,5 +1,5 @@
 //
-//  AddAccountTableViewController.swift
+//  AccountInfoTableViewController.swift
 //  my1password
 //
 //  Created by Adriana Pineda on 5/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddAccountTableViewController: UITableViewController {
+class AccountInfoTableViewController: UITableViewController {
 
     enum ViewType {
         case Add, Edit
@@ -191,6 +191,7 @@ class AddAccountTableViewController: UITableViewController {
 
             } else {
 
+                // How to avoid modifying reference??
                 self.currentAccount?.username = self.username.text!
                 self.currentAccount?.password = self.password.text!
                 self.currentAccount?.url = self.url.text!

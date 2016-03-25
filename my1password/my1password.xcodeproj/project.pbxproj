@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */; };
+		01198F1C1AFFFDDB0036321A /* AccountInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */; };
 		0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */; };
 		0165F9A71C8B26EC0047ADAB /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */; };
 		0165F9A81C8B26EC0047ADAB /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -64,7 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
+		01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewController.swift; sourceTree = "<group>"; };
 		0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadTableViewDelegate.swift; sourceTree = "<group>"; };
 		0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = "<group>"; };
 		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
 				7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */,
 				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
-				01198F1B1AFFFDDB0036321A /* AddAccountTableViewController.swift */,
+				01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */,
 				01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */,
 				0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */,
 			);
@@ -328,7 +328,7 @@
 			files = (
 				7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */,
 				0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */,
-				01198F1C1AFFFDDB0036321A /* AddAccountTableViewController.swift in Sources */,
+				01198F1C1AFFFDDB0036321A /* AccountInfoTableViewController.swift in Sources */,
 				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
 				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
 				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
