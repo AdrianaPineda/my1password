@@ -21,10 +21,17 @@ class User: NSObject {
         self.accounts = accounts
         
     }
+
+    init(email: String, password: String) {
+
+        self.email = email
+        self.password = password
+
+    }
     
     func addAccount(account: Account) -> Bool {
         
-        accounts.append(account)
+        self.accounts.append(account)
         
         return true
     }
