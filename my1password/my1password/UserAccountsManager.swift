@@ -42,34 +42,51 @@ class UserAccountsManager: NSObject {
 
     private func loadAccounts() -> [Account] {
 
-        var accounts: [Account] = []
-
         let userDefaults = NSUserDefaults.standardUserDefaults()
 
         if let userDict: [String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
 
+            return self.loadAccounts(fromUserDict: userDict)
+        }
 
-            if let userAccounts: [[String:AnyObject]] = userDict[currentUserAccounts] as? [[String:AnyObject]] {
+        return []
+    }
 
-                var index: Int = 0
-                for account: [String:AnyObject] in userAccounts {
-                    // TODO WHAT IF NO ACCOUNT IS FOUND?
-                    let accountUsername: String = account[currentAccountUsername + String(index)] as! String
+    private func loadAccounts(fromUserDict userDict:[String: AnyObject]) -> [Account] {
 
-                    let accountPassword: String = self.getSensitiveData(forKey: currentAccountPassword + String(index))
-                    let accountUrl: String = account[currentAccountUrl+String(index)] as! String
+        var accounts: [Account] = []
 
-                    let currentUserAccount: Account = Account(username: accountUsername, password: accountPassword, url: accountUrl)
+        if let userAccounts: [[String:AnyObject]] = userDict[currentUserAccounts] as? [[String:AnyObject]] {
 
-                    accounts.append(currentUserAccount)
+            var index: Int = 0
+            for account: [String:AnyObject] in userAccounts {
 
-                    index++
-
+                if let currentAccount = self.loadAccount(fromAccountData: account, atIndex: index) {
+                    accounts.append(currentAccount)
                 }
+
+                index++
+
             }
         }
 
         return accounts
+    }
+
+    private func loadAccount(fromAccountData data: [String: AnyObject], atIndex index:Int) -> Account? {
+
+        let accountUsername: String? = data[currentAccountUsername + String(index)] as? String
+        let accountPassword: String? = self.getSensitiveData(forKey: currentAccountPassword + String(index))
+        let accountUrl: String? = data[currentAccountUrl+String(index)] as? String
+
+        if accountUsername != nil && accountPassword != nil  && accountUrl != nil {
+
+            let currentUserAccount: Account = Account(username: accountUsername!, password: accountPassword!, url: accountUrl!)
+            return currentUserAccount
+        }
+
+        return nil
+
     }
 
     private func loadUser(withAccounts accounts:[Account]) -> User? {
@@ -78,14 +95,16 @@ class UserAccountsManager: NSObject {
 
         if let currentUserDict: [String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
 
-            let userEmail: String = currentUserDict[currentUserEmail] as! String
-            let password: String = self.getSensitiveData(forKey: currentUserPassword)
+            let userEmail: String? = currentUserDict[currentUserEmail] as? String
+            let password: String? = self.getSensitiveData(forKey: currentUserPassword)
 
-            return User(email: userEmail, password: password, accounts: accounts)
+            if userEmail != nil && password != nil {
+                return User(email: userEmail!, password: password!, accounts: accounts)
+            }
 
-        } else {
-            return nil
         }
+
+        return nil
 
     }
 
@@ -140,32 +159,58 @@ class UserAccountsManager: NSObject {
 
     private func saveAccount(currentAccount: Account) {
 
+        if self.user != nil {
+
+            let currentUserDict = self.getUserInfoDictionary(withAccount: currentAccount)
+
+            // Save info in userDefaults
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.removeObjectForKey(currentUserKey)
+            userDefaults.setObject(currentUserDict, forKey: currentUserKey)
+            userDefaults.synchronize()
+
+            // Save info in the keychain
+            let indexForAccount = self.user!.accounts.count - 1
+            self.saveSensitiveData(currentAccount.password, forKey: currentAccountPassword + String(indexForAccount))
+        }
+
+    }
+
+    private func getUserInfoDictionary(withAccount currentAccount: Account) -> NSMutableDictionary {
+
         if let currentUser = self.user {
 
             let userDefaults = NSUserDefaults.standardUserDefaults()
 
-            let accountsSize = currentUser.accounts.count
-            let indexForAccount = accountsSize - 1
+            if let currentUserDict: [String:AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String:AnyObject] {
 
-            let currentUserDict = NSMutableDictionary(dictionary: userDefaults.objectForKey(currentUserKey) as! NSDictionary)
-            var accountsSaved: [[String: AnyObject]] = []
+                var accountsSaved: [[String: AnyObject]] = self.getSavedAccounts(fromUserDict: currentUserDict)
 
-            if let currentAccounts: [[String:AnyObject]] = currentUserDict[currentUserAccounts] as? [[String: AnyObject]] {
-                if currentAccounts.count > 0 {
-                    accountsSaved = currentAccounts
-                }
+                let indexForAccount = currentUser.accounts.count - 1
+                let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: currentAccount, atIndex: indexForAccount)
+                accountsSaved.append(currentAccountDict)
+
+                let newUserDict = NSMutableDictionary(dictionary: currentUserDict)
+                newUserDict[currentUserAccounts] = accountsSaved
+
+                return newUserDict
             }
 
-            let currentAccountDict: [String: String] = [currentAccountUsername + String(indexForAccount): currentAccount.username, currentAccountUrl + String(indexForAccount): currentAccount.url]
-            accountsSaved.append(currentAccountDict)
-            self.saveSensitiveData(currentAccount.password, forKey: currentAccountPassword + String(indexForAccount))
-
-            currentUserDict[currentUserAccounts] = accountsSaved
-            userDefaults.removeObjectForKey(currentUserKey)
-            userDefaults.setObject(currentUserDict, forKey: currentUserKey)
-            userDefaults.synchronize()
         }
 
+        return NSMutableDictionary()
+    }
+
+    private func getSavedAccounts(fromUserDict currentUserDict: [String:AnyObject]) -> [[String:AnyObject]] {
+
+        var accountsSaved: [[String: AnyObject]] = []
+
+        if let currentAccounts: [[String:AnyObject]] = currentUserDict[currentUserAccounts] as? [[String: AnyObject]] {
+            if currentAccounts.count > 0 {
+                accountsSaved = currentAccounts
+            }
+        }
+        return accountsSaved
     }
 
     // MARK: - Update Account
@@ -197,8 +242,10 @@ class UserAccountsManager: NSObject {
                 var index: Int = 0
                 for account: Account in currentUser.accounts {
 
-                    let currentAccountDict: [String: String] = [currentAccountUsername + String(index): account.username, currentAccountUrl + String(index): account.url]
+                    let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: account, atIndex: index)
                     currentAccountsArray.append(currentAccountDict)
+
+                    self.saveSensitiveData(account.password, forKey: currentAccountPassword + String(index))
 
                     index++
 
@@ -206,18 +253,38 @@ class UserAccountsManager: NSObject {
 
                 mutableUserDict[currentUserAccounts] = currentAccountsArray
 
+                // Save info in userDefaults
+                self.saveUserDictInUserDefaults(mutableUserDict)
+
             }
 
         }
     }
 
+    private func saveUserDictInUserDefaults(userDict:NSDictionary) {
+
+        // Save info in userDefaults
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.removeObjectForKey(currentUserKey)
+        userDefaults.setObject(userDict, forKey: currentUserKey)
+        userDefaults.synchronize()
+
+    }
+
+    private func getAccountDict(fromAccount account: Account, atIndex index:Int) -> [String: String] {
+
+        let currentAccountDict: [String: String] = [currentAccountUsername + String(index): account.username, currentAccountUrl + String(index): account.url]
+        return currentAccountDict
+
+    }
+
     // MARK: - Keychain
-    private func getSensitiveData(forKey key: String) -> String {
+    private func getSensitiveData(forKey key: String) -> String? {
         if let currentInfo: String = SSKeychain.passwordForService(keychainServiceId, account: key) {
             return currentInfo
         }
 
-        return ""
+        return nil
     }
 
     private func saveSensitiveData(data: String, forKey key: String) {
