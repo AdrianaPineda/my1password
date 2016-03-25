@@ -10,6 +10,19 @@ import UIKit
 
 class AccountInfoTableViewController: UITableViewController {
 
+    // Constants
+    let cancelButtonTitle: String = "Cancel"
+    let saveButtonTitle: String = "Save"
+    let editButtonTitle: String = "Edit"
+    let viewEditNavigationTitle: String = "Edit"
+    let incompleteFormTitle: String = "Incomplete form"
+    let incompleteFormMessage: String = "Please fill all fields before saving"
+    let okAction: String = "OK"
+    let accountUpdatedAlertTitle: String = "Account updated"
+    let accountUpdatedAlertMessage: String = "Your account was successfully updated"
+    let accountAddedAlertTitle = "Account added"
+    let accountAddedAlertMessage = "Your account was successfully added"
+
     enum ViewType {
         case Add, Edit
     }
@@ -37,20 +50,21 @@ class AccountInfoTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        let cancelButtomItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancel")
+        let cancelButtomItem = UIBarButtonItem(title: cancelButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "cancel")
 
         self.navigationItem.leftBarButtonItem = cancelButtomItem
 
         if self.viewType == .Add {
 
-            let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
+            let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
             self.navigationItem.rightBarButtonItem = saveButtonItem
 
             self.username.becomeFirstResponder()
 
         } else {
-            self.navigationItem.title = "Edit"
-            let editButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
+
+            self.navigationItem.title = viewEditNavigationTitle
+            let editButtonItem = UIBarButtonItem(title: editButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
             self.navigationItem.rightBarButtonItem = editButtonItem
 
             self.configureSavedTexts()
@@ -134,7 +148,7 @@ class AccountInfoTableViewController: UITableViewController {
 
         self.username.becomeFirstResponder()
 
-        let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
+        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
         self.navigationItem.rightBarButtonItem = saveButtonItem
     }
 
@@ -173,8 +187,8 @@ class AccountInfoTableViewController: UITableViewController {
         self.dismissKeyboard()
 
         if !areAllFieldsComplete() {
-            let alert = UIAlertController(title: "Incomplete form", message: "Please fill all fields before saving", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            let alert = UIAlertController(title: incompleteFormTitle, message: incompleteFormMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: okAction, style: UIAlertActionStyle.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
 
@@ -190,8 +204,8 @@ class AccountInfoTableViewController: UITableViewController {
                 let account: Account = Account(username: username.text!, password: password.text!, url: url.text!)
                 wasActionSuccesful = userAccountsManager.addAccount(account)
 
-                alertTitle = "Account added"
-                alertMessage = "Your account was successfully added"
+                alertTitle = accountAddedAlertTitle
+                alertMessage = accountAddedAlertMessage
 
             } else {
 
@@ -202,14 +216,14 @@ class AccountInfoTableViewController: UITableViewController {
 
                 wasActionSuccesful = userAccountsManager.updateAccount(self.currentAccount!)
 
-                alertTitle = "Account updated"
-                alertMessage = "Your account was successfully updated"
+                alertTitle = accountUpdatedAlertTitle
+                alertMessage = accountUpdatedAlertMessage
             }
 
             if wasActionSuccesful {
                 let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
 
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alertAction: UIAlertAction) -> Void in
+                alert.addAction(UIAlertAction(title: okAction, style: UIAlertActionStyle.Default, handler: {(alertAction: UIAlertAction) -> Void in
 
                     self.delegate?.reloadTable(self)
 
