@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.password.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
