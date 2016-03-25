@@ -231,28 +231,13 @@ class UserAccountsManager: NSObject {
 
     private func saveAccounts() {
 
-        if let currentUser = user {
+        if self.user != nil {
 
             let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+
             if let userDict:[String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
 
-                let mutableUserDict: NSMutableDictionary = NSMutableDictionary(dictionary: userDict)
-
-                var currentAccountsArray: [[String: String]] = []
-
-                var index: Int = 0
-                for account: Account in currentUser.accounts {
-
-                    let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: account, atIndex: index)
-                    currentAccountsArray.append(currentAccountDict)
-
-                    self.saveSensitiveData(account.password, forKey: currentAccountPassword + String(index))
-
-                    index++
-
-                }
-
-                mutableUserDict[currentUserAccounts] = currentAccountsArray
+                let mutableUserDict: NSMutableDictionary = self.saveAccounts(inUserDict: userDict)
 
                 // Save info in userDefaults
                 self.saveUserDictInUserDefaults(mutableUserDict)
@@ -260,6 +245,34 @@ class UserAccountsManager: NSObject {
             }
 
         }
+    }
+
+    private func saveAccounts(inUserDict userDict:[String: AnyObject]) -> NSMutableDictionary {
+
+        if let currentUser = user {
+
+            let mutableUserDict: NSMutableDictionary = NSMutableDictionary(dictionary: userDict)
+
+            var currentAccountsArray: [[String: String]] = []
+
+            var index: Int = 0
+            for account: Account in currentUser.accounts {
+
+                let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: account, atIndex: index)
+                currentAccountsArray.append(currentAccountDict)
+
+                self.saveSensitiveData(account.password, forKey: currentAccountPassword + String(index))
+
+                index++
+
+            }
+
+            mutableUserDict[currentUserAccounts] = currentAccountsArray
+
+            return mutableUserDict
+        }
+
+        return NSMutableDictionary()
     }
 
     private func saveUserDictInUserDefaults(userDict:NSDictionary) {
