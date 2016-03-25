@@ -157,62 +157,6 @@ class UserAccountsManager: NSObject {
         return false
     }
 
-//    private func saveAccount(currentAccount: Account) {
-//
-//        if self.user != nil {
-//
-//            let currentUserDict = self.getUserInfoDictionary(withAccount: currentAccount)
-//
-//            // Save info in userDefaults
-//            let userDefaults = NSUserDefaults.standardUserDefaults()
-//            userDefaults.removeObjectForKey(currentUserKey)
-//            userDefaults.setObject(currentUserDict, forKey: currentUserKey)
-//            userDefaults.synchronize()
-//
-//            // Save info in the keychain
-//            let indexForAccount = self.user!.accounts.count - 1
-//            self.saveSensitiveData(currentAccount.password, forKey: currentAccountPassword + String(indexForAccount))
-//        }
-//
-//    }
-//
-//    private func getUserInfoDictionary(withAccount currentAccount: Account) -> NSMutableDictionary {
-//
-//        if let currentUser = self.user {
-//
-//            let userDefaults = NSUserDefaults.standardUserDefaults()
-//
-//            if let currentUserDict: [String:AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String:AnyObject] {
-//
-//                var accountsSaved: [[String: AnyObject]] = self.getSavedAccounts(fromUserDict: currentUserDict)
-//
-//                let indexForAccount = currentUser.accounts.count - 1
-//                let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: currentAccount, atIndex: indexForAccount)
-//                accountsSaved.append(currentAccountDict)
-//
-//                let newUserDict = NSMutableDictionary(dictionary: currentUserDict)
-//                newUserDict[currentUserAccounts] = accountsSaved
-//
-//                return newUserDict
-//            }
-//
-//        }
-//
-//        return NSMutableDictionary()
-//    }
-//
-//    private func getSavedAccounts(fromUserDict currentUserDict: [String:AnyObject]) -> [[String:AnyObject]] {
-//
-//        var accountsSaved: [[String: AnyObject]] = []
-//
-//        if let currentAccounts: [[String:AnyObject]] = currentUserDict[currentUserAccounts] as? [[String: AnyObject]] {
-//            if currentAccounts.count > 0 {
-//                accountsSaved = currentAccounts
-//            }
-//        }
-//        return accountsSaved
-//    }
-
     // MARK: - Update Account
     func updateAccount(account: Account) -> Bool {
 
