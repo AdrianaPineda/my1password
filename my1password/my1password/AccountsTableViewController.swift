@@ -134,10 +134,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
                 if let currentAccount: Account = self.accounts[accountRow] as? Account {
 
-                    nextController.userNameText = currentAccount.username
-                    nextController.passwordText = currentAccount.password
-                    nextController.urlText = currentAccount.url
-
+                    nextController.currentAccount = currentAccount
+                    nextController.delegate = self
                 }
 
             }
@@ -160,7 +158,14 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - ReloadTableViewDelegate
     func reloadTable(sender: UIViewController) {
 
-        sender.dismissViewControllerAnimated(true, completion: nil)
+        if let accountViewSender: AddAccountTableViewController = sender as! AddAccountTableViewController {
+            if accountViewSender.viewType == .Add {
+                sender.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                accountViewSender.navigationController?.popViewControllerAnimated(true)
+            }
+        }
+
         self.tableView.reloadData()
     }
 

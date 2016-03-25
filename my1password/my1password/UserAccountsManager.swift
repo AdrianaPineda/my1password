@@ -130,6 +130,20 @@ class UserAccountsManager: NSObject {
 
     }
 
+    func updateAccount(account: Account) -> Bool {
+
+        if let currentUser = user {
+            let index: Int = currentUser.accounts.indexOf(account)!
+            currentUser.accounts[index] = account
+
+            self.saveAccount()
+
+            return true
+        }
+
+        return false
+    }
+
 //    func saveAccountForUserAndIndex(user: User, index: Int) -> NSMutableDictionary! {
 //
 //        let userDict: NSMutableDictionary = NSMutableDictionary()

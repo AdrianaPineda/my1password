@@ -29,9 +29,7 @@ class AddAccountTableViewController: UITableViewController {
 
     var viewType: ViewType = .Add
 
-    var userNameText: String?
-    var passwordText: String?
-    var urlText: String?
+    var currentAccount: Account?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +48,8 @@ class AddAccountTableViewController: UITableViewController {
 
         } else {
             self.navigationItem.title = "Edit"
-//            let editButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
-//            self.navigationItem.rightBarButtonItem = editButtonItem
+            let editButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
+            self.navigationItem.rightBarButtonItem = editButtonItem
 
             self.configureSavedTexts()
         }
@@ -126,6 +124,16 @@ class AddAccountTableViewController: UITableViewController {
     */
 
     // MARK: - Edit
+    func edit() {
+
+        self.username.enabled = true
+        self.password.enabled = true
+        self.url.enabled = true
+
+        let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
+        self.navigationItem.rightBarButtonItem = saveButtonItem
+    }
+
     func configureSavedTexts() {
 
         self.username.enabled = false
@@ -133,16 +141,18 @@ class AddAccountTableViewController: UITableViewController {
         self.url.enabled = false
 
         if self.areFieldsValid() {
-            self.username.text = self.userNameText
-            self.password.text = self.passwordText
-            self.url.text = self.urlText
+            self.username.text = self.currentAccount?.username
+            self.password.text = self.currentAccount?.password
+            self.url.text = self.currentAccount?.url
 
         }
     }
 
     func areFieldsValid() -> Bool {
-        if (self.userNameText ?? "").isEmpty || (self.passwordText ?? "").isEmpty || (self.urlText ?? "").isEmpty {
-            return false
+        if self.currentAccount != nil {
+            if (self.currentAccount?.username ?? "").isEmpty || (self.currentAccount?.password ?? "").isEmpty || (self.currentAccount?.url ?? "").isEmpty {
+                return false
+            }
         }
 
         return true
@@ -166,13 +176,33 @@ class AddAccountTableViewController: UITableViewController {
 
         } else {
 
-            let account: Account = Account(username: username.text!, password: password.text!, url: url.text!)
-
             let userAccountsManager = UserAccountsManager.userAccounts
-            let wasAccountAdded = userAccountsManager.addAccount(account)
+            var alertTitle: String = ""
+            var alertMessage: String = ""
+            var wasActionSuccesful: Bool = false
 
-            if wasAccountAdded {
-                let alert = UIAlertController(title: "Account added", message: "Your account was successfully added", preferredStyle: UIAlertControllerStyle.Alert)
+            if self.viewType == .Add {
+
+                let account: Account = Account(username: username.text!, password: password.text!, url: url.text!)
+                wasActionSuccesful = userAccountsManager.addAccount(account)
+
+                alertTitle = "Account added"
+                alertMessage = "Your account was successfully added"
+
+            } else {
+
+                self.currentAccount?.username = self.username.text!
+                self.currentAccount?.password = self.password.text!
+                self.currentAccount?.url = self.url.text!
+
+                wasActionSuccesful = userAccountsManager.updateAccount(self.currentAccount!)
+
+                alertTitle = "Account updated"
+                alertMessage = "Your account was successfully updated"
+            }
+
+            if wasActionSuccesful {
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
 
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alertAction: UIAlertAction) -> Void in
 
