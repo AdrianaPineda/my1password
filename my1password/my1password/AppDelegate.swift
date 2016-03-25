@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_1")
 //        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_2")
 //        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_3")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_4")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_5")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_6")
+//        SSKeychain.deletePasswordForService("com.adrianapineda", account: "USER_ACCOUNT_PASSWORD_7")
 
 
         // Override point for customization after application launch.
