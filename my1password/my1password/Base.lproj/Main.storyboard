@@ -218,6 +218,9 @@
                         <barButtonItem title="Item" id="BRd-R8-IZC"/>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="WZe-pp-dut" kind="show" identifier="showAccount" id="dV3-jq-hzB"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRC-hQ-Qgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -290,7 +293,7 @@
                             <tableViewSection headerTitle="Username" id="Tts-IH-9hV">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addAccount" id="DXY-Db-15G">
-                                        <rect key="frame" x="0.0" y="50" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DXY-Db-15G" id="eSH-D7-Hie">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -315,7 +318,7 @@
                             <tableViewSection headerTitle="Password" id="Jsb-cp-G4X">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addAccount" id="oDc-27-yyD">
-                                        <rect key="frame" x="0.0" y="137" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="201" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oDc-27-yyD" id="vQR-Ai-zFa">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -340,7 +343,7 @@
                             <tableViewSection headerTitle="URL" id="NAi-zK-8ev">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addAccount" id="QSS-Bg-0RS">
-                                        <rect key="frame" x="0.0" y="224" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="288" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QSS-Bg-0RS" id="Jbm-4U-1aR">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -376,7 +379,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RLy-qA-1mU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1605" y="1791"/>
+            <point key="canvasLocation" x="1605" y="1852"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OhA-g7-Mvk">

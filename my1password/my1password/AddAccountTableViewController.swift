@@ -10,6 +10,10 @@ import UIKit
 
 class AddAccountTableViewController: UITableViewController {
 
+    enum ViewType {
+        case Add, Edit
+    }
+
     weak var delegate: ReloadTableViewDelegate?
 
     enum AccountFields: Int {
@@ -22,6 +26,8 @@ class AddAccountTableViewController: UITableViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var url: UITextField!
+
+    var viewType: ViewType = .Add
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +35,18 @@ class AddAccountTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
-        self.navigationItem.rightBarButtonItem = saveButtonItem
-
         let cancelButtomItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancel")
+
         self.navigationItem.leftBarButtonItem = cancelButtomItem
+
+        if self.viewType == .Add {
+
+            let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
+            self.navigationItem.rightBarButtonItem = saveButtonItem
+
+        } else {
+            self.navigationItem.title = "Edit"
+        }
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.tableView.addGestureRecognizer(gestureRecognizer)
@@ -181,6 +194,10 @@ class AddAccountTableViewController: UITableViewController {
 
     // MARK: - Cancel action
     func cancel() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if self.viewType == .Add {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 }

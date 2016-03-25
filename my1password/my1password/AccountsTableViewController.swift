@@ -14,6 +14,9 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     var accounts: NSArray = []
 
     let addAccountTableViewControllerId: String = "addAccountTableViewController"
+    let showAccountSegueId: String = "showAccount"
+    let addAccountSelector: Selector = "addAccount"
+    let accountRowIdentifier: String = "accountRow"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     override func viewWillAppear(animated: Bool) {
         accounts = userAccountsManager.getUserAccounts()
 
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addAccount")
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
 
         self.tableView.reloadData()
@@ -61,7 +64,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("accountRow", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier(accountRowIdentifier, forIndexPath: indexPath)
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         // Configure the cell...
@@ -71,8 +74,13 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
         return cell
     }
-    
 
+    // MARK: - Table View
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        self.performSegueWithIdentifier(showAccountSegueId, sender: self)
+
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -108,15 +116,21 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if segue.identifier == showAccountSegueId {
+
+            let nextController: AddAccountTableViewController = segue.destinationViewController as! AddAccountTableViewController
+            nextController.viewType = .Edit
+
+        }
     }
-    */
+
     
     // MARK: - Add Account
     func addAccount() {
