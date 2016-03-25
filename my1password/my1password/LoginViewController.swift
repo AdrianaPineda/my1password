@@ -47,6 +47,8 @@ class LoginViewController: UIViewController {
 
         if self.areFieldsValid() {
 
+            self.resetFields()
+
             UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
             self.performSegueWithIdentifier(loginSegueIdentifier, sender: self)
 
