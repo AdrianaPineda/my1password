@@ -128,6 +128,19 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
             let nextController: AddAccountTableViewController = segue.destinationViewController as! AddAccountTableViewController
             nextController.viewType = .Edit
 
+            let accountRow: Int = (self.tableView.indexPathForSelectedRow?.row)!
+
+            if self.accounts.count > accountRow {
+
+                if let currentAccount: Account = self.accounts[accountRow] as? Account {
+
+                    nextController.userNameText = currentAccount.username
+                    nextController.passwordText = currentAccount.password
+                    nextController.urlText = currentAccount.url
+
+                }
+
+            }
         }
     }
 

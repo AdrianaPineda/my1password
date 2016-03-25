@@ -28,6 +28,10 @@ class AddAccountTableViewController: UITableViewController {
     @IBOutlet weak var url: UITextField!
 
     var viewType: ViewType = .Add
+
+    var userNameText: String?
+    var passwordText: String?
+    var urlText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,10 @@ class AddAccountTableViewController: UITableViewController {
 
         } else {
             self.navigationItem.title = "Edit"
+//            let editButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
+//            self.navigationItem.rightBarButtonItem = editButtonItem
+
+            self.configureSavedTexts()
         }
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -116,6 +124,29 @@ class AddAccountTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    // MARK: - Edit
+    func configureSavedTexts() {
+
+        self.username.enabled = false
+        self.password.enabled = false
+        self.url.enabled = false
+
+        if self.areFieldsValid() {
+            self.username.text = self.userNameText
+            self.password.text = self.passwordText
+            self.url.text = self.urlText
+
+        }
+    }
+
+    func areFieldsValid() -> Bool {
+        if (self.userNameText ?? "").isEmpty || (self.passwordText ?? "").isEmpty || (self.urlText ?? "").isEmpty {
+            return false
+        }
+
+        return true
+    }
     
     // MARK: Keyboard
     func dismissKeyboard() {
