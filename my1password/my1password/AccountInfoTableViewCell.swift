@@ -21,18 +21,6 @@ class AccountInfoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == AccountInfoTableViewController.copySelector || action == AccountInfoTableViewController.revealSelector {
-            return true
-        }
-
-        return false
-    }
-
-    override func canBecomeFirstResponder() -> Bool {
-        return true
-    }
-
     override func copy(sender: AnyObject?) {
         //
         let pasteboard = UIPasteboard.generalPasteboard()
