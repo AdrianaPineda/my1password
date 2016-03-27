@@ -22,6 +22,8 @@ class AccountInfoTableViewController: UITableViewController {
     let accountUpdatedAlertMessage: String = "Your account was successfully updated"
     let accountAddedAlertTitle = "Account added"
     let accountAddedAlertMessage = "Your account was successfully added"
+    static let copySelector: Selector = "copy:"
+    static let revealSelector: Selector = "reveal:"
 
     enum ViewType {
         case Add, Edit
@@ -92,7 +94,7 @@ class AccountInfoTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
 
-        if action == "copy:" || action == "reveal:" {
+        if action == copySelector || action == revealSelector {
             return true
         }
         return false

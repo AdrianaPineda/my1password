@@ -22,7 +22,7 @@ class AccountInfoTableViewCell: UITableViewCell {
     }
 
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == "reveal:" || action == "copy:" {
+        if action == AccountInfoTableViewController.copySelector || action == AccountInfoTableViewController.revealSelector {
             return true
         }
 
