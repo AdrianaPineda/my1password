@@ -317,7 +317,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Password" id="Jsb-cp-G4X">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addAccount" id="oDc-27-yyD">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addAccount" id="oDc-27-yyD" customClass="AccountInfoTableViewCell" customModule="my1password" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="201" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oDc-27-yyD" id="vQR-Ai-zFa">
