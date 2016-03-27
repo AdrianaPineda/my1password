@@ -22,9 +22,7 @@ class AccountInfoTableViewCell: UITableViewCell {
     }
 
     override func copy(sender: AnyObject?) {
-        //
-        let pasteboard = UIPasteboard.generalPasteboard()
-        pasteboard.string = "axs"
+        UIPasteboard.generalPasteboard().string = "TESTING"
     }
 
     func reveal(sender: AnyObject) {
