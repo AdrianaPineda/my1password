@@ -72,6 +72,11 @@ class AccountInfoTableViewController: UITableViewController {
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.tableView.addGestureRecognizer(gestureRecognizer)
+
+        let testMenuItem: UIMenuItem = UIMenuItem(title: "Reveal", action: "reveal:")
+        UIMenuController.sharedMenuController().menuItems = [testMenuItem]
+        UIMenuController.sharedMenuController().update()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +85,24 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+
+    override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+
+        if action == "copy:" || action == "reveal:" {
+            return true
+        }
+        return false
+    }
+
+    override func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+
+        //
+
+    }
 
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        // #warning Potentially incomplete method implementation.

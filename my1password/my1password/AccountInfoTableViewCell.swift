@@ -21,4 +21,25 @@ class AccountInfoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == "reveal:" || action == "copy:" {
+            return true
+        }
+
+        return false
+    }
+
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+
+    override func copy(sender: AnyObject?) {
+        //
+        let pasteboard = UIPasteboard.generalPasteboard()
+        pasteboard.string = "axs"
+    }
+
+    func reveal(sender: AnyObject) {
+        //
+    }
 }
