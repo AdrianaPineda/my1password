@@ -22,8 +22,8 @@ class AccountInfoTableViewController: UITableViewController {
     let accountUpdatedAlertMessage: String = "Your account was successfully updated"
     let accountAddedAlertTitle = "Account added"
     let accountAddedAlertMessage = "Your account was successfully added"
-    static let copySelector: Selector = "copy:"
-    static let revealSelector: Selector = "reveal:"
+    let copySelector: Selector = "copy:"
+    let revealSelector: Selector = "reveal:"
 
     enum ViewType {
         case Add, Edit
