@@ -22,8 +22,14 @@ class AccountInfoTableViewController: UITableViewController {
     let accountUpdatedAlertMessage: String = "Your account was successfully updated"
     let accountAddedAlertTitle = "Account added"
     let accountAddedAlertMessage = "Your account was successfully added"
+    let revealMenuItemText = "Reveal"
+
     let copySelector: Selector = "copy:"
     let revealSelector: Selector = "reveal:"
+    let saveAccountAction: Selector = "saveAccount"
+    let cancelAction: Selector = "cancel"
+    let editAction: Selector = "edit"
+    let dismissKeyboardAction: Selector = "dismissKeyboard"
 
     enum ViewType {
         case Add, Edit
@@ -52,13 +58,13 @@ class AccountInfoTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        let cancelButtomItem = UIBarButtonItem(title: cancelButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "cancel")
+        let cancelButtomItem = UIBarButtonItem(title: cancelButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: cancelAction)
 
         self.navigationItem.leftBarButtonItem = cancelButtomItem
 
         if self.viewType == .Add {
 
-            let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
+            let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: saveAccountAction)
             self.navigationItem.rightBarButtonItem = saveButtonItem
 
             self.username.becomeFirstResponder()
@@ -66,16 +72,16 @@ class AccountInfoTableViewController: UITableViewController {
         } else {
 
             self.navigationItem.title = viewEditNavigationTitle
-            let editButtonItem = UIBarButtonItem(title: editButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "edit")
+            let editButtonItem = UIBarButtonItem(title: editButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: editAction)
             self.navigationItem.rightBarButtonItem = editButtonItem
 
             self.configureSavedTexts()
         }
 
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: dismissKeyboardAction)
         self.tableView.addGestureRecognizer(gestureRecognizer)
 
-        let testMenuItem: UIMenuItem = UIMenuItem(title: "Reveal", action: "reveal:")
+        let testMenuItem: UIMenuItem = UIMenuItem(title: revealMenuItemText, action: revealSelector)
         UIMenuController.sharedMenuController().menuItems = [testMenuItem]
         UIMenuController.sharedMenuController().update()
 
@@ -170,7 +176,7 @@ class AccountInfoTableViewController: UITableViewController {
 
         self.username.becomeFirstResponder()
 
-        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "saveAccount")
+        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: saveAccountAction)
         self.navigationItem.rightBarButtonItem = saveButtonItem
     }
 
