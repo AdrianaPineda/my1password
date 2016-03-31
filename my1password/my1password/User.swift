@@ -47,4 +47,16 @@ class User: NSObject {
 
         return false
     }
+
+    static func isUserValid(user: User?) -> Bool {
+        if user != nil {
+            if (user!.email ?? "").isEmpty || (user!.password ?? "").isEmpty || user!.accounts.count < 0 {
+                return false
+            } else {
+                return true
+            }
+        }
+
+        return false
+    }
 }
