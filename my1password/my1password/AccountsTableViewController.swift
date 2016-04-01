@@ -8,21 +8,34 @@
 
 import UIKit
 
-class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate {
+class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate, UISearchResultsUpdating {
 
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
-    var accounts: NSArray = []
+    var accounts = [Account]()
+    var filteredAccounts = [Account]()
 
     let addAccountTableViewControllerId: String = "addAccountTableViewController"
     let showAccountSegueId: String = "showAccount"
     let addAccountSelector: Selector = "addAccount"
     let accountRowIdentifier: String = "accountRow"
 
+    let searchController: UISearchController = UISearchController(searchResultsController: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+
+        self.searchController.searchResultsUpdater = self
+        self.searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        self.tableView.tableHeaderView = self.searchController.searchBar
+
+        accounts = userAccountsManager.getUserAccounts()
+
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
 
     }
 
@@ -32,36 +45,54 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
     
     override func viewWillAppear(animated: Bool) {
-        accounts = userAccountsManager.getUserAccounts()
 
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
 
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
 
     override func viewWillDisappear(animated: Bool) {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
-    
-    // MARK: - Table view data source
 
+    // MARK: - Search bar
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.filterContentForSearchText(self.searchController.searchBar.text!)
+    }
+
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        self.filteredAccounts = self.accounts.filter({ (account: Account) -> Bool in
+            let isAccountAMatch: Bool = account.username.lowercaseString.containsString(searchText.lowercaseString) || account.url.lowercaseString.containsString(searchText.lowercaseString)
+            return isAccountAMatch
+        })
+
+        self.tableView.reloadData()
+    }
+
+    func isSearching() -> Bool {
+
+        if self.searchController.active && self.searchController.searchBar.text != "" {
+            return true
+        }
+
+        return false
+    }
+
+    // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
+
         // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        if accounts.count > 0 {
-            return accounts.count
-        } else {
-            return 0
-        }
-    }
 
+        // Return the number of rows in the section.
+        if self.isSearching() {
+            self.filteredAccounts.count
+        }
+
+        return accounts.count
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(accountRowIdentifier, forIndexPath: indexPath)
@@ -69,8 +100,19 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         // Configure the cell...
 
-        let currentAccount: Account = accounts[indexPath.row] as! Account
-        cell.textLabel?.text = currentAccount.username
+        var currentAccount: Account? = nil
+        let cellRow: Int = indexPath.row
+        if self.isSearching() && filteredAccounts.count > 0  && cellRow < filteredAccounts.count {
+            currentAccount = filteredAccounts[cellRow]
+        } else {
+            if accounts.count > 0 && cellRow < accounts.count {
+                currentAccount = accounts[indexPath.row]
+            }
+        }
+
+        if currentAccount != nil {
+            cell.textLabel?.text = currentAccount!.username
+        }
 
         return cell
     }
@@ -132,7 +174,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
             if self.accounts.count > accountRow {
 
-                if let currentAccount: Account = self.accounts[accountRow] as? Account {
+                if let currentAccount: Account = self.accounts[accountRow] as Account {
 
                     nextController.currentAccount = currentAccount
                     nextController.delegate = self
