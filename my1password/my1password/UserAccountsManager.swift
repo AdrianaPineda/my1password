@@ -109,14 +109,14 @@ class UserAccountsManager: NSObject {
     }
 
     // MARK: - Get Accounts
-    func getUserAccounts() -> NSArray {
+    func getUserAccounts() -> [Account] {
         
         if let currentUser = user {
             
             return currentUser.accounts
         }
         
-        return NSArray()
+        return []
     }
 
     // MARK: - Configure User
