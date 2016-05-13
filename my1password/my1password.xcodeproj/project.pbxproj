@@ -21,6 +21,9 @@
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
 		7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */; };
+		7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA2BCF1CE5795D00933303 /* UserTests.swift */; settings = {ASSET_TAGS = (); }; };
+		7ADA2BD21CE57D1C00933303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; settings = {ASSET_TAGS = (); }; };
 		7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF311A927101001EF48C /* AppDelegate.swift */; };
 		7AFECF371A927101001EF48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF351A927101001EF48C /* Main.storyboard */; };
 		7AFECF391A927101001EF48C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF381A927101001EF48C /* Images.xcassets */; };
@@ -78,6 +81,7 @@
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountsManager.swift; sourceTree = "<group>"; };
 		7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		7ADA2BCF1CE5795D00933303 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTests.swift; path = Models/UserTests.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF301A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFECF311A927101001EF48C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,14 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		7ADA2BCE1CE5793F00933303 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7ADA2BCF1CE5795D00933303 /* UserTests.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		7AFECF231A927101001EF48C = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +205,7 @@
 		7AFECF441A927101001EF48C /* my1passwordTests */ = {
 			isa = PBXGroup;
 			children = (
+				7ADA2BCE1CE5793F00933303 /* Models */,
 				7AFECF471A927101001EF48C /* my1passwordTests.swift */,
 				7AFECF451A927101001EF48C /* Supporting Files */,
 			);
@@ -349,7 +362,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */,
+				7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */,
 				7AFECF481A927101001EF48C /* my1passwordTests.swift in Sources */,
+				7ADA2BD21CE57D1C00933303 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
