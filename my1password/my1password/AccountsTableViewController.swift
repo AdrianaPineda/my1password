@@ -84,7 +84,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         self.filteredAccounts = self.accounts.filter { account in
 
-            let isAccountAMatch: Bool = account.username.lowercaseString.containsString(searchText.lowercaseString) || account.url.lowercaseString.containsString(searchText.lowercaseString)
+            let isAccountAMatch: Bool = account.getUsername().lowercaseString.containsString(searchText.lowercaseString) || account.getUrl().lowercaseString.containsString(searchText.lowercaseString)
 
             return isAccountAMatch
         }
@@ -135,7 +135,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         }
 
         if currentAccount != nil {
-            cell.textLabel?.text = currentAccount!.username
+            cell.textLabel?.text = currentAccount!.getUsername()
         }
 
         return cell

@@ -187,16 +187,16 @@ class AccountInfoTableViewController: UITableViewController {
         self.url.enabled = false
 
         if self.areFieldsValid() {
-            self.username.text = self.currentAccount?.username
-            self.password.text = self.currentAccount?.password
-            self.url.text = self.currentAccount?.url
+            self.username.text = self.currentAccount?.getUsername()
+            self.password.text = self.currentAccount?.getPassword()
+            self.url.text = self.currentAccount?.getUrl()
 
         }
     }
 
     func areFieldsValid() -> Bool {
         if self.currentAccount != nil {
-            if (self.currentAccount?.username ?? "").isEmpty || (self.currentAccount?.password ?? "").isEmpty || (self.currentAccount?.url ?? "").isEmpty {
+            if (self.currentAccount?.getUsername() ?? "").isEmpty || (self.currentAccount?.getPassword() ?? "").isEmpty || (self.currentAccount?.getUrl() ?? "").isEmpty {
                 return false
             }
         }
@@ -237,10 +237,9 @@ class AccountInfoTableViewController: UITableViewController {
 
             } else {
 
-                // How to avoid modifying reference??
-                self.currentAccount?.username = self.username.text!
-                self.currentAccount?.password = self.password.text!
-                self.currentAccount?.url = self.url.text!
+                self.currentAccount?.setUsername(self.username.text!)
+                self.currentAccount?.setPassword(self.password.text!)
+                self.currentAccount?.setUrl(self.url.text!)
 
                 wasActionSuccesful = userAccountsManager.updateAccount(self.currentAccount!)
 

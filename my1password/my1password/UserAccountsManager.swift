@@ -203,7 +203,7 @@ class UserAccountsManager: NSObject {
                 let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: account, atIndex: index)
                 currentAccountsArray.append(currentAccountDict)
 
-                self.saveSensitiveData(account.password, forKey: currentAccountPassword + String(index))
+                self.saveSensitiveData(account.getPassword(), forKey: currentAccountPassword + String(index))
 
                 index += 1
 
@@ -229,7 +229,7 @@ class UserAccountsManager: NSObject {
 
     private func getAccountDict(fromAccount account: Account, atIndex index:Int) -> [String: String] {
 
-        let currentAccountDict: [String: String] = [currentAccountUsername + String(index): account.username, currentAccountUrl + String(index): account.url]
+        let currentAccountDict: [String: String] = [currentAccountUsername + String(index): account.getUsername(), currentAccountUrl + String(index): account.getUrl()]
         return currentAccountDict
 
     }
