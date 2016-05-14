@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0103ABE21CE7684500F51B82 /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0103ABE11CE7684500F51B82 /* AccountTests.swift */; };
 		01198F1C1AFFFDDB0036321A /* AccountInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */; };
 		0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */; };
 		01316B0B1CA77F5C007C6968 /* AccountInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */; };
@@ -21,9 +22,9 @@
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
 		7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */; };
-		7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA2BCF1CE5795D00933303 /* UserTests.swift */; settings = {ASSET_TAGS = (); }; };
-		7ADA2BD21CE57D1C00933303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; settings = {ASSET_TAGS = (); }; };
-		7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; settings = {ASSET_TAGS = (); }; };
+		7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA2BCF1CE5795D00933303 /* UserTests.swift */; };
+		7ADA2BD21CE57D1C00933303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
+		7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF311A927101001EF48C /* AppDelegate.swift */; };
 		7AFECF371A927101001EF48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF351A927101001EF48C /* Main.storyboard */; };
 		7AFECF391A927101001EF48C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF381A927101001EF48C /* Images.xcassets */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0103ABE11CE7684500F51B82 /* AccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountTests.swift; path = Models/AccountTests.swift; sourceTree = "<group>"; };
 		01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewController.swift; sourceTree = "<group>"; };
 		0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadTableViewDelegate.swift; sourceTree = "<group>"; };
 		01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				7ADA2BCF1CE5795D00933303 /* UserTests.swift */,
+				0103ABE11CE7684500F51B82 /* AccountTests.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */,
 				7AFECF481A927101001EF48C /* my1passwordTests.swift in Sources */,
 				7ADA2BD21CE57D1C00933303 /* User.swift in Sources */,
+				0103ABE21CE7684500F51B82 /* AccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
