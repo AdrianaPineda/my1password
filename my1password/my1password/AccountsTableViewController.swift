@@ -16,7 +16,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     let addAccountTableViewControllerId: String = "addAccountTableViewController"
     let showAccountSegueId: String = "showAccount"
-    let addAccountSelector: Selector = "addAccount"
+    let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
     let accountRowIdentifier: String = "accountRow"
 
     let searchController: UISearchController = UISearchController(searchResultsController: nil)

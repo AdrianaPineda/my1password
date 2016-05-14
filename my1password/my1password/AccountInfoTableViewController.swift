@@ -24,12 +24,12 @@ class AccountInfoTableViewController: UITableViewController {
     let accountAddedAlertMessage = "Your account was successfully added"
     let revealMenuItemText = "Reveal"
 
-    let copySelector: Selector = "copy:"
+    let copySelector: Selector = #selector(NSObject.copy(_:))
     let revealSelector: Selector = "reveal:"
-    let saveAccountAction: Selector = "saveAccount"
-    let cancelAction: Selector = "cancel"
-    let editAction: Selector = "edit"
-    let dismissKeyboardAction: Selector = "dismissKeyboard"
+    let saveAccountAction: Selector = #selector(AccountInfoTableViewController.saveAccount)
+    let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
+    let editAction: Selector = #selector(AccountInfoTableViewController.edit)
+    let dismissKeyboardAction: Selector = #selector(AccountInfoTableViewController.dismissKeyboard)
 
     enum ViewType {
         case Add, Edit

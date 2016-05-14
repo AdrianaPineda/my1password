@@ -65,7 +65,7 @@ class UserAccountsManager: NSObject {
                     accounts.append(currentAccount)
                 }
 
-                index++
+                index += 1
 
             }
         }
@@ -205,7 +205,7 @@ class UserAccountsManager: NSObject {
 
                 self.saveSensitiveData(account.password, forKey: currentAccountPassword + String(index))
 
-                index++
+                index += 1
 
             }
 
