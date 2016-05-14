@@ -117,11 +117,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01B7DAB01B000B0B00421693 /* Views */ = {
+		0103ABE71CE7820600F51B82 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7AFECF3A1A927101001EF48C /* LaunchScreen.xib */,
+				7AFECF351A927101001EF48C /* Main.storyboard */,
+				0103ABEC1CE7826E00F51B82 /* ShowAccountList */,
+				0103ABEB1CE7826000F51B82 /* Common */,
+				0103ABEA1CE7824900F51B82 /* Login */,
+				0103ABE91CE7821D00F51B82 /* AddAccount */,
+				0103ABE81CE7820E00F51B82 /* Registration */,
 			);
-			name = Views;
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		0103ABE81CE7820E00F51B82 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
+			);
+			name = Registration;
+			sourceTree = "<group>";
+		};
+		0103ABE91CE7821D00F51B82 /* AddAccount */ = {
+			isa = PBXGroup;
+			children = (
+				7A4F213D1AC0595800D4AB8C /* Account.swift */,
+				01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */,
+			);
+			name = AddAccount;
+			sourceTree = "<group>";
+		};
+		0103ABEA1CE7824900F51B82 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7AFECF541A92941C001EF48C /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		0103ABEB1CE7826000F51B82 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */,
+				01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */,
+				7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */,
+				7A4F213B1AC0594C00D4AB8C /* User.swift */,
+				7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */,
+				7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		0103ABEC1CE7826E00F51B82 /* ShowAccountList */ = {
+			isa = PBXGroup;
+			children = (
+				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
+				01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */,
+			);
+			name = ShowAccountList;
 			sourceTree = "<group>";
 		};
 		01B7DAB51B00172600421693 /* Resources */ = {
@@ -132,24 +186,6 @@
 				7AFECF511A927DB1001EF48C /* pass-icon.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		7A4F213A1AC0593E00D4AB8C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				7A4F213B1AC0594C00D4AB8C /* User.swift */,
-				7A4F213D1AC0595800D4AB8C /* Account.swift */,
-				7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		7A84D2981AC0B97B00B111DA /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 		7ADA2BCE1CE5793F00933303 /* Models */ = {
@@ -183,15 +219,10 @@
 		7AFECF2E1A927101001EF48C /* my1password */ = {
 			isa = PBXGroup;
 			children = (
-				7A84D2981AC0B97B00B111DA /* Helpers */,
-				7A4F213A1AC0593E00D4AB8C /* Models */,
-				7AFECF531A9293FC001EF48C /* Controllers */,
-				01B7DAB01B000B0B00421693 /* Views */,
+				0103ABE71CE7820600F51B82 /* Scenes */,
 				01B7DAB51B00172600421693 /* Resources */,
 				7AFECF311A927101001EF48C /* AppDelegate.swift */,
-				7AFECF351A927101001EF48C /* Main.storyboard */,
 				7AFECF381A927101001EF48C /* Images.xcassets */,
-				7AFECF3A1A927101001EF48C /* LaunchScreen.xib */,
 				7AFECF2F1A927101001EF48C /* Supporting Files */,
 			);
 			path = my1password;
@@ -221,21 +252,6 @@
 				7AFECF461A927101001EF48C /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7AFECF531A9293FC001EF48C /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				7AFECF541A92941C001EF48C /* LoginViewController.swift */,
-				7AFECF561A92A650001EF48C /* RegisterViewController.swift */,
-				7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */,
-				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
-				01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */,
-				01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */,
-				01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */,
-				0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */,
-			);
-			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
