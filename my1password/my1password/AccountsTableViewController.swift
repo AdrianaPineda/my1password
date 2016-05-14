@@ -8,18 +8,18 @@
 
 import UIKit
 
-class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate {
+class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate, UISearchResultsUpdating {
 
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     var accounts = [Account]()
-//    var filteredAccounts = [Account]()
+    var filteredAccounts = [Account]()
 
     let addAccountTableViewControllerId: String = "addAccountTableViewController"
     let showAccountSegueId: String = "showAccount"
     let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
     let accountRowIdentifier: String = "accountRow"
 
-//    let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    let searchController: UISearchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +27,12 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-//        self.searchController.searchResultsUpdater = self
-//        self.searchController.dimsBackgroundDuringPresentation = false
-//        definesPresentationContext = true
-//        self.tableView.tableHeaderView = self.searchController.searchBar
+        self.configureUI()
 
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.configureUI()
+        self.configureRightBarButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +58,9 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         // Configure right bar button
         self.configureRightBarButton()
 
+        // Configure search bar
+        self.configureSearchBar()
+
     }
 
     func configureRightBarButton() {
@@ -68,25 +68,34 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
     }
 
-    // MARK: - Search bar
-//    func updateSearchResultsForSearchController(searchController: UISearchController) {
-//        self.filterContentForSearchText(self.searchController.searchBar.text!)
-//    }
+    func configureSearchBar() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        self.tableView.tableHeaderView = self.searchController.searchBar
+    }
 
-//    func filterContentForSearchText(searchText: String, scope: String = "All") {
-//        self.filteredAccounts = self.accounts.filter({ (account: Account) -> Bool in
-//            let isAccountAMatch: Bool = account.username.lowercaseString.containsString(searchText.lowercaseString) || account.url.lowercaseString.containsString(searchText.lowercaseString)
-//            return isAccountAMatch
-//        })
-//
-//        self.tableView.reloadData()
-//    }
+    // MARK: - Search bar
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.filterContentForSearchText(self.searchController.searchBar.text!)
+    }
+
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        self.filteredAccounts = self.accounts.filter { account in
+
+            let isAccountAMatch: Bool = account.username.lowercaseString.containsString(searchText.lowercaseString) || account.url.lowercaseString.containsString(searchText.lowercaseString)
+
+            return isAccountAMatch
+        }
+
+        self.tableView.reloadData()
+    }
 
     func isSearching() -> Bool {
 
-//        if self.searchController.active && self.searchController.searchBar.text != "" {
-//            return true
-//        }
+        if self.searchController.active && self.searchController.searchBar.text != "" {
+            return true
+        }
 
         return false
     }
@@ -101,9 +110,9 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         // Return the number of rows in the section.
-//        if self.isSearching() {
-//            self.filteredAccounts.count
-//        }
+        if self.isSearching() {
+            return self.filteredAccounts.count
+        }
 
         return accounts.count
     }
@@ -116,13 +125,13 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
         var currentAccount: Account? = nil
         let cellRow: Int = indexPath.row
-//        if self.isSearching() && filteredAccounts.count > 0  && cellRow < filteredAccounts.count {
-//            currentAccount = filteredAccounts[cellRow]
-//        } else {
+        if self.isSearching() && filteredAccounts.count > 0  && cellRow < filteredAccounts.count {
+            currentAccount = filteredAccounts[cellRow]
+        } else {
             if accounts.count > 0 && cellRow < accounts.count {
                 currentAccount = accounts[indexPath.row]
             }
-//        }
+        }
 
         if currentAccount != nil {
             cell.textLabel?.text = currentAccount!.username
