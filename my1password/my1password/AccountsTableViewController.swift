@@ -32,40 +32,40 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 //        definesPresentationContext = true
 //        self.tableView.tableHeaderView = self.searchController.searchBar
 
-        accounts = userAccountsManager.getUserAccounts()
+    }
 
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
-
+    override func viewWillAppear(animated: Bool) {
+        self.configureUI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-
-
-//        self.tableView.reloadData()
     }
 
     override func viewWillDisappear(animated: Bool) {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
 
-    // MARK: - Search bar
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        self.filterContentForSearchText(self.searchController.searchBar.text!)
+    // MARK: - Configure UI
+
+    func reloadUI() {
+        self.configureUI()
+        self.tableView.reloadData()
     }
 
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
-        self.filteredAccounts = self.accounts.filter({ (account: Account) -> Bool in
-            let isAccountAMatch: Bool = account.username.lowercaseString.containsString(searchText.lowercaseString) || account.url.lowercaseString.containsString(searchText.lowercaseString)
-            return isAccountAMatch
-        })
+    func configureUI() {
 
-        self.tableView.reloadData()
+        // Load accounts
+        accounts = userAccountsManager.getUserAccounts()
+
+        // Configure right bar button
+        self.configureRightBarButton()
+
+    }
+
+    func configureRightBarButton() {
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
     }
 
     // MARK: - Search bar
@@ -222,7 +222,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
             }
         }
 
-        self.tableView.reloadData()
+        self.reloadUI()
     }
 
 }
