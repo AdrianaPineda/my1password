@@ -24,9 +24,6 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         self.configureUI()
 
     }
@@ -40,7 +37,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
 
     override func viewWillDisappear(animated: Bool) {
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        self.removeRightBarButton()
     }
 
     // MARK: - Configure UI
@@ -66,6 +63,10 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     func configureRightBarButton() {
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
+    }
+
+    func removeRightBarButton() {
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
 
     func configureSearchBar() {
