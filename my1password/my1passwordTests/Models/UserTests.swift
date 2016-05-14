@@ -81,4 +81,28 @@ class UserTests: XCTestCase {
         XCTAssertEqual(user.password, emptyField)
     }
 
+    func testAddAccount() {
+
+        let password = "password"
+        let email = "email"
+
+        let user: User = User(email: email, password: password)
+
+        var accounts = user.accounts
+        XCTAssertTrue(accounts.count == 0)
+
+        let account = Account(username: "u1", password: "p1", url: "u1")
+
+        let accountAdded = user.addAccount(account)
+
+        XCTAssertTrue(accountAdded)
+
+        accounts = user.accounts
+        XCTAssertTrue(accounts.count == 1)
+        XCTAssertEqual(accounts[0].username, account.username)
+        XCTAssertEqual(accounts[0].password, account.password)
+        XCTAssertEqual(accounts[0].url, account.url)
+
+    }
+
 }
