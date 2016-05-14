@@ -105,4 +105,86 @@ class UserTests: XCTestCase {
 
     }
 
+    func testUpdateAccount_WhenNoAccounts() {
+
+        let password = "password"
+        let email = "email"
+
+        let user: User = User(email: email, password: password)
+
+        let account = Account(username: "u1", password: "p1", url: "u1")
+
+        let accountUpdated = user.updateAccount(account)
+
+        XCTAssertFalse(accountUpdated)
+    }
+
+    func testUpdateAccount_WithNonExistingAccount() {
+
+        let password = "password"
+        let email = "email"
+
+        let account = Account(username: "u1", password: "p1", url: "u1")
+
+        let user: User = User(email: email, password: password, accounts: [account])
+
+        let updatedAccount = Account(username: "u2", password: "p1", url: "u2")
+
+        let accountUpdated = user.updateAccount(updatedAccount)
+
+        XCTAssertFalse(accountUpdated)
+    }
+
+    func testUpdateAccount_WithExistingAccount() {
+
+        let password = "password"
+        let email = "email"
+
+        let account = Account(username: "u1", password: "p1", url: "url1")
+
+        let user: User = User(email: email, password: password, accounts: [account])
+
+        account.url = "url2"
+
+        let accountUpdated = user.updateAccount(account)
+
+        XCTAssertTrue(accountUpdated)
+    }
+
+    func testIsUserValid_InvalidUser() {
+
+        let user: User? = nil
+
+        let isUserValid = User.isUserValid(user)
+
+        XCTAssertFalse(isUserValid)
+    }
+
+    func testIsUserValid_UserWithoutEmail() {
+
+        let user: User = User(email: "", password: "password")
+
+        let isUserValid = User.isUserValid(user)
+
+        XCTAssertFalse(isUserValid)
+    }
+
+    func testIsUserValid_UserWithoutPassword() {
+
+        let user: User = User(email: "email", password: "")
+
+        let isUserValid = User.isUserValid(user)
+
+        XCTAssertFalse(isUserValid)
+    }
+
+    func testIsUserValid_ValidUser() {
+
+        let user: User = User(email: "email", password: "password")
+
+        let isUserValid = User.isUserValid(user)
+
+        XCTAssertTrue(isUserValid)
+    }
+
 }

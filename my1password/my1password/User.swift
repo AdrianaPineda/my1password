@@ -49,14 +49,16 @@ class User: NSObject {
     }
 
     static func isUserValid(user: User?) -> Bool {
-        if user != nil {
-            if (user!.email ?? "").isEmpty || (user!.password ?? "").isEmpty || user!.accounts.count < 0 {
-                return false
-            } else {
-                return true
-            }
+
+        if user == nil {
+            return false
         }
 
-        return false
+        if (user!.email ?? "").isEmpty || (user!.password ?? "").isEmpty || user!.accounts.count < 0 {
+            return false
+        } else {
+            return true
+        }
+
     }
 }
