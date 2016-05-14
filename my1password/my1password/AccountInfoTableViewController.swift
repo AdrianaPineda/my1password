@@ -48,10 +48,10 @@ class AccountInfoTableViewController: UITableViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var url: UITextField!
 
-    var viewType: ViewType = .Add
+    private var viewType: ViewType = .Add
 
-    var currentAccount: Account? = nil
-    let currentUserId: Int = -1
+    private var currentAccount: Account? = nil
+    private var currentUserId: Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +87,19 @@ class AccountInfoTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    func setViewType(viewType: ViewType) {
+        self.viewType = viewType
+    }
+
+    func getViewType() -> ViewType {
+        return self.viewType
+    }
+
+    func setAccount(account: Account, forUserId userId: Int) {
+        self.currentAccount = account
+        self.currentUserId = userId
     }
 
     // MARK: - Table view

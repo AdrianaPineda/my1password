@@ -153,7 +153,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         if segue.identifier == showAccountSegueId {
 
             let nextController: AccountInfoTableViewController = segue.destinationViewController as! AccountInfoTableViewController
-            nextController.viewType = .Edit
+            nextController.setViewType(.Edit)
 
             let accountRow: Int = (self.tableView.indexPathForSelectedRow?.row)!
 
@@ -161,7 +161,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
                 if let currentAccount: Account = self.accounts[accountRow] as Account {
 
-                    nextController.currentAccount = currentAccount
+                    // TODO
+                    nextController.setAccount(currentAccount, forUserId: 0)
                     nextController.delegate = self
                 }
 
@@ -186,7 +187,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     func reloadTable(sender: UIViewController) {
 
         if let accountViewSender: AccountInfoTableViewController = sender as? AccountInfoTableViewController {
-            if accountViewSender.viewType == .Add {
+            if accountViewSender.getViewType() == .Add {
                 sender.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 accountViewSender.navigationController?.popViewControllerAnimated(true)
