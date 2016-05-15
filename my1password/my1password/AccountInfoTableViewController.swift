@@ -256,17 +256,6 @@ class AccountInfoTableViewController: UITableViewController {
 
     }
 
-    private func validateFieldsWhenSaving() -> Bool{
-        let areAllFieldsComplete = self.areAllFieldsComplete()
-
-        if !areAllFieldsComplete {
-
-            self.showAlert(withTitle: incompleteFormTitle, andMessage: incompleteFormMessage, handler: nil)
-        }
-
-        return areAllFieldsComplete
-    }
-
     private func addOrUpdateAccount() -> Bool {
 
         if self.viewType == .Add {
@@ -274,17 +263,6 @@ class AccountInfoTableViewController: UITableViewController {
         }
 
         return self.updateExistingAccount()
-    }
-
-    private func showAccountSavedConfirmationForViewType() {
-
-        if self.viewType == .Add {
-            self.showAccountSavedConfirmation(accountAddedAlertTitle, andMessage: accountAddedAlertTitle)
-
-        } else {
-            self.showAccountSavedConfirmation(accountUpdatedAlertTitle, andMessage: accountUpdatedAlertMessage)
-        }
-
     }
 
     private func addNewAccount() -> Bool {
@@ -312,6 +290,17 @@ class AccountInfoTableViewController: UITableViewController {
 
     }
 
+    private func showAccountSavedConfirmationForViewType() {
+
+        if self.viewType == .Add {
+            self.showAccountSavedConfirmation(accountAddedAlertTitle, andMessage: accountAddedAlertTitle)
+
+        } else {
+            self.showAccountSavedConfirmation(accountUpdatedAlertTitle, andMessage: accountUpdatedAlertMessage)
+        }
+
+    }
+
     private func showAccountSavedConfirmation(alertTitle: String, andMessage alertMessage: String) {
 
         self.showAlert(withTitle: alertTitle, andMessage: alertMessage, handler: {(alertAction: UIAlertAction) -> Void in
@@ -330,7 +319,19 @@ class AccountInfoTableViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion:nil)
 
     }
-    
+
+    // MARK: Fields Validation
+    private func validateFieldsWhenSaving() -> Bool{
+        let areAllFieldsComplete = self.areAllFieldsComplete()
+
+        if !areAllFieldsComplete {
+
+            self.showAlert(withTitle: incompleteFormTitle, andMessage: incompleteFormMessage, handler: nil)
+        }
+
+        return areAllFieldsComplete
+    }
+
     private func areAllFieldsComplete() -> Bool {
         
         if isUsernameComplete() && isPasswordComplete() && isURLComplete() {
