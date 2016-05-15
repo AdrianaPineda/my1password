@@ -41,10 +41,11 @@ class LoginViewController: UIViewController {
     // MARK: - Login
     @IBAction func login(sender: AnyObject) {
 
-        self.configureUIWhenLoginClicked()
+        self.hideKeyBoard()
 
         // Validate fields
         if !self.areFieldsValid() {
+            self.resetFields()
             self.showIvalidPasswordAlert()
             return
         }
@@ -54,13 +55,9 @@ class LoginViewController: UIViewController {
 
     }
 
-    private func configureUIWhenLoginClicked() {
-        self.hideKeyBoard()
-        self.resetFields()
-    }
-
     private func performLogin() {
 
+        self.resetFields()
         UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
         self.performSegueWithIdentifier(loginSegueIdentifier, sender: self)
     }
