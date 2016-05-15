@@ -310,8 +310,7 @@ class AccountInfoTableViewController: UITableViewController {
 
         let account = Account(username: self.username.text!, password: self.password.text!, url: self.url.text!, id:(self.currentAccount?.getId())!)
 
-        let updateSuccessful = userAccountsManager.updateAccount(account, forAccountId: self.currentAccount!.getId())
-
+        let updateSuccessful = userAccountsManager.updateAccount(account, forCurrentAccount: currentAccount)
         return updateSuccessful
 
     }

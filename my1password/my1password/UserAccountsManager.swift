@@ -160,12 +160,20 @@ class UserAccountsManager: NSObject {
     }
 
     // MARK: - Update Account
-    func updateAccount(account: Account, forAccountId accountId: Int) -> Bool {
+    func updateAccount(account: Account?, forCurrentAccount currentAccount: Account?) -> Bool {
+
+        if account == nil {
+            return false
+        }
+
+        if currentAccount == nil {
+            return false
+        }
 
         if let currentUser = user {
 
-            let currentAccountIndex = currentUser.getAccounts()[accountId]
-            currentUser.updateAccount(account, forAccountId: accountId)
+            let currentAccountId = currentAccount!.getId()
+            currentUser.updateAccount(account!, forAccountId: currentAccountId)
             self.saveAccounts()
 
             return true
