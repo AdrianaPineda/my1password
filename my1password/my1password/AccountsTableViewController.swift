@@ -10,20 +10,25 @@ import UIKit
 
 class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate, UISearchResultsUpdating {
 
+    // MARK: - Constants
+    let addAccountTableViewControllerId: String = "addAccountTableViewController"
+    let showAccountSegueId: String = "showAccount"
+    let accountRowIdentifier: String = "accountRow"
+
+    // MARK: - Selectors
+    let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
+
+    // MARK: - Properties
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     var accounts = [Account]()
     var filteredAccounts = [Account]()
 
-    let addAccountTableViewControllerId: String = "addAccountTableViewController"
-    let showAccountSegueId: String = "showAccount"
-    let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
-    let accountRowIdentifier: String = "accountRow"
-
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
-        super.viewDidLoad()
 
+        super.viewDidLoad()
         self.configureUI()
 
     }
@@ -42,12 +47,12 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     // MARK: - Configure UI
 
-    func reloadUI() {
+    private func reloadUI() {
         self.configureUI()
         self.tableView.reloadData()
     }
 
-    func configureUI() {
+    private func configureUI() {
 
         // Load accounts
         accounts = userAccountsManager.getUserAccounts()
@@ -60,20 +65,22 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     }
 
-    func configureRightBarButton() {
+    private func configureRightBarButton() {
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
     }
 
-    func removeRightBarButton() {
+    private func removeRightBarButton() {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
 
-    func configureSearchBar() {
+    private func configureSearchBar() {
+
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         self.tableView.tableHeaderView = self.searchController.searchBar
+
     }
 
     // MARK: - Search bar
@@ -81,7 +88,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         self.filterContentForSearchText(self.searchController.searchBar.text!)
     }
 
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
+    private func filterContentForSearchText(searchText: String, scope: String = "All") {
         self.filteredAccounts = self.accounts.filter { account in
 
             let isAccountAMatch: Bool = account.getUsername().lowercaseString.containsString(searchText.lowercaseString) || account.getUrl().lowercaseString.containsString(searchText.lowercaseString)
@@ -92,7 +99,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         self.tableView.reloadData()
     }
 
-    func isSearching() -> Bool {
+    private func isSearching() -> Bool {
 
         if self.searchController.active && self.searchController.searchBar.text != "" {
             return true
@@ -101,16 +108,13 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         return false
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table view
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        // Return the number of rows in the section.
         if self.isSearching() {
             return self.filteredAccounts.count
         }
@@ -119,13 +123,14 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCellWithIdentifier(accountRowIdentifier, forIndexPath: indexPath)
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        // Configure the cell...
 
         var currentAccount: Account? = nil
         let cellRow: Int = indexPath.row
+
         if self.isSearching() && filteredAccounts.count > 0  && cellRow < filteredAccounts.count {
             currentAccount = filteredAccounts[cellRow]
         } else {
@@ -141,36 +146,39 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         return cell
     }
 
-    // MARK: - Table View
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         self.performSegueWithIdentifier(showAccountSegueId, sender: self)
 
     }
 
-    // MARK: - Navigation
+    // MARK: - Edit Account
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == showAccountSegueId {
 
-            let nextController: AccountInfoTableViewController = segue.destinationViewController as! AccountInfoTableViewController
-            nextController.setViewType(.Edit)
+        if segue.identifier != showAccountSegueId {
+            return
+        }
 
-            let accountRow: Int = (self.tableView.indexPathForSelectedRow?.row)!
+        let accountRow: Int = (self.tableView.indexPathForSelectedRow?.row)!
 
-            if self.accounts.count > accountRow {
+        if self.accounts.count <= accountRow {
+            return
+        }
 
-                if let currentAccount: Account = self.accounts[accountRow] as Account {
-
-                    // TODO
-                    nextController.setAccount(currentAccount)
-                    nextController.delegate = self
-                }
-
-            }
+        if let currentAccount: Account = self.accounts[accountRow] as Account {
+            self.configureAccountInfoForEditSegue(segue, withAccount: currentAccount)
         }
     }
 
-    
+    private func configureAccountInfoForEditSegue(segue: UIStoryboardSegue, withAccount account: Account) {
+
+        let nextController: AccountInfoTableViewController = segue.destinationViewController as! AccountInfoTableViewController
+        nextController.setViewType(.Edit)
+        nextController.setAccount(account)
+        nextController.delegate = self
+    }
+
+
     // MARK: - Add Account
     func addAccount() {
 
@@ -187,11 +195,13 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     func reloadTable(sender: UIViewController) {
 
         if let accountViewSender: AccountInfoTableViewController = sender as? AccountInfoTableViewController {
+
             if accountViewSender.getViewType() == .Add {
                 sender.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 accountViewSender.navigationController?.popViewControllerAnimated(true)
             }
+
         }
 
         self.reloadUI()
