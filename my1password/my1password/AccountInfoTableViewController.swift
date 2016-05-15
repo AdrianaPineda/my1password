@@ -27,7 +27,7 @@ class AccountInfoTableViewController: UITableViewController {
     // Selectors
     private let copySelector: Selector = #selector(NSObject.copy(_:))
     private let revealSelector: Selector = "reveal:"
-    private let saveAccountAction: Selector = #selector(AccountInfoTableViewController.saveAccount)
+    private let saveAction: Selector = #selector(AccountInfoTableViewController.save)
     private let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
     private let editAction: Selector = #selector(AccountInfoTableViewController.edit)
     private let dismissKeyboardAction: Selector = #selector(AccountInfoTableViewController.dismissKeyboard)
@@ -83,7 +83,7 @@ class AccountInfoTableViewController: UITableViewController {
         self.currentAccount = account
     }
 
-    // MARK: - Configure UI first time
+    // MARK: - Configure UI for first time
     private func configureUI() {
 
         self.configureLeftButtonItem()
@@ -102,17 +102,16 @@ class AccountInfoTableViewController: UITableViewController {
     private func configureRightButtonItem() {
 
         if self.viewType == .Add {
-            self.configureRightButtonItemToAdd()
+            self.configureRightButtonItemToSave()
         } else {
             self.configureRightButtonItemToEdit()
         }
     }
 
-    private func configureRightButtonItemToAdd() {
+    private func configureRightButtonItemToSave() {
 
-        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: saveAccountAction)
+        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: saveAction)
         self.navigationItem.rightBarButtonItem = saveButtonItem
-
     }
 
     private func configureRightButtonItemToEdit() {
@@ -240,13 +239,8 @@ class AccountInfoTableViewController: UITableViewController {
         self.username.becomeFirstResponder()
     }
 
-    private func configureRightButtonItemToSave() {
-        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: saveAccountAction)
-        self.navigationItem.rightBarButtonItem = saveButtonItem
-    }
-
     // MARK:- Save Account
-    func saveAccount() {
+    func save() {
 
         self.dismissKeyboard()
 
@@ -254,7 +248,11 @@ class AccountInfoTableViewController: UITableViewController {
             return
         }
 
-        self.addOrUpdateAccount()
+        let accountAddedOrUpdated = self.addOrUpdateAccount()
+
+        if accountAddedOrUpdated {
+            self.showAccountSavedConfirmationForViewType()
+        }
 
     }
 
@@ -269,24 +267,24 @@ class AccountInfoTableViewController: UITableViewController {
         return areAllFieldsComplete
     }
 
-    private func addOrUpdateAccount() {
+    private func addOrUpdateAccount() -> Bool {
 
         if self.viewType == .Add {
+            return self.addNewAccount()
+        }
 
-            if !self.addNewAccount() {
-                return
-            }
+        return self.updateExistingAccount()
+    }
 
+    private func showAccountSavedConfirmationForViewType() {
+
+        if self.viewType == .Add {
             self.showAccountSavedConfirmation(accountAddedAlertTitle, andMessage: accountAddedAlertTitle)
 
         } else {
-
-            if !self.updateExistingAccount() {
-                return
-            }
-
             self.showAccountSavedConfirmation(accountUpdatedAlertTitle, andMessage: accountUpdatedAlertMessage)
         }
+
     }
 
     private func addNewAccount() -> Bool {
