@@ -51,8 +51,8 @@ class AccountInfoTableViewController: UITableViewController {
     private var viewType: ViewType = .Add
 
     private var currentAccount: Account? = nil
-    private var currentUserId: Int = -1
-    
+//    private var currentUserId: Int = -1
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -97,9 +97,8 @@ class AccountInfoTableViewController: UITableViewController {
         return self.viewType
     }
 
-    func setAccount(account: Account, forUserId userId: Int) {
+    func setAccount(account: Account) {
         self.currentAccount = account
-        self.currentUserId = userId
     }
 
     // MARK: - Table view
@@ -190,19 +189,20 @@ class AccountInfoTableViewController: UITableViewController {
 
             if self.viewType == .Add {
 
-                let account: Account = Account(username: username.text!, password: password.text!, url: url.text!)
-                wasActionSuccesful = userAccountsManager.addAccount(account)
+                let usernameText = username.text!
+                let passwordText = password.text!
+                let urlText = url.text!
+
+                wasActionSuccesful = userAccountsManager.addAccount(withUsername: usernameText, password: passwordText, url: urlText)
 
                 alertTitle = accountAddedAlertTitle
                 alertMessage = accountAddedAlertMessage
 
             } else {
 
-                self.currentAccount?.setUsername(self.username.text!)
-                self.currentAccount?.setPassword(self.password.text!)
-                self.currentAccount?.setUrl(self.url.text!)
+                let account = Account(username: self.username.text!, password: self.password.text!, url: self.url.text!, id:-1)
 
-                wasActionSuccesful = userAccountsManager.updateAccount(self.currentAccount!)
+                wasActionSuccesful = userAccountsManager.updateAccount(account, forAccountId: self.currentAccount!.getId())
 
                 alertTitle = accountUpdatedAlertTitle
                 alertMessage = accountUpdatedAlertMessage

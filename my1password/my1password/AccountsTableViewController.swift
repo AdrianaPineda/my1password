@@ -162,7 +162,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
                 if let currentAccount: Account = self.accounts[accountRow] as Account {
 
                     // TODO
-                    nextController.setAccount(currentAccount, forUserId: 0)
+                    nextController.setAccount(currentAccount)
                     nextController.delegate = self
                 }
 

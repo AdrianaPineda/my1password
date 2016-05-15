@@ -10,9 +10,9 @@ import Foundation
 
 class User: NSObject {
     
-    var email: String = ""
-    var password: String = ""
-    var accounts: [Account] = []
+    private var email: String = ""
+    private var password: String = ""
+    private var accounts: [Account] = []
     
     init(email: String, password: String, accounts: [Account]) {
         
@@ -28,7 +28,26 @@ class User: NSObject {
         self.password = password
 
     }
-    
+
+    func getEmail() -> String {
+        return self.email
+    }
+
+    func getPassword() -> String {
+        return self.password
+    }
+
+    func getAccounts() -> [Account] {
+        return self.accounts
+    }
+
+    func addAccount(withUsername username: String, password: String, url: String) {
+        let numberOfAccounts = self.accounts.count
+        let newAccount = Account(username: username, password: password, url: url, id: numberOfAccounts)
+
+        self.accounts.append(newAccount)
+    }
+
     func addAccount(account: Account) -> Bool {
         
         self.accounts.append(account)
@@ -36,11 +55,11 @@ class User: NSObject {
         return true
     }
 
-    func updateAccount(account: Account) -> Bool {
+    func updateAccount(account: Account, forAccountId accountId: Int) -> Bool {
 
-        if let index: Int = self.accounts.indexOf(account) {
+        if self.accounts.count > accountId {
 
-            self.accounts[index] = account
+            self.accounts[accountId] = account;
             return true
 
         }

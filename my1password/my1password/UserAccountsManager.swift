@@ -13,6 +13,7 @@ private let sharedInstance = UserAccountsManager()
 
 class UserAccountsManager: NSObject {
 
+    let currentAccountId: String = "USER_ACCOUNT_ID_"
     let currentAccountUsername: String = "USER_ACCOUNT_USERNAME_"
     let currentAccountPassword: String = "USER_ACCOUNT_PASSWORD_"
     let currentAccountUrl: String = "USER_ACCOUNT_URL_"
@@ -75,13 +76,14 @@ class UserAccountsManager: NSObject {
 
     private func loadAccount(fromAccountData data: [String: AnyObject], atIndex index:Int) -> Account? {
 
+        let accountId: String? = data[currentAccountId + String(index)] as? String
         let accountUsername: String? = data[currentAccountUsername + String(index)] as? String
         let accountPassword: String? = self.getSensitiveData(forKey: currentAccountPassword + String(index))
         let accountUrl: String? = data[currentAccountUrl+String(index)] as? String
 
-        if accountUsername != nil && accountPassword != nil  && accountUrl != nil {
+        if accountUsername != nil && accountPassword != nil  && accountUrl != nil && accountId != nil {
 
-            let currentUserAccount: Account = Account(username: accountUsername!, password: accountPassword!, url: accountUrl!)
+            let currentUserAccount: Account = Account(username: accountUsername!, password: accountPassword!, url: accountUrl!, id: Int(accountId!)!)
             return currentUserAccount
         }
 
@@ -113,7 +115,7 @@ class UserAccountsManager: NSObject {
         
         if let currentUser = user {
             
-            return currentUser.accounts
+            return currentUser.getAccounts()
         }
         
         return []
@@ -134,9 +136,9 @@ class UserAccountsManager: NSObject {
             let userDefaults = NSUserDefaults.standardUserDefaults()
 
             let userDict: NSMutableDictionary = NSMutableDictionary()
-            userDict.setObject(currentUser.email, forKey: currentUserEmail)
+            userDict.setObject(currentUser.getEmail(), forKey: currentUserEmail)
 
-            self.saveSensitiveData(currentUser.password, forKey: currentUserPassword)
+            self.saveSensitiveData(currentUser.getPassword(), forKey: currentUserPassword)
 
             userDefaults.setObject(userDict, forKey: currentUserKey)
             userDefaults.synchronize()
@@ -144,11 +146,11 @@ class UserAccountsManager: NSObject {
     }
 
     // MARK: - Add Account
-    func addAccount(account: Account) -> Bool {
+    func addAccount(withUsername username: String, password: String, url: String) -> Bool {
 
         if let currentUser: User = self.user {
 
-            currentUser.addAccount(account)
+            currentUser.addAccount(withUsername: username, password: password, url: url)
             self.saveAccounts()
             return true
 
@@ -158,11 +160,12 @@ class UserAccountsManager: NSObject {
     }
 
     // MARK: - Update Account
-    func updateAccount(account: Account) -> Bool {
+    func updateAccount(account: Account, forAccountId accountId: Int) -> Bool {
 
         if let currentUser = user {
 
-            currentUser.updateAccount(account)
+            let currentAccountIndex = currentUser.getAccounts()[accountId]
+//            currentUser.updateAccount(account)
             self.saveAccounts()
 
             return true
@@ -198,7 +201,7 @@ class UserAccountsManager: NSObject {
             var currentAccountsArray: [[String: String]] = []
 
             var index: Int = 0
-            for account: Account in currentUser.accounts {
+            for account: Account in currentUser.getAccounts() {
 
                 let currentAccountDict: [String: String] = self.getAccountDict(fromAccount: account, atIndex: index)
                 currentAccountsArray.append(currentAccountDict)
@@ -229,7 +232,8 @@ class UserAccountsManager: NSObject {
 
     private func getAccountDict(fromAccount account: Account, atIndex index:Int) -> [String: String] {
 
-        let currentAccountDict: [String: String] = [currentAccountUsername + String(index): account.getUsername(), currentAccountUrl + String(index): account.getUrl()]
+        let currentAccountIdKey = currentAccountId + String(index)
+        let currentAccountDict: [String: String] = [currentAccountIdKey: String(account.getId()), currentAccountUsername + String(index): account.getUsername(), currentAccountUrl + String(index): account.getUrl()]
         return currentAccountDict
 
     }

@@ -10,14 +10,20 @@ import Foundation
 
 class Account: NSObject {
 
+    private var id: Int = 0
     private var username: String = ""
     private var password: String = ""
     private var url: String = ""
 
-    init(username:String, password:String, url:String) {
+    init(username:String, password:String, url:String, id: Int) {
+        self.id = id
         self.username = username
         self.password = password
         self.url = url
+    }
+
+    func getId() -> Int {
+        return id
     }
 
     func getUsername() -> String {
@@ -30,18 +36,6 @@ class Account: NSObject {
 
     func getUrl() -> String {
         return url
-    }
-
-    func setUsername(username: String) {
-        self.username = username
-    }
-
-    func setPassword(password: String) {
-        self.password = password
-    }
-
-    func setUrl(url: String) {
-        self.url = url
     }
 
 }
