@@ -42,6 +42,8 @@ class RegisterViewController: UIViewController {
         case finish
     }
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

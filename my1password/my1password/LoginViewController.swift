@@ -11,7 +11,7 @@ import SSKeychain
 
 class LoginViewController: UIViewController {
 
-    // Constants
+    // MARK: - Constants
     private let loginSegueIdentifier: String = "login"
     private let registerSegueIdentifier: String = "register"
 
@@ -19,13 +19,13 @@ class LoginViewController: UIViewController {
     private let invalidPasswordAlertMessage: String = "Your master password is invalid"
     private let okAlertActionTitle: String = "OK"
 
-    // Properties
+    // MARK: - Properties
     @IBOutlet weak var password: UITextField!
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
 
         super.viewDidLoad()
-
         self.configureUI()
     }
 
