@@ -150,13 +150,17 @@ class AccountInfoTableViewController: UITableViewController {
             return
         }
 
-        self.username.enabled = false
-        self.password.enabled = false
-        self.url.enabled = false
+        self.disableFields()
 
         self.username.text = self.currentAccount?.getUsername()
         self.password.text = self.currentAccount?.getPassword()
         self.url.text = self.currentAccount?.getUrl()
+    }
+
+    private func disableFields() {
+        self.username.enabled = false
+        self.password.enabled = false
+        self.url.enabled = false
     }
 
     private func areFieldsValid() -> Bool {
@@ -265,31 +269,6 @@ class AccountInfoTableViewController: UITableViewController {
         return self.updateExistingAccount()
     }
 
-    private func addNewAccount() -> Bool {
-
-        let usernameText = username.text!
-        let passwordText = password.text!
-        let urlText = url.text!
-
-        let addSuccessful = userAccountsManager.addAccount(withUsername: usernameText, password: passwordText, url: urlText)
-
-        return addSuccessful
-    }
-
-    private func updateExistingAccount() -> Bool {
-
-        if self.currentAccount?.getId() == nil {
-            return false
-        }
-
-        let account = Account(username: self.username.text!, password: self.password.text!, url: self.url.text!, id:(self.currentAccount?.getId())!)
-
-        let updateSuccessful = userAccountsManager.updateAccount(account, forAccountId: self.currentAccount!.getId())
-
-        return updateSuccessful
-
-    }
-
     private func showAccountSavedConfirmationForViewType() {
 
         if self.viewType == .Add {
@@ -310,6 +289,34 @@ class AccountInfoTableViewController: UITableViewController {
         })
     }
 
+    // MARK: Add Account
+    private func addNewAccount() -> Bool {
+
+        let usernameText = username.text!
+        let passwordText = password.text!
+        let urlText = url.text!
+
+        let addSuccessful = userAccountsManager.addAccount(withUsername: usernameText, password: passwordText, url: urlText)
+
+        return addSuccessful
+    }
+
+    // MARK: Update Account
+    private func updateExistingAccount() -> Bool {
+
+        if self.currentAccount?.getId() == nil {
+            return false
+        }
+
+        let account = Account(username: self.username.text!, password: self.password.text!, url: self.url.text!, id:(self.currentAccount?.getId())!)
+
+        let updateSuccessful = userAccountsManager.updateAccount(account, forAccountId: self.currentAccount!.getId())
+
+        return updateSuccessful
+
+    }
+
+    // MARK: Alert
     private func showAlert(withTitle alertTitle: String, andMessage alertMessage: String, handler: ((UIAlertAction) -> Void)?) {
 
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
