@@ -11,81 +11,79 @@ import SSKeychain
 
 class LoginViewController: UIViewController {
 
-    let loginSegueIdentifier: String = "login"
-    let registerSegueIdentifier: String = "register"
+    // Constants
+    private let loginSegueIdentifier: String = "login"
+    private let registerSegueIdentifier: String = "register"
 
-    let invalidPasswordAlertTitle: String = "Invalid password"
-    let invalidPasswordAlertMessage: String = "Your master password is invalid"
-    let okAlertActionTitle: String = "OK"
+    private let invalidPasswordAlertTitle: String = "Invalid password"
+    private let invalidPasswordAlertMessage: String = "Your master password is invalid"
+    private let okAlertActionTitle: String = "OK"
 
+    // Properties
     @IBOutlet weak var password: UITextField!
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
-        self.password.becomeFirstResponder()
+        self.configureUI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
 
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Configure UI
+    private func configureUI() {
+        self.password.becomeFirstResponder()
     }
-    
+
+    // MARK: - Login
     @IBAction func login(sender: AnyObject) {
 
-        self.hideKeyBoard()
+        self.configureUIWhenLoginClicked()
 
-        if self.areFieldsValid() {
-
-            self.resetFields()
-
-            UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
-            self.performSegueWithIdentifier(loginSegueIdentifier, sender: self)
-
-        } else {
-
-            self.resetFields()
-
-            let alertController: UIAlertController = UIAlertController(title: invalidPasswordAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-
-            let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
-
-            alertController.addAction(alertAction)
-
-            self.presentViewController(alertController, animated: true, completion: nil)
+        // Validate fields
+        if !self.areFieldsValid() {
+            self.showIvalidPasswordAlert()
+            return
         }
+
+        // Login user
+        self.performLogin()
 
     }
 
-    func resetFields() {
+    private func configureUIWhenLoginClicked() {
+        self.hideKeyBoard()
+        self.resetFields()
+    }
+
+    private func performLogin() {
+
+        UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
+        self.performSegueWithIdentifier(loginSegueIdentifier, sender: self)
+    }
+
+    // MARK: Reset fields
+    private func resetFields() {
 
         self.password.text = ""
     }
 
-    func areFieldsValid() -> Bool {
+    // MARK: Validate fields
+    private func areFieldsValid() -> Bool {
 
-        if !self.isPasswordEmpty(){
-
-            let userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
-            return userAccountsManager.isMasterPasswordValid(forPassword: self.password.text!)
-
+        if self.isPasswordEmpty(){
+            return false
         }
 
-        return false
+        let userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
+        return userAccountsManager.isMasterPasswordValid(forPassword: self.password.text!)
 
     }
 
-    func isPasswordEmpty() -> Bool {
+    private func isPasswordEmpty() -> Bool {
 
         if password.text == "" {
             return true
@@ -95,12 +93,25 @@ class LoginViewController: UIViewController {
 
     }
 
+    // MARK: - Keyboard
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.hideKeyBoard()
     }
 
-    func hideKeyBoard() -> Void {
+    private func hideKeyBoard() -> Void {
         self.password.resignFirstResponder()
+    }
+
+    // MARK: - Alert
+    private func showIvalidPasswordAlert() {
+
+        let alertController: UIAlertController = UIAlertController(title: invalidPasswordAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+
+        let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
+
+        alertController.addAction(alertAction)
+
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }
