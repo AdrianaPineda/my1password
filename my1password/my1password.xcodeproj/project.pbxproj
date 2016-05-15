@@ -122,11 +122,11 @@
 			children = (
 				7AFECF3A1A927101001EF48C /* LaunchScreen.xib */,
 				7AFECF351A927101001EF48C /* Main.storyboard */,
-				0103ABEC1CE7826E00F51B82 /* ShowAccountList */,
-				0103ABEB1CE7826000F51B82 /* Common */,
 				0103ABEA1CE7824900F51B82 /* Login */,
-				0103ABE91CE7821D00F51B82 /* AccountDetail */,
 				0103ABE81CE7820E00F51B82 /* Registration */,
+				0103ABEC1CE7826E00F51B82 /* ShowAccountList */,
+				0103ABE91CE7821D00F51B82 /* AccountDetail */,
+				0103ABEB1CE7826000F51B82 /* Common */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";

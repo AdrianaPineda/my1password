@@ -10,7 +10,7 @@ import UIKit
 
 class AccountInfoTableViewController: UITableViewController {
 
-    // Constants
+    // MARK: - Constants
     private let cancelButtonTitle: String = "Cancel"
     private let saveButtonTitle: String = "Save"
     private let editButtonTitle: String = "Edit"
@@ -24,13 +24,15 @@ class AccountInfoTableViewController: UITableViewController {
     private let accountAddedAlertMessage = "Your account was successfully added"
     private let revealMenuItemText = "Reveal"
 
-    // Selectors
+    // MARK: - Selectors
     private let copySelector: Selector = #selector(NSObject.copy(_:))
     private let revealSelector: Selector = "reveal:"
     private let saveAction: Selector = #selector(AccountInfoTableViewController.save)
     private let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
     private let editAction: Selector = #selector(AccountInfoTableViewController.edit)
     private let dismissKeyboardAction: Selector = #selector(AccountInfoTableViewController.dismissKeyboard)
+
+    // MARK: - Properties
 
     // Possible View types
     enum ViewType {
@@ -47,17 +49,18 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     weak var delegate: ReloadTableViewDelegate?
-    
-    // Properties
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var url: UITextField!
 
     private var viewType: ViewType = .Add
 
     private let userAccountsManager = UserAccountsManager.userAccounts
     private var currentAccount: Account? = nil
 
+    // MARK: - Outlets
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var url: UITextField!
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
 
         super.viewDidLoad()
