@@ -165,7 +165,7 @@ class UserAccountsManager: NSObject {
         if let currentUser = user {
 
             let currentAccountIndex = currentUser.getAccounts()[accountId]
-//            currentUser.updateAccount(account)
+            currentUser.updateAccount(account, forAccountId: accountId)
             self.saveAccounts()
 
             return true
