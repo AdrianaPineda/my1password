@@ -125,7 +125,7 @@
 				0103ABEC1CE7826E00F51B82 /* ShowAccountList */,
 				0103ABEB1CE7826000F51B82 /* Common */,
 				0103ABEA1CE7824900F51B82 /* Login */,
-				0103ABE91CE7821D00F51B82 /* AddAccount */,
+				0103ABE91CE7821D00F51B82 /* AccountDetail */,
 				0103ABE81CE7820E00F51B82 /* Registration */,
 			);
 			name = Scenes;
@@ -139,13 +139,13 @@
 			name = Registration;
 			sourceTree = "<group>";
 		};
-		0103ABE91CE7821D00F51B82 /* AddAccount */ = {
+		0103ABE91CE7821D00F51B82 /* AccountDetail */ = {
 			isa = PBXGroup;
 			children = (
 				7A4F213D1AC0595800D4AB8C /* Account.swift */,
 				01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */,
 			);
-			name = AddAccount;
+			name = AccountDetail;
 			sourceTree = "<group>";
 		};
 		0103ABEA1CE7824900F51B82 /* Login */ = {
