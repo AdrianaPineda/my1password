@@ -144,6 +144,7 @@
 			children = (
 				7A4F213D1AC0595800D4AB8C /* Account.swift */,
 				01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */,
+				01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */,
 			);
 			name = AccountDetail;
 			sourceTree = "<group>";
@@ -173,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */,
-				01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */,
 			);
 			name = ShowAccountList;
 			sourceTree = "<group>";
