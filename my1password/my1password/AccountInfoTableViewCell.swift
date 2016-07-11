@@ -19,10 +19,49 @@ class AccountInfoTableViewCell: UITableViewCell {
     }
 
     override func copy(sender: AnyObject?) {
-        UIPasteboard.generalPasteboard().string = "TESTING"
+
+        let subviews = self.subviews
+        for view in subviews {
+
+            let subviews2 = view.subviews
+
+            for view2 in subviews2 {
+                if let textField: UITextField = view2 as? UITextField {
+                    UIPasteboard.generalPasteboard().string = textField.text
+                    return
+                }
+            }
+        }
+
     }
 
     func reveal(sender: AnyObject) {
-        //
+
+        let subviews = self.subviews
+        for view in subviews {
+            let subviews2 = view.subviews
+
+            for view2 in subviews2 {
+                if let textField: UITextField = view2 as? UITextField {
+                    textField.secureTextEntry = false
+                    return
+                }
+            }
+        }
+    }
+
+    func conceal(sender: AnyObject) {
+
+        let subviews = self.subviews
+        for view in subviews {
+            let subviews2 = view.subviews
+
+            for view2 in subviews2 {
+                if let textField: UITextField = view2 as? UITextField {
+                    textField.secureTextEntry = true
+                    return
+                }
+            }
+        }
     }
 }

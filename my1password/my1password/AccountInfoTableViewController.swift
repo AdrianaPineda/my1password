@@ -23,10 +23,13 @@ class AccountInfoTableViewController: UITableViewController {
     private let accountAddedAlertTitle = "Account added"
     private let accountAddedAlertMessage = "Your account was successfully added"
     private let revealMenuItemText = "Reveal"
+    private let concealMenuItemText = "Concel"
 
     // MARK: - Selectors
-    private let copySelector: Selector = #selector(NSObject.copy(_:))
-    private let revealSelector: Selector = "reveal:"
+    private let copySelector: Selector = #selector(AccountInfoTableViewCell.copy(_:))
+    private let revealSelector: Selector = #selector(AccountInfoTableViewCell.reveal(_:))
+    private let concealSelector: Selector = #selector(AccountInfoTableViewCell.conceal(_:))
+
     private let saveAction: Selector = #selector(AccountInfoTableViewController.save)
     private let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
     private let editAction: Selector = #selector(AccountInfoTableViewController.edit)
@@ -46,6 +49,17 @@ class AccountInfoTableViewController: UITableViewController {
         case Url
 
         static let allValues = [Username, Password, Url]
+
+        func position() -> Int {
+            switch self {
+            case .Username:
+                return 0
+            case .Password:
+                return 1
+            case .Url:
+                return 2
+            }
+        }
     }
 
     weak var delegate: ReloadTableViewDelegate?
@@ -92,8 +106,8 @@ class AccountInfoTableViewController: UITableViewController {
         self.configureLeftButtonItem()
         self.configureRightButtonItem()
         self.configureGestureForKeyboard()
-        self.configureMenuItem()
         self.configureFields()
+        self.configureMenuItem()
 
     }
 
@@ -127,8 +141,10 @@ class AccountInfoTableViewController: UITableViewController {
 
     private func configureMenuItem() {
 
-        let testMenuItem: UIMenuItem = UIMenuItem(title: revealMenuItemText, action: revealSelector)
-        UIMenuController.sharedMenuController().menuItems = [testMenuItem]
+        let revealMenuItem: UIMenuItem = UIMenuItem(title: revealMenuItemText, action: revealSelector)
+        let concealMenuItem: UIMenuItem = UIMenuItem(title: concealMenuItemText, action: concealSelector)
+
+        UIMenuController.sharedMenuController().menuItems = [revealMenuItem, concealMenuItem]
         UIMenuController.sharedMenuController().update()
 
     }
@@ -209,12 +225,17 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+
+        if indexPath.section == AccountInfoSections.Password.position() {
+            return true
+        }
+
+        return false
     }
 
     override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
 
-        if action == copySelector || action == revealSelector {
+        if action == copySelector || (action == revealSelector && self.password.secureTextEntry) || (action == concealSelector && !self.password.secureTextEntry) {
             return true
         }
         return false
