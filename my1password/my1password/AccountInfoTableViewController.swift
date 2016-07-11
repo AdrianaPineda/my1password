@@ -25,8 +25,8 @@ class AccountInfoTableViewController: UITableViewController {
     private let revealMenuItemText = "Reveal"
 
     // MARK: - Selectors
-    private let copySelector: Selector = #selector(NSObject.copy(_:))
-    private let revealSelector: Selector = "reveal:"
+    private let copySelector: Selector = #selector(AccountInfoTableViewCell.copy(_:))
+    private let revealSelector: Selector = #selector(AccountInfoTableViewCell.reveal(_:))
     private let saveAction: Selector = #selector(AccountInfoTableViewController.save)
     private let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
     private let editAction: Selector = #selector(AccountInfoTableViewController.edit)
@@ -92,8 +92,8 @@ class AccountInfoTableViewController: UITableViewController {
         self.configureLeftButtonItem()
         self.configureRightButtonItem()
         self.configureGestureForKeyboard()
-        self.configureMenuItem()
         self.configureFields()
+        self.configureMenuItem()
 
     }
 
