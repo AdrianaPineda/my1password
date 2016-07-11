@@ -36,7 +36,6 @@ class AccountInfoTableViewCell: UITableViewCell {
     }
 
     func reveal(sender: AnyObject) {
-        //
 
         let subviews = self.subviews
         for view in subviews {
@@ -45,6 +44,21 @@ class AccountInfoTableViewCell: UITableViewCell {
             for view2 in subviews2 {
                 if let textField: UITextField = view2 as? UITextField {
                     textField.secureTextEntry = false
+                    return
+                }
+            }
+        }
+    }
+
+    func conceal(sender: AnyObject) {
+
+        let subviews = self.subviews
+        for view in subviews {
+            let subviews2 = view.subviews
+
+            for view2 in subviews2 {
+                if let textField: UITextField = view2 as? UITextField {
+                    textField.secureTextEntry = true
                     return
                 }
             }
