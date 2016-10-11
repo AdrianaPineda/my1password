@@ -18,6 +18,7 @@
 		01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */; };
 		01B7DAD01B00286300421693 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DACF1B00286300421693 /* settings@2x.png */; };
 		7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */; };
+		7A096DCF1DAC8EBA00768A2F /* my1password.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DCD1DAC8EBA00768A2F /* my1password.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
@@ -79,6 +80,7 @@
 		01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		01B7DACF1B00286300421693 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHomeTabBarController.swift; sourceTree = "<group>"; };
+		7A096DCE1DAC8EBA00768A2F /* my1password.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = my1password.xcdatamodel; sourceTree = "<group>"; };
 		7A4F213B1AC0594C00D4AB8C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountsManager.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				7AFECF311A927101001EF48C /* AppDelegate.swift */,
 				7AFECF381A927101001EF48C /* Images.xcassets */,
 				7AFECF2F1A927101001EF48C /* Supporting Files */,
+				7A096DCD1DAC8EBA00768A2F /* my1password.xcdatamodeld */,
 			);
 			path = my1password;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
 				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
 				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
+				7A096DCF1DAC8EBA00768A2F /* my1password.xcdatamodeld in Sources */,
 				7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */,
 				7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */,
 				7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */,
@@ -599,6 +603,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7A096DCD1DAC8EBA00768A2F /* my1password.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7A096DCE1DAC8EBA00768A2F /* my1password.xcdatamodel */,
+			);
+			currentVersion = 7A096DCE1DAC8EBA00768A2F /* my1password.xcdatamodel */;
+			path = my1password.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7AFECF241A927101001EF48C /* Project object */;
 }
