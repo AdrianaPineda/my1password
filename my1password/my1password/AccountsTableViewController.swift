@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AccountsTableViewController: UITableViewController, ReloadTableViewDelegate, UISearchResultsUpdating {
 
@@ -21,6 +22,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - Properties
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     var accounts = [Account]()
+    var accountsCoreData = [NSManagedObject]()
     var filteredAccounts = [Account]()
 
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
@@ -140,6 +142,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         }
 
         if currentAccount != nil {
+//            cell.textLabel?.text = currentAccount!.getUsername()
+            currentAccount = accountsCoreData[cellRow].valueForKey("username") as? String
             cell.textLabel?.text = currentAccount!.getUsername()
         }
 
