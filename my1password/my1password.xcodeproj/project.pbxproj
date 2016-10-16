@@ -89,8 +89,8 @@
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountsManager.swift; sourceTree = "<group>"; };
 		7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		7AAAE72C1DB314A00028B610 /* Account+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Account+CoreDataProperties.swift"; path = "../../my1password/Account+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7AAAE72E1DB3151B0028B610 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../my1password/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7AAAE72C1DB314A00028B610 /* Account+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7AAAE72E1DB3151B0028B610 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7ADA2BCF1CE5795D00933303 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTests.swift; path = Models/UserTests.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF301A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 				7AAAE72C1DB314A00028B610 /* Account+CoreDataProperties.swift */,
 				7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */,
 			);
-			name = Accounts;
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		7AAAE7311DB315960028B610 /* User */ = {
@@ -227,7 +227,7 @@
 			children = (
 				7AAAE72E1DB3151B0028B610 /* User+CoreDataProperties.swift */,
 			);
-			name = User;
+			path = User;
 			sourceTree = "<group>";
 		};
 		7ADA2BCE1CE5793F00933303 /* Models */ = {
