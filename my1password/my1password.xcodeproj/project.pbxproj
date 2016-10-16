@@ -207,11 +207,27 @@
 		7A096DD11DAF2F3400768A2F /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				7AAAE72E1DB3151B0028B610 /* User+CoreDataProperties.swift */,
+				7AAAE7311DB315960028B610 /* User */,
+				7AAAE7301DB315900028B610 /* Accounts */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		7AAAE7301DB315900028B610 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
 				7AAAE72C1DB314A00028B610 /* Account+CoreDataProperties.swift */,
 				7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */,
 			);
-			path = UseCases;
+			name = Accounts;
+			sourceTree = "<group>";
+		};
+		7AAAE7311DB315960028B610 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				7AAAE72E1DB3151B0028B610 /* User+CoreDataProperties.swift */,
+			);
+			name = User;
 			sourceTree = "<group>";
 		};
 		7ADA2BCE1CE5793F00933303 /* Models */ = {
