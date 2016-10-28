@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AccountInfoTableViewController: UITableViewController {
 
@@ -26,14 +27,14 @@ class AccountInfoTableViewController: UITableViewController {
     private let concealMenuItemText = "Concel"
 
     // MARK: - Selectors
-    private let copySelector: Selector = #selector(AccountInfoTableViewCell.copy(_:))
-    private let revealSelector: Selector = #selector(AccountInfoTableViewCell.reveal(_:))
-    private let concealSelector: Selector = #selector(AccountInfoTableViewCell.conceal(_:))
+    private let copySelector: Selector = Selector("copy:")
+    private let revealSelector: Selector = Selector("reveal:")
+    private let concealSelector: Selector = Selector("conceal:")
 
-    private let saveAction: Selector = #selector(AccountInfoTableViewController.save)
-    private let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
-    private let editAction: Selector = #selector(AccountInfoTableViewController.edit)
-    private let dismissKeyboardAction: Selector = #selector(AccountInfoTableViewController.dismissKeyboard)
+    private let saveAction: Selector = Selector("save")
+    private let cancelAction: Selector = Selector("cancel")
+    private let editAction: Selector = Selector("edit")
+    private let dismissKeyboardAction: Selector = Selector("dismissKeyboard")
 
     // MARK: - Properties
 
@@ -320,9 +321,23 @@ class AccountInfoTableViewController: UITableViewController {
         let passwordText = password.text!
         let urlText = url.text!
 
-        let addSuccessful = userAccountsManager.addAccount(withUsername: usernameText, password: passwordText, url: urlText)
+        let applicationDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = applicationDelegate.managedObjectContext
+        let entity = NSEntityDescription.entityForName("Account", inManagedObjectContext: managedContext)
 
-        return addSuccessful
+        let account = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        account.setValue("username", forKey: usernameText)
+        account.setValue("password", forKey: passwordText)
+        account.setValue("url", forKey: urlText)
+
+        do {
+
+            try managedContext.save()
+            return true
+
+        } catch {
+            return false
+        }
     }
 
     // MARK: Update Account

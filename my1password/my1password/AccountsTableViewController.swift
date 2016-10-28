@@ -17,13 +17,13 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     let accountRowIdentifier: String = "accountRow"
 
     // MARK: - Selectors
-    let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
+    let addAccountSelector: Selector = Selector("addAccount")
 
     // MARK: - Properties
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
-    var accounts = [Account]()
-    var accountsCoreData = [NSManagedObject]()
-    var filteredAccounts = [Account]()
+
+    var accounts = [NSManagedObject]()
+    var filteredAccounts = [NSManagedObject]()
 
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
 
@@ -57,7 +57,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     private func configureUI() {
 
         // Load accounts
-        accounts = userAccountsManager.getUserAccounts()
+        accounts = self.fetchAccounts()
 
         // Configure right bar button
         self.configureRightBarButton()
@@ -65,6 +65,27 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         // Configure search bar
         self.configureSearchBar()
 
+    }
+
+    private func fetchAccounts() -> [NSManagedObject] {
+
+        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+        let managedContext = appDelegate.managedObjectContext
+
+        let fetchRequest = NSFetchRequest(entityName: "Account")
+
+        do {
+
+            if let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
+                return results
+            }
+
+        } catch {
+            return []
+        }
+
+        return []
     }
 
     private func configureRightBarButton() {
@@ -93,7 +114,15 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     private func filterContentForSearchText(searchText: String, scope: String = "All") {
         self.filteredAccounts = self.accounts.filter { account in
 
-            let isAccountAMatch: Bool = account.getUsername().lowercaseString.containsString(searchText.lowercaseString) || account.getUrl().lowercaseString.containsString(searchText.lowercaseString)
+            guard let accountUsername = account.valueForKey("username") else {
+                return false
+            }
+
+            guard let accountUrl = account.valueForKey("url") else {
+                return false
+            }
+
+            let isAccountAMatch: Bool = accountUsername.lowercaseString.containsString(searchText.lowercaseString) || accountUrl.lowercaseString.containsString(searchText.lowercaseString)
 
             return isAccountAMatch
         }
@@ -130,7 +159,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
 
-        var currentAccount: Account? = nil
+        var currentAccount: NSManagedObject?
         let cellRow: Int = indexPath.row
 
         if self.isSearching() && filteredAccounts.count > 0  && cellRow < filteredAccounts.count {
@@ -142,9 +171,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         }
 
         if currentAccount != nil {
-//            cell.textLabel?.text = currentAccount!.getUsername()
-            currentAccount = accountsCoreData[cellRow].valueForKey("username") as? String
-            cell.textLabel?.text = currentAccount!.getUsername()
+            cell.textLabel?.text = currentAccount!.valueForKey("username") as? String
         }
 
         return cell
@@ -169,12 +196,12 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
             return
         }
 
-        if let currentAccount: Account = self.accounts[accountRow] as Account {
+        if let currentAccount: NSManagedObject = self.accounts[accountRow] as NSManagedObject {
             self.configureAccountInfoForEditSegue(segue, withAccount: currentAccount)
         }
     }
 
-    private func configureAccountInfoForEditSegue(segue: UIStoryboardSegue, withAccount account: Account) {
+    private func configureAccountInfoForEditSegue(segue: UIStoryboardSegue, withAccount account: NSManagedObject) {
 
         let nextController: AccountInfoTableViewController = segue.destinationViewController as! AccountInfoTableViewController
         nextController.setViewType(.Edit)
