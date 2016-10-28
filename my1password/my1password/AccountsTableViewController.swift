@@ -17,7 +17,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     let accountRowIdentifier: String = "accountRow"
 
     // MARK: - Selectors
-    let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
+    let addAccountSelector: Selector = Selector("addAccount")
 
     // MARK: - Properties
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts

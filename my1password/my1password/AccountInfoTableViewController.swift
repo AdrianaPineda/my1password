@@ -26,14 +26,14 @@ class AccountInfoTableViewController: UITableViewController {
     private let concealMenuItemText = "Concel"
 
     // MARK: - Selectors
-    private let copySelector: Selector = #selector(AccountInfoTableViewCell.copy(_:))
-    private let revealSelector: Selector = #selector(AccountInfoTableViewCell.reveal(_:))
-    private let concealSelector: Selector = #selector(AccountInfoTableViewCell.conceal(_:))
+    private let copySelector: Selector = Selector("copy:")
+    private let revealSelector: Selector = Selector("reveal:")
+    private let concealSelector: Selector = Selector("conceal:")
 
-    private let saveAction: Selector = #selector(AccountInfoTableViewController.save)
-    private let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
-    private let editAction: Selector = #selector(AccountInfoTableViewController.edit)
-    private let dismissKeyboardAction: Selector = #selector(AccountInfoTableViewController.dismissKeyboard)
+    private let saveAction: Selector = Selector("save")
+    private let cancelAction: Selector = Selector("cancel")
+    private let editAction: Selector = Selector("edit")
+    private let dismissKeyboardAction: Selector = Selector("dismissKeyboard")
 
     // MARK: - Properties
 
