@@ -37,6 +37,7 @@ class AccountInfoTableViewController: UITableViewController {
     private let dismissKeyboardAction: Selector = Selector("dismissKeyboard")
 
     // MARK: - Properties
+    private let accountsUseCase = AccountsUseCase()
 
     // Possible View types
     enum ViewType {
@@ -317,27 +318,19 @@ class AccountInfoTableViewController: UITableViewController {
     // MARK: Add Account
     private func addNewAccount() -> Bool {
 
-        let usernameText = username.text!
-        let passwordText = password.text!
-        let urlText = url.text!
-
-        let applicationDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = applicationDelegate.managedObjectContext
-        let entity = NSEntityDescription.entityForName("Account", inManagedObjectContext: managedContext)
-
-        let account = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        account.setValue(usernameText, forKey: "username")
-        account.setValue(passwordText, forKey: "password")
-        account.setValue(urlText, forKey: "url")
-
-        do {
-
-            try managedContext.save()
-            return true
-
-        } catch {
+        guard let usernameText = username.text else {
             return false
         }
+
+        guard let passwordText = password.text else {
+            return false
+        }
+
+        guard let urlText = url.text else {
+            return false
+        }
+
+        return self.accountsUseCase.addAccount(usernameText, password: passwordText, url: urlText)
     }
 
     // MARK: Update Account
