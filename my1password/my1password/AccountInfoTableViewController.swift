@@ -326,9 +326,9 @@ class AccountInfoTableViewController: UITableViewController {
         let entity = NSEntityDescription.entityForName("Account", inManagedObjectContext: managedContext)
 
         let account = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        account.setValue("username", forKey: usernameText)
-        account.setValue("password", forKey: passwordText)
-        account.setValue("url", forKey: urlText)
+        account.setValue(usernameText, forKey: "username")
+        account.setValue(passwordText, forKey: "password")
+        account.setValue(urlText, forKey: "url")
 
         do {
 
