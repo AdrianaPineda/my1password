@@ -68,24 +68,9 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
 
     private func fetchAccounts() -> [NSManagedObject] {
-
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
-        let managedContext = appDelegate.managedObjectContext
-
-        let fetchRequest = NSFetchRequest(entityName: "Account")
-
-        do {
-
-            if let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
-                return results
-            }
-
-        } catch {
-            return []
-        }
-
-        return []
+        
+        let accountsUseCase = AccountsUseCase()
+        return accountsUseCase.loadAccounts()
     }
 
     private func configureRightBarButton() {
