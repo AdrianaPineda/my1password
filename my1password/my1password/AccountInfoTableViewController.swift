@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AccountInfoTableViewController: UITableViewController {
 
@@ -320,9 +321,23 @@ class AccountInfoTableViewController: UITableViewController {
         let passwordText = password.text!
         let urlText = url.text!
 
-        let addSuccessful = userAccountsManager.addAccount(withUsername: usernameText, password: passwordText, url: urlText)
+        let applicationDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = applicationDelegate.managedObjectContext
+        let entity = NSEntityDescription.entityForName("Account", inManagedObjectContext: managedContext)
 
-        return addSuccessful
+        let account = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        account.setValue("username", forKey: usernameText)
+        account.setValue("password", forKey: passwordText)
+        account.setValue("url", forKey: urlText)
+
+        do {
+
+            try managedContext.save()
+            return true
+
+        } catch {
+            return false
+        }
     }
 
     // MARK: Update Account
