@@ -21,6 +21,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     // MARK: - Properties
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
+    private let accountsUseCase = AccountsUseCase()
 
     var accounts = [NSManagedObject]()
     var filteredAccounts = [NSManagedObject]()
@@ -57,7 +58,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     private func configureUI() {
 
         // Load accounts
-        accounts = self.fetchAccounts()
+        accounts = accountsUseCase.loadAccounts()
 
         // Configure right bar button
         self.configureRightBarButton()
@@ -65,12 +66,6 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         // Configure search bar
         self.configureSearchBar()
 
-    }
-
-    private func fetchAccounts() -> [NSManagedObject] {
-        
-        let accountsUseCase = AccountsUseCase()
-        return accountsUseCase.loadAccounts()
     }
 
     private func configureRightBarButton() {

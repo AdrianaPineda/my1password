@@ -28,7 +28,7 @@ class AccountsUseCase: NSObject {
         } catch {
             return []
         }
-        
+
         return []
     }
 
