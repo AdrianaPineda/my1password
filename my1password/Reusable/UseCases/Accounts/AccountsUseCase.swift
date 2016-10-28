@@ -13,19 +13,17 @@ class AccountsUseCase: NSObject {
 
     private let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
-    func loadAccounts() -> [AnyObject] {
+    func loadAccounts() -> [NSManagedObject] {
 
-        guard let moct: NSManagedObjectContext = self.appDelegate.managedObjectContext else {
-            return []
-        }
+        let managedContext = appDelegate.managedObjectContext
 
         let fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Account")
 
         do {
 
-            let results = try moct.executeFetchRequest(fetchRequest)
-
-            return results
+            if let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
+                return results
+            }
 
         } catch {
             return []
