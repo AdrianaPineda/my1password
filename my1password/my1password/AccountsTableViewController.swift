@@ -17,11 +17,11 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     let accountRowIdentifier: String = "accountRow"
 
     // MARK: - Selectors
-    let addAccountSelector: Selector = Selector("addAccount")
+    let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
 
     // MARK: - Properties
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
-    private let accountsUseCase = AccountsUseCase()
+    fileprivate let accountsUseCase = AccountsUseCase()
 
     var accounts = [NSManagedObject]()
     var filteredAccounts = [NSManagedObject]()
@@ -36,7 +36,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.configureRightBarButton()
     }
 
@@ -44,18 +44,18 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.removeRightBarButton()
     }
 
     // MARK: - Configure UI
 
-    private func reloadUI() {
+    fileprivate func reloadUI() {
         self.configureUI()
         self.tableView.reloadData()
     }
 
-    private func configureUI() {
+    fileprivate func configureUI() {
 
         // Load accounts
         accounts = accountsUseCase.loadAccounts()
@@ -68,16 +68,16 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     }
 
-    private func configureRightBarButton() {
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: addAccountSelector)
+    fileprivate func configureRightBarButton() {
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: addAccountSelector)
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
     }
 
-    private func removeRightBarButton() {
+    fileprivate func removeRightBarButton() {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
 
-    private func configureSearchBar() {
+    fileprivate func configureSearchBar() {
 
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
@@ -87,22 +87,22 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
 
     // MARK: - Search bar
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         self.filterContentForSearchText(self.searchController.searchBar.text!)
     }
 
-    private func filterContentForSearchText(searchText: String, scope: String = "All") {
+    fileprivate func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         self.filteredAccounts = self.accounts.filter { account in
 
-            guard let accountUsername = account.valueForKey("username") else {
+            guard let accountUsername = account.value(forKey: "username") else {
                 return false
             }
 
-            guard let accountUrl = account.valueForKey("url") else {
+            guard let accountUrl = account.value(forKey: "url") else {
                 return false
             }
 
-            let isAccountAMatch: Bool = accountUsername.lowercaseString.containsString(searchText.lowercaseString) || accountUrl.lowercaseString.containsString(searchText.lowercaseString)
+            let isAccountAMatch: Bool = (accountUsername as AnyObject).lowercased.contains(searchText.lowercased()) || (accountUrl as AnyObject).lowercased.contains(searchText.lowercased())
 
             return isAccountAMatch
         }
@@ -110,9 +110,9 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         self.tableView.reloadData()
     }
 
-    private func isSearching() -> Bool {
+    fileprivate func isSearching() -> Bool {
 
-        if self.searchController.active && self.searchController.searchBar.text != "" {
+        if self.searchController.isActive && self.searchController.searchBar.text != "" {
             return true
         }
 
@@ -120,11 +120,11 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     }
 
     // MARK: - Table view
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if self.isSearching() {
             return self.filteredAccounts.count
@@ -133,11 +133,11 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         return accounts.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(accountRowIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: accountRowIdentifier, for: indexPath)
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
 
         var currentAccount: NSManagedObject?
         let cellRow: Int = indexPath.row
@@ -151,20 +151,20 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         }
 
         if currentAccount != nil {
-            cell.textLabel?.text = currentAccount!.valueForKey("username") as? String
+            cell.textLabel?.text = currentAccount!.value(forKey: "username") as? String
         }
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        self.performSegueWithIdentifier(showAccountSegueId, sender: self)
+        self.performSegue(withIdentifier: showAccountSegueId, sender: self)
 
     }
 
     // MARK: - Edit Account
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier != showAccountSegueId {
             return
@@ -181,10 +181,10 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         }
     }
 
-    private func configureAccountInfoForEditSegue(segue: UIStoryboardSegue, withAccount account: NSManagedObject) {
+    fileprivate func configureAccountInfoForEditSegue(_ segue: UIStoryboardSegue, withAccount account: NSManagedObject) {
 
-        let nextController: AccountInfoTableViewController = segue.destinationViewController as! AccountInfoTableViewController
-        nextController.setViewType(.Edit)
+        let nextController: AccountInfoTableViewController = segue.destination as! AccountInfoTableViewController
+        nextController.setViewType(.edit)
         nextController.setAccount(account)
         nextController.delegate = self
     }
@@ -193,24 +193,24 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - Add Account
     func addAccount() {
 
-        let addAccountTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier(addAccountTableViewControllerId) as! AccountInfoTableViewController
+        let addAccountTableViewController = self.storyboard?.instantiateViewController(withIdentifier: addAccountTableViewControllerId) as! AccountInfoTableViewController
 
         addAccountTableViewController.delegate = self
 
         let navigationController = UINavigationController(rootViewController: addAccountTableViewController)
 
-        self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
+        self.navigationController?.present(navigationController, animated: true, completion: nil)
     }
 
     // MARK: - ReloadTableViewDelegate
-    func reloadTable(sender: UIViewController) {
+    func reloadTable(_ sender: UIViewController) {
 
         if let accountViewSender: AccountInfoTableViewController = sender as? AccountInfoTableViewController {
 
-            if accountViewSender.getViewType() == .Add {
-                sender.dismissViewControllerAnimated(true, completion: nil)
+            if accountViewSender.getViewType() == .add {
+                sender.dismiss(animated: true, completion: nil)
             } else {
-                accountViewSender.navigationController?.popViewControllerAnimated(true)
+                accountViewSender.navigationController?.popViewController(animated: true)
             }
 
         }

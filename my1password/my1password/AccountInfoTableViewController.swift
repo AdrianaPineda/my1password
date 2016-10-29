@@ -12,52 +12,53 @@ import CoreData
 class AccountInfoTableViewController: UITableViewController {
 
     // MARK: - Constants
-    private let cancelButtonTitle: String = "Cancel"
-    private let saveButtonTitle: String = "Save"
-    private let editButtonTitle: String = "Edit"
-    private let viewEditNavigationTitle: String = "Edit"
-    private let incompleteFormTitle: String = "Incomplete form"
-    private let incompleteFormMessage: String = "Please fill all fields before saving"
-    private let okAction: String = "OK"
-    private let accountUpdatedAlertTitle: String = "Account updated"
-    private let accountUpdatedAlertMessage: String = "Your account was successfully updated"
-    private let accountAddedAlertTitle = "Account added"
-    private let accountAddedAlertMessage = "Your account was successfully added"
-    private let revealMenuItemText = "Reveal"
-    private let concealMenuItemText = "Concel"
+    fileprivate let cancelButtonTitle: String = "Cancel"
+    fileprivate let saveButtonTitle: String = "Save"
+    fileprivate let editButtonTitle: String = "Edit"
+    fileprivate let viewEditNavigationTitle: String = "Edit"
+    fileprivate let incompleteFormTitle: String = "Incomplete form"
+    fileprivate let incompleteFormMessage: String = "Please fill all fields before saving"
+    fileprivate let okAction: String = "OK"
+    fileprivate let accountUpdatedAlertTitle: String = "Account updated"
+    fileprivate let accountUpdatedAlertMessage: String = "Your account was successfully updated"
+    fileprivate let accountAddedAlertTitle = "Account added"
+    fileprivate let accountAddedAlertMessage = "Your account was successfully added"
+    fileprivate let revealMenuItemText = "Reveal"
+    fileprivate let concealMenuItemText = "Concel"
 
     // MARK: - Selectors
-    private let copySelector: Selector = Selector("copy:")
-    private let revealSelector: Selector = Selector("reveal:")
-    private let concealSelector: Selector = Selector("conceal:")
+    fileprivate let copySelector: Selector = #selector(UIResponderStandardEditActions.copy(_:))
+    fileprivate let revealSelector: Selector = Selector("reveal:")
+    fileprivate let concealSelector: Selector = Selector("conceal:")
 
-    private let saveAction: Selector = Selector("save")
-    private let cancelAction: Selector = Selector("cancel")
-    private let editAction: Selector = Selector("edit")
-    private let dismissKeyboardAction: Selector = Selector("dismissKeyboard")
+    fileprivate let saveAction: Selector = #selector(AccountInfoTableViewController.save)
+    fileprivate let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
+    fileprivate let editAction: Selector = #selector(AccountInfoTableViewController.edit)
+    fileprivate let dismissKeyboardAction: Selector = #selector(AccountInfoTableViewController.dismissKeyboard)
 
     // MARK: - Properties
+    fileprivate let accountsUseCase = AccountsUseCase()
 
     // Possible View types
     enum ViewType {
-        case Add, Edit
+        case add, edit
     }
 
     // View Sections for Account Info
-    private enum AccountInfoSections: Int {
-        case Username
-        case Password
-        case Url
+    fileprivate enum AccountInfoSections: Int {
+        case username
+        case password
+        case url
 
-        static let allValues = [Username, Password, Url]
+        static let allValues = [username, password, url]
 
         func position() -> Int {
             switch self {
-            case .Username:
+            case .username:
                 return 0
-            case .Password:
+            case .password:
                 return 1
-            case .Url:
+            case .url:
                 return 2
             }
         }
@@ -65,10 +66,10 @@ class AccountInfoTableViewController: UITableViewController {
 
     weak var delegate: ReloadTableViewDelegate?
 
-    private var viewType: ViewType = .Add
+    fileprivate var viewType: ViewType = .add
 
-    private let userAccountsManager = UserAccountsManager.userAccounts
-    private var currentAccount: Account? = nil
+    fileprivate let userAccountsManager = UserAccountsManager.userAccounts
+    fileprivate var currentAccount: NSManagedObject? = nil
 
     // MARK: - Outlets
     @IBOutlet weak var username: UITextField!
@@ -88,7 +89,7 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     // MARK: - ViewType
-    func setViewType(viewType: ViewType) {
+    func setViewType(_ viewType: ViewType) {
         self.viewType = viewType
     }
 
@@ -97,12 +98,12 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     // MARK: - Current Account
-    func setAccount(account: Account) {
+    func setAccount(_ account: NSManagedObject) {
         self.currentAccount = account
     }
 
     // MARK: - Configure UI for first time
-    private func configureUI() {
+    fileprivate func configureUI() {
 
         self.configureLeftButtonItem()
         self.configureRightButtonItem()
@@ -112,47 +113,47 @@ class AccountInfoTableViewController: UITableViewController {
 
     }
 
-    private func configureLeftButtonItem() {
-        let cancelButtomItem = UIBarButtonItem(title: cancelButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: cancelAction)
+    fileprivate func configureLeftButtonItem() {
+        let cancelButtomItem = UIBarButtonItem(title: cancelButtonTitle, style: UIBarButtonItemStyle.plain, target: self, action: cancelAction)
         self.navigationItem.leftBarButtonItem = cancelButtomItem
     }
 
-    private func configureRightButtonItem() {
+    fileprivate func configureRightButtonItem() {
 
-        if self.viewType == .Add {
+        if self.viewType == .add {
             self.configureRightButtonItemToSave()
         } else {
             self.configureRightButtonItemToEdit()
         }
     }
 
-    private func configureRightButtonItemToSave() {
+    fileprivate func configureRightButtonItemToSave() {
 
-        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: saveAction)
+        let saveButtonItem = UIBarButtonItem(title: saveButtonTitle, style: UIBarButtonItemStyle.plain, target: self, action: saveAction)
         self.navigationItem.rightBarButtonItem = saveButtonItem
     }
 
-    private func configureRightButtonItemToEdit() {
+    fileprivate func configureRightButtonItemToEdit() {
 
         self.navigationItem.title = viewEditNavigationTitle
-        let editButtonItem = UIBarButtonItem(title: editButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: editAction)
+        let editButtonItem = UIBarButtonItem(title: editButtonTitle, style: UIBarButtonItemStyle.plain, target: self, action: editAction)
         self.navigationItem.rightBarButtonItem = editButtonItem
 
     }
 
-    private func configureMenuItem() {
+    fileprivate func configureMenuItem() {
 
         let revealMenuItem: UIMenuItem = UIMenuItem(title: revealMenuItemText, action: revealSelector)
         let concealMenuItem: UIMenuItem = UIMenuItem(title: concealMenuItemText, action: concealSelector)
 
-        UIMenuController.sharedMenuController().menuItems = [revealMenuItem, concealMenuItem]
-        UIMenuController.sharedMenuController().update()
+        UIMenuController.shared.menuItems = [revealMenuItem, concealMenuItem]
+        UIMenuController.shared.update()
 
     }
 
-    private func configureFields() {
+    fileprivate func configureFields() {
 
-        if self.viewType == .Add {
+        if self.viewType == .add {
             self.focusFirstItem()
         } else {
             self.populateAccountInfoFields()
@@ -160,11 +161,11 @@ class AccountInfoTableViewController: UITableViewController {
 
     }
 
-    private func focusFirstItem() {
+    fileprivate func focusFirstItem() {
         self.username.becomeFirstResponder()
     }
 
-    private func populateAccountInfoFields() {
+    fileprivate func populateAccountInfoFields() {
 
         if !self.areFieldsValid() {
             return
@@ -172,40 +173,40 @@ class AccountInfoTableViewController: UITableViewController {
 
         self.disableFields()
 
-        self.username.text = self.currentAccount?.getUsername()
-        self.password.text = self.currentAccount?.getPassword()
-        self.url.text = self.currentAccount?.getUrl()
+        self.username.text = self.currentAccount?.value(forKey: "username") as! String?
+        self.password.text = self.currentAccount?.value(forKey: "password") as! String?
+        self.url.text = self.currentAccount?.value(forKey: "url") as! String?
     }
 
-    private func disableFields() {
-        self.username.enabled = false
-        self.password.enabled = false
-        self.url.enabled = false
+    fileprivate func disableFields() {
+        self.username.isEnabled = false
+        self.password.isEnabled = false
+        self.url.isEnabled = false
     }
 
-    private func areFieldsValid() -> Bool {
+    fileprivate func areFieldsValid() -> Bool {
 
-        if self.currentAccount == nil {
-            return false
-        }
-
-        if (self.currentAccount?.getUsername() ?? "").isEmpty {
-            return false
-        }
-
-        if (self.currentAccount?.getPassword() ?? "").isEmpty {
-            return false
-        }
-
-        if (self.currentAccount?.getUrl() ?? "").isEmpty {
-            return false
-        }
+//        if self.currentAccount == nil {
+//            return false
+//        }
+//
+//        if (self.currentAccount?.value(forKey: "username") ?? "").isEmpty {
+//            return false
+//        }
+//
+//        if (self.currentAccount?.value(forKey: "password") ?? "").isEmpty {
+//            return false
+//        }
+//
+//        if (self.currentAccount?.value(forKey: "url") ?? "").isEmpty {
+//            return false
+//        }
 
         return true
     }
 
     // MARK: Keyboard
-    private func configureGestureForKeyboard() {
+    fileprivate func configureGestureForKeyboard() {
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: dismissKeyboardAction)
         self.tableView.addGestureRecognizer(gestureRecognizer)
@@ -217,32 +218,32 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     // MARK: - Table view
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return AccountInfoSections.allValues.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
 
-        if indexPath.section == AccountInfoSections.Password.position() {
+        if indexPath.section == AccountInfoSections.password.position() {
             return true
         }
 
         return false
     }
 
-    override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
 
-        if action == copySelector || (action == revealSelector && self.password.secureTextEntry) || (action == concealSelector && !self.password.secureTextEntry) {
+        if action == copySelector || (action == revealSelector && self.password.isSecureTextEntry) || (action == concealSelector && !self.password.isSecureTextEntry) {
             return true
         }
         return false
     }
 
-    override func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
 
         // Required for custom actions
     }
@@ -253,17 +254,17 @@ class AccountInfoTableViewController: UITableViewController {
         self.configureUIWhenEditing()
     }
 
-    private func configureUIWhenEditing() {
+    fileprivate func configureUIWhenEditing() {
 
         self.enableEditFields()
         self.configureRightButtonItemToSave()
 
     }
 
-    private func enableEditFields() {
-        self.username.enabled = true
-        self.password.enabled = true
-        self.url.enabled = true
+    fileprivate func enableEditFields() {
+        self.username.isEnabled = true
+        self.password.isEnabled = true
+        self.url.isEnabled = true
 
         self.username.becomeFirstResponder()
     }
@@ -285,18 +286,18 @@ class AccountInfoTableViewController: UITableViewController {
 
     }
 
-    private func addOrUpdateAccount() -> Bool {
+    fileprivate func addOrUpdateAccount() -> Bool {
 
-        if self.viewType == .Add {
+        if self.viewType == .add {
             return self.addNewAccount()
         }
 
         return self.updateExistingAccount()
     }
 
-    private func showAccountSavedConfirmationForViewType() {
+    fileprivate func showAccountSavedConfirmationForViewType() {
 
-        if self.viewType == .Add {
+        if self.viewType == .add {
             self.showAccountSavedConfirmation(accountAddedAlertTitle, andMessage: accountAddedAlertTitle)
 
         } else {
@@ -305,7 +306,7 @@ class AccountInfoTableViewController: UITableViewController {
 
     }
 
-    private func showAccountSavedConfirmation(alertTitle: String, andMessage alertMessage: String) {
+    fileprivate func showAccountSavedConfirmation(_ alertTitle: String, andMessage alertMessage: String) {
 
         self.showAlert(withTitle: alertTitle, andMessage: alertMessage, handler: {(alertAction: UIAlertAction) -> Void in
 
@@ -315,58 +316,59 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     // MARK: Add Account
-    private func addNewAccount() -> Bool {
+    fileprivate func addNewAccount() -> Bool {
 
-        let usernameText = username.text!
-        let passwordText = password.text!
-        let urlText = url.text!
-
-        let applicationDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = applicationDelegate.managedObjectContext
-        let entity = NSEntityDescription.entityForName("Account", inManagedObjectContext: managedContext)
-
-        let account = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        account.setValue(usernameText, forKey: "username")
-        account.setValue(passwordText, forKey: "password")
-        account.setValue(urlText, forKey: "url")
-
-        do {
-
-            try managedContext.save()
-            return true
-
-        } catch {
+        guard let usernameText = username.text else {
             return false
         }
+
+        guard let passwordText = password.text else {
+            return false
+        }
+
+        guard let urlText = url.text else {
+            return false
+        }
+
+        return self.accountsUseCase.addAccount(usernameText, password: passwordText, url: urlText)
     }
 
     // MARK: Update Account
-    private func updateExistingAccount() -> Bool {
+    fileprivate func updateExistingAccount() -> Bool {
 
-        if self.currentAccount?.getId() == nil {
+        guard let currentAccount = self.currentAccount else {
             return false
         }
 
-        let account = Account(username: self.username.text!, password: self.password.text!, url: self.url.text!, id:(self.currentAccount?.getId())!)
-
-        let updateSuccessful = userAccountsManager.updateAccount(account, forCurrentAccount: currentAccount)
-        return updateSuccessful
+        guard let usernameText = username.text else {
+            return false
+        }
+        
+        guard let passwordText = password.text else {
+            return false
+        }
+        
+        guard let urlText = url.text else {
+            return false
+        }
+        
+        return self.accountsUseCase.updateAccount(currentAccount, username: usernameText, password: passwordText, url: urlText)
 
     }
 
     // MARK: Alert
-    private func showAlert(withTitle alertTitle: String, andMessage alertMessage: String, handler: ((UIAlertAction) -> Void)?) {
+    fileprivate func showAlert(withTitle alertTitle: String, andMessage alertMessage: String, handler: ((UIAlertAction) -> Void)?) {
 
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
 
-        alert.addAction(UIAlertAction(title: okAction, style: UIAlertActionStyle.Default, handler: handler))
+        alert.addAction(UIAlertAction(title: okAction, style: UIAlertActionStyle.default, handler: handler))
 
-        self.presentViewController(alert, animated: true, completion:nil)
+        self.present(alert, animated: true, completion:nil)
 
     }
 
     // MARK: Fields Validation
-    private func validateFieldsWhenSaving() -> Bool{
+    fileprivate func validateFieldsWhenSaving() -> Bool{
         let areAllFieldsComplete = self.areAllFieldsComplete()
 
         if !areAllFieldsComplete {
@@ -377,7 +379,7 @@ class AccountInfoTableViewController: UITableViewController {
         return areAllFieldsComplete
     }
 
-    private func areAllFieldsComplete() -> Bool {
+    fileprivate func areAllFieldsComplete() -> Bool {
         
         if isUsernameComplete() && isPasswordComplete() && isURLComplete() {
             return true
@@ -386,7 +388,7 @@ class AccountInfoTableViewController: UITableViewController {
         return false
     }
     
-    private func isUsernameComplete() -> Bool {
+    fileprivate func isUsernameComplete() -> Bool {
         
         if username.text == nil || username.text == "" {
             return false
@@ -395,7 +397,7 @@ class AccountInfoTableViewController: UITableViewController {
         return true
     }
     
-    private func isPasswordComplete() -> Bool {
+    fileprivate func isPasswordComplete() -> Bool {
         
         if password.text == nil || password.text == "" {
             return false
@@ -404,7 +406,7 @@ class AccountInfoTableViewController: UITableViewController {
         return true
     }
 
-    private func isURLComplete() -> Bool {
+    fileprivate func isURLComplete() -> Bool {
         
         if url.text == nil || url.text == "" {
             return false
@@ -415,10 +417,10 @@ class AccountInfoTableViewController: UITableViewController {
 
     // MARK: - Cancel
     func cancel() {
-        if self.viewType == .Add {
-            self.dismissViewControllerAnimated(true, completion: nil)
+        if self.viewType == .add {
+            self.dismiss(animated: true, completion: nil)
         } else {
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }

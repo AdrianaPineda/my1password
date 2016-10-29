@@ -10,6 +10,6 @@ import UIKit
 
 protocol ReloadTableViewDelegate: class {
 
-    func reloadTable(sender: UIViewController)
+    func reloadTable(_ sender: UIViewController)
 
 }

@@ -19,8 +19,8 @@ class UserHomeTabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func signOut(sender: AnyObject) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    @IBAction func signOut(_ sender: AnyObject) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func barButtonItemClicked () -> Void {

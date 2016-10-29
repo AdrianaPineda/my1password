@@ -11,17 +11,18 @@ import CoreData
 
 class AccountsUseCase: NSObject {
 
-    private let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    fileprivate let accountEntityName = "Account"
+    fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
     func loadAccounts() -> [NSManagedObject] {
 
         let managedContext = appDelegate.managedObjectContext
 
-        let fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Account")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: accountEntityName)
 
         do {
 
-            if let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
+            if let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject] {
                 return results
             }
 
@@ -30,6 +31,45 @@ class AccountsUseCase: NSObject {
         }
 
         return []
+    }
+
+    func addAccount(_ username: String, password: String, url: String) -> Bool {
+
+        let managedContext = appDelegate.managedObjectContext
+        let entity = NSEntityDescription.entity(forEntityName: accountEntityName, in: managedContext)
+
+        let account = NSManagedObject(entity: entity!, insertInto: managedContext)
+        account.setValue(username, forKey: "username")
+        account.setValue(password, forKey: "password")
+        account.setValue(username, forKey: "url")
+
+        do {
+
+            try managedContext.save()
+            return true
+
+        } catch {
+            return false
+        }
+    }
+    
+    func updateAccount(_ account: NSManagedObject, username: String, password: String, url: String) -> Bool {
+        
+        account.setValue(username, forKey: "username")
+        account.setValue(password, forKey: "password")
+        account.setValue(username, forKey: "url")
+        
+        do {
+            
+            let managedContext = appDelegate.managedObjectContext
+            
+            try managedContext.save()
+            
+            return true
+            
+        } catch {
+            return false
+        }
     }
 
 }

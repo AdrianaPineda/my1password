@@ -41,11 +41,11 @@ class UserAccountsManager: NSObject {
 
     }
 
-    private func loadAccounts() -> [Account] {
+    fileprivate func loadAccounts() -> [Account] {
 
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = UserDefaults.standard
 
-        if let userDict: [String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
+        if let userDict: [String: AnyObject] = userDefaults.object(forKey: currentUserKey) as? [String: AnyObject] {
 
             return self.loadAccounts(fromUserDict: userDict)
         }
@@ -53,7 +53,7 @@ class UserAccountsManager: NSObject {
         return []
     }
 
-    private func loadAccounts(fromUserDict userDict:[String: AnyObject]) -> [Account] {
+    fileprivate func loadAccounts(fromUserDict userDict:[String: AnyObject]) -> [Account] {
 
         var accounts: [Account] = []
 
@@ -74,7 +74,7 @@ class UserAccountsManager: NSObject {
         return accounts
     }
 
-    private func loadAccount(fromAccountData data: [String: AnyObject], atIndex index:Int) -> Account? {
+    fileprivate func loadAccount(fromAccountData data: [String: AnyObject], atIndex index:Int) -> Account? {
 
         let accountId: String? = data[currentAccountId + String(index)] as? String
         let accountUsername: String? = data[currentAccountUsername + String(index)] as? String
@@ -91,11 +91,11 @@ class UserAccountsManager: NSObject {
 
     }
 
-    private func loadUser(withAccounts accounts:[Account]) -> User? {
+    fileprivate func loadUser(withAccounts accounts:[Account]) -> User? {
 
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults: UserDefaults = UserDefaults.standard
 
-        if let currentUserDict: [String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
+        if let currentUserDict: [String: AnyObject] = userDefaults.object(forKey: currentUserKey) as? [String: AnyObject] {
 
             let userEmail: String? = currentUserDict[currentUserEmail] as? String
             let password: String? = self.getSensitiveData(forKey: currentUserPassword)
@@ -129,18 +129,18 @@ class UserAccountsManager: NSObject {
         self.saveUser()
     }
 
-    private func saveUser() {
+    fileprivate func saveUser() {
 
         if let currentUser = user {
 
-            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let userDefaults = UserDefaults.standard
 
             let userDict: NSMutableDictionary = NSMutableDictionary()
-            userDict.setObject(currentUser.getEmail(), forKey: currentUserEmail)
+            userDict.setObject(currentUser.getEmail(), forKey: currentUserEmail as NSCopying)
 
             self.saveSensitiveData(currentUser.getPassword(), forKey: currentUserPassword)
 
-            userDefaults.setObject(userDict, forKey: currentUserKey)
+            userDefaults.set(userDict, forKey: currentUserKey)
             userDefaults.synchronize()
         }
     }
@@ -160,7 +160,7 @@ class UserAccountsManager: NSObject {
     }
 
     // MARK: - Update Account
-    func updateAccount(account: Account?, forCurrentAccount currentAccount: Account?) -> Bool {
+    func updateAccount(_ account: Account?, forCurrentAccount currentAccount: Account?) -> Bool {
 
         if account == nil {
             return false
@@ -182,13 +182,13 @@ class UserAccountsManager: NSObject {
         return false
     }
 
-    private func saveAccounts() {
+    fileprivate func saveAccounts() {
 
         if self.user != nil {
 
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            let userDefaults: UserDefaults = UserDefaults.standard
 
-            if let userDict:[String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
+            if let userDict:[String: AnyObject] = userDefaults.object(forKey: currentUserKey) as? [String: AnyObject] {
 
                 let mutableUserDict: NSMutableDictionary = self.saveAccounts(inUserDict: userDict)
 
@@ -200,7 +200,7 @@ class UserAccountsManager: NSObject {
         }
     }
 
-    private func saveAccounts(inUserDict userDict:[String: AnyObject]) -> NSMutableDictionary {
+    fileprivate func saveAccounts(inUserDict userDict:[String: AnyObject]) -> NSMutableDictionary {
 
         if let currentUser = user {
 
@@ -228,17 +228,17 @@ class UserAccountsManager: NSObject {
         return NSMutableDictionary()
     }
 
-    private func saveUserDictInUserDefaults(userDict:NSDictionary) {
+    fileprivate func saveUserDictInUserDefaults(_ userDict:NSDictionary) {
 
         // Save info in userDefaults
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.removeObjectForKey(currentUserKey)
-        userDefaults.setObject(userDict, forKey: currentUserKey)
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: currentUserKey)
+        userDefaults.set(userDict, forKey: currentUserKey)
         userDefaults.synchronize()
 
     }
 
-    private func getAccountDict(fromAccount account: Account, atIndex index:Int) -> [String: String] {
+    fileprivate func getAccountDict(fromAccount account: Account, atIndex index:Int) -> [String: String] {
 
         let currentAccountIdKey = currentAccountId + String(index)
         let currentAccountDict: [String: String] = [currentAccountIdKey: String(account.getId()), currentAccountUsername + String(index): account.getUsername(), currentAccountUrl + String(index): account.getUrl()]
@@ -247,25 +247,25 @@ class UserAccountsManager: NSObject {
     }
 
     // MARK: - Keychain
-    private func getSensitiveData(forKey key: String) -> String? {
-        if let currentInfo: String = SSKeychain.passwordForService(keychainServiceId, account: key) {
+    fileprivate func getSensitiveData(forKey key: String) -> String? {
+        if let currentInfo: String = SSKeychain.password(forService: keychainServiceId, account: key) {
             return currentInfo
         }
 
         return nil
     }
 
-    private func saveSensitiveData(data: String, forKey key: String) {
+    fileprivate func saveSensitiveData(_ data: String, forKey key: String) {
         SSKeychain.setPassword(data, forService: keychainServiceId, account: key)
     }
 
     // MARK: - Master Password
     func isMasterPasswordValid(forPassword password: String) -> Bool {
 
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        if let _: [String: AnyObject] = userDefaults.objectForKey(currentUserKey) as? [String: AnyObject] {
+        let userDefaults: UserDefaults = UserDefaults.standard
+        if let _: [String: AnyObject] = userDefaults.object(forKey: currentUserKey) as? [String: AnyObject] {
 
-            let savedPassword: String? = SSKeychain.passwordForService(keychainServiceId, account: currentUserPassword)
+            let savedPassword: String? = SSKeychain.password(forService: keychainServiceId, account: currentUserPassword)
 
             if savedPassword != nil && password == savedPassword {
                 return true
