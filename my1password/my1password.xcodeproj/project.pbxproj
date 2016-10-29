@@ -18,8 +18,8 @@
 		01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */; };
 		01B7DAD01B00286300421693 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DACF1B00286300421693 /* settings@2x.png */; };
 		7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */; };
-		7A096DCF1DAC8EBA00768A2F /* my1password.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DCD1DAC8EBA00768A2F /* my1password.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		7A096DD31DAF2F6E00768A2F /* AccountsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */; settings = {ASSET_TAGS = (); }; };
+		7A096DCF1DAC8EBA00768A2F /* my1password.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DCD1DAC8EBA00768A2F /* my1password.xcdatamodeld */; };
+		7A096DD31DAF2F6E00768A2F /* AccountsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */; };
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
@@ -345,9 +345,11 @@
 				TargetAttributes = {
 					7AFECF2B1A927101001EF48C = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0810;
 					};
 					7AFECF401A927101001EF48C = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 7AFECF2B1A927101001EF48C;
 					};
 				};
@@ -551,6 +553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adrianapineda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -568,6 +571,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adrianapineda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -588,6 +592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adrianapineda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my1password.app/my1password";
 			};
 			name = Debug;
@@ -604,6 +609,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adrianapineda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my1password.app/my1password";
 			};
 			name = Release;

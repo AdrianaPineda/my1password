@@ -10,10 +10,10 @@ import Foundation
 
 class Account: NSObject {
 
-    private var id: Int = 0
-    private var username: String = ""
-    private var password: String = ""
-    private var url: String = ""
+    fileprivate var id: Int = 0
+    fileprivate var username: String = ""
+    fileprivate var password: String = ""
+    fileprivate var url: String = ""
 
     init(username:String, password:String, url:String, id: Int) {
         self.id = id

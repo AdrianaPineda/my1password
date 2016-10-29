@@ -11,14 +11,14 @@ import UIKit
 class RegisterViewController: UIViewController {
 
     // MARK: - Constants
-    private let emailInvalidAlertTitle: String = "Invalid email"
-    private let emailInvalidAlertMessage: String = "Your email is invalid"
-    private let okAlertActionTitle: String = "OK"
-    private let reenterPasswordText: String = "Re-enter password"
-    private let toUserHomeSegueId: String = "showHomeView"
-    private let errorAlertTitle: String = "Error"
-    private let passwordsDontMatchAlertMessage: String = "Passwords don't match"
-    private let invalidPasswordAlertMessage: String = "Invalid password"
+    fileprivate let emailInvalidAlertTitle: String = "Invalid email"
+    fileprivate let emailInvalidAlertMessage: String = "Your email is invalid"
+    fileprivate let okAlertActionTitle: String = "OK"
+    fileprivate let reenterPasswordText: String = "Re-enter password"
+    fileprivate let toUserHomeSegueId: String = "showHomeView"
+    fileprivate let errorAlertTitle: String = "Error"
+    fileprivate let passwordsDontMatchAlertMessage: String = "Passwords don't match"
+    fileprivate let invalidPasswordAlertMessage: String = "Invalid password"
 
     // MARK: - Outlets
     @IBOutlet weak var userEmail: UITextField!
@@ -32,11 +32,11 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var savePassword: UIButton!
 
     // MARK: - Properties
-    private var currentEmail:String = ""
-    private var currentMasterPassword: String = ""
-    private var currentStep: RegistrationStep = RegistrationStep.firstPassword
+    fileprivate var currentEmail:String = ""
+    fileprivate var currentMasterPassword: String = ""
+    fileprivate var currentStep: RegistrationStep = RegistrationStep.firstPassword
 
-    private enum RegistrationStep {
+    fileprivate enum RegistrationStep {
         case firstPassword
         case secondPassword
         case finish
@@ -55,18 +55,18 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Configure UI for first time
-    private func configureUI() {
+    fileprivate func configureUI() {
 
-        verificationCode.hidden = true
-        verifyCode.hidden = true
-        sendVerificationCode.hidden = true
-        masterPassword.hidden = true
-        savePassword.hidden = true
+        verificationCode.isHidden = true
+        verifyCode.isHidden = true
+        sendVerificationCode.isHidden = true
+        masterPassword.isHidden = true
+        savePassword.isHidden = true
 
     }
 
     // MARK: - Register
-    @IBAction func registerUser(sender: AnyObject) {
+    @IBAction func registerUser(_ sender: AnyObject) {
         
         if !self.isEmailValid() {
             self.showAlert(forAlertTitle: emailInvalidAlertTitle, alertMessage: emailInvalidAlertMessage, withActionTitle: okAlertActionTitle)
@@ -77,25 +77,25 @@ class RegisterViewController: UIViewController {
         self.configureUIForVerificationCode()
     }
 
-    private func configureUIForVerificationCode() {
-        verifyCode.hidden = false
-        verificationCode.hidden = false
-        sendVerificationCode.hidden = false
-        register.hidden = true
+    fileprivate func configureUIForVerificationCode() {
+        verifyCode.isHidden = false
+        verificationCode.isHidden = false
+        sendVerificationCode.isHidden = false
+        register.isHidden = true
     }
 
     // MARK: - Verify Code
-    @IBAction func verifyCode(sender: AnyObject) {
+    @IBAction func verifyCode(_ sender: AnyObject) {
 
-        self.verificationCode.hidden = true
-        self.verifyCode.hidden = true
-        self.sendVerificationCode.hidden = true
-        self.masterPassword.hidden = false
-        self.savePassword.hidden = false
+        self.verificationCode.isHidden = true
+        self.verifyCode.isHidden = true
+        self.sendVerificationCode.isHidden = true
+        self.masterPassword.isHidden = false
+        self.savePassword.isHidden = false
     }
 
     // MARK: - Save Password
-    @IBAction func savePassword(sender: AnyObject) {
+    @IBAction func savePassword(_ sender: AnyObject) {
 
         if !isPasswordValid() {
             self.showAlert(forAlertTitle: errorAlertTitle, alertMessage: invalidPasswordAlertMessage, withActionTitle: okAlertActionTitle)
@@ -116,39 +116,39 @@ class RegisterViewController: UIViewController {
 
     }
 
-    private func configureFirstPasswordEntered() {
+    fileprivate func configureFirstPasswordEntered() {
 
         self.currentMasterPassword = self.masterPassword.text!
         self.masterPassword.text = ""
         self.currentStep = RegistrationStep.secondPassword
-        self.savePassword.setTitle(reenterPasswordText, forState: UIControlState.Normal)
+        self.savePassword.setTitle(reenterPasswordText, for: UIControlState())
 
     }
 
-    private func configureUIWhenSecondPassDoesNotMatchFirstOne() {
+    fileprivate func configureUIWhenSecondPassDoesNotMatchFirstOne() {
 
         self.masterPassword.text = ""
         self.showAlert(forAlertTitle: errorAlertTitle, alertMessage: passwordsDontMatchAlertMessage, withActionTitle: okAlertActionTitle)
 
     }
 
-    private func configurePassword() {
+    fileprivate func configurePassword() {
 
         UserAccountsManager.userAccounts.configureUser(withEmail: self.currentEmail, andPassword: self.currentMasterPassword)
         self.currentStep = RegistrationStep.finish
-        self.performSegueWithIdentifier(toUserHomeSegueId, sender: self)
+        self.performSegue(withIdentifier: toUserHomeSegueId, sender: self)
 
     }
 
     // MARK: - Validate fields
-    private func isEmailValid() -> Bool {
+    fileprivate func isEmailValid() -> Bool {
         if (self.userEmail.text ?? "").isEmpty {
             return false
         }
         return true
     }
 
-    private func isPasswordValid() -> Bool {
+    fileprivate func isPasswordValid() -> Bool {
         if (self.masterPassword.text ?? "").isEmpty {
             return false
         }
@@ -157,24 +157,24 @@ class RegisterViewController: UIViewController {
     }
 
     // MARK: - Alert
-    private func showAlert(forAlertTitle alertTitle: String, alertMessage: String, withActionTitle actionTitle: String) {
+    fileprivate func showAlert(forAlertTitle alertTitle: String, alertMessage: String, withActionTitle actionTitle: String) {
 
-        let alertController: UIAlertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController: UIAlertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
 
-        let okAction: UIAlertAction = UIAlertAction(title: actionTitle, style: UIAlertActionStyle.Default, handler: nil)
+        let okAction: UIAlertAction = UIAlertAction(title: actionTitle, style: UIAlertActionStyle.default, handler: nil)
 
         alertController.addAction(okAction)
 
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
 
     }
 
     // MARK: - Keyboard
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.hideKeyBoard()
     }
     
-    private func hideKeyBoard() -> Void {
+    fileprivate func hideKeyBoard() -> Void {
         self.userEmail.resignFirstResponder()
         self.verificationCode.resignFirstResponder()
     }

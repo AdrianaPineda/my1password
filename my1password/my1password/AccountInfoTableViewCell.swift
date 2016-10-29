@@ -14,11 +14,11 @@ class AccountInfoTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    override func copy(sender: AnyObject?) {
+    override func copy(_ sender: AnyObject?) {
 
         let subviews = self.subviews
         for view in subviews {
@@ -27,7 +27,7 @@ class AccountInfoTableViewCell: UITableViewCell {
 
             for view2 in subviews2 {
                 if let textField: UITextField = view2 as? UITextField {
-                    UIPasteboard.generalPasteboard().string = textField.text
+                    UIPasteboard.general.string = textField.text
                     return
                 }
             }
@@ -35,7 +35,7 @@ class AccountInfoTableViewCell: UITableViewCell {
 
     }
 
-    func reveal(sender: AnyObject) {
+    func reveal(_ sender: AnyObject) {
 
         let subviews = self.subviews
         for view in subviews {
@@ -43,14 +43,14 @@ class AccountInfoTableViewCell: UITableViewCell {
 
             for view2 in subviews2 {
                 if let textField: UITextField = view2 as? UITextField {
-                    textField.secureTextEntry = false
+                    textField.isSecureTextEntry = false
                     return
                 }
             }
         }
     }
 
-    func conceal(sender: AnyObject) {
+    func conceal(_ sender: AnyObject) {
 
         let subviews = self.subviews
         for view in subviews {
@@ -58,7 +58,7 @@ class AccountInfoTableViewCell: UITableViewCell {
 
             for view2 in subviews2 {
                 if let textField: UITextField = view2 as? UITextField {
-                    textField.secureTextEntry = true
+                    textField.isSecureTextEntry = true
                     return
                 }
             }

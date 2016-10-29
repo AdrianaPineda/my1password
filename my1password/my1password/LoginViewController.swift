@@ -12,12 +12,12 @@ import SSKeychain
 class LoginViewController: UIViewController {
 
     // MARK: - Constants
-    private let loginSegueIdentifier: String = "login"
-    private let registerSegueIdentifier: String = "register"
+    fileprivate let loginSegueIdentifier: String = "login"
+    fileprivate let registerSegueIdentifier: String = "register"
 
-    private let invalidPasswordAlertTitle: String = "Invalid password"
-    private let invalidPasswordAlertMessage: String = "Your master password is invalid"
-    private let okAlertActionTitle: String = "OK"
+    fileprivate let invalidPasswordAlertTitle: String = "Invalid password"
+    fileprivate let invalidPasswordAlertMessage: String = "Your master password is invalid"
+    fileprivate let okAlertActionTitle: String = "OK"
 
     // MARK: - Properties
     @IBOutlet weak var password: UITextField!
@@ -34,12 +34,12 @@ class LoginViewController: UIViewController {
     }
 
     // MARK: - Configure UI
-    private func configureUI() {
+    fileprivate func configureUI() {
         self.password.becomeFirstResponder()
     }
 
     // MARK: - Login
-    @IBAction func login(sender: AnyObject) {
+    @IBAction func login(_ sender: AnyObject) {
 
         self.hideKeyBoard()
 
@@ -55,21 +55,21 @@ class LoginViewController: UIViewController {
 
     }
 
-    private func performLogin() {
+    fileprivate func performLogin() {
 
         self.resetFields()
         UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
-        self.performSegueWithIdentifier(loginSegueIdentifier, sender: self)
+        self.performSegue(withIdentifier: loginSegueIdentifier, sender: self)
     }
 
     // MARK: Reset fields
-    private func resetFields() {
+    fileprivate func resetFields() {
 
         self.password.text = ""
     }
 
     // MARK: Validate fields
-    private func areFieldsValid() -> Bool {
+    fileprivate func areFieldsValid() -> Bool {
 
         if self.isPasswordEmpty(){
             return false
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController {
 
     }
 
-    private func isPasswordEmpty() -> Bool {
+    fileprivate func isPasswordEmpty() -> Bool {
 
         if password.text == "" {
             return true
@@ -91,24 +91,24 @@ class LoginViewController: UIViewController {
     }
 
     // MARK: - Keyboard
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.hideKeyBoard()
     }
 
-    private func hideKeyBoard() -> Void {
+    fileprivate func hideKeyBoard() -> Void {
         self.password.resignFirstResponder()
     }
 
     // MARK: - Alert
-    private func showIvalidPasswordAlert() {
+    fileprivate func showIvalidPasswordAlert() {
 
-        let alertController: UIAlertController = UIAlertController(title: invalidPasswordAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController: UIAlertController = UIAlertController(title: invalidPasswordAlertTitle, message: invalidPasswordAlertMessage, preferredStyle: UIAlertControllerStyle.alert)
 
-        let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.Default, handler: nil)
+        let alertAction: UIAlertAction = UIAlertAction(title: okAlertActionTitle, style: UIAlertActionStyle.default, handler: nil)
 
         alertController.addAction(alertAction)
 
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
 
 }
