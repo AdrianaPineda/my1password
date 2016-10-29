@@ -18,7 +18,7 @@ class AccountsUseCase: NSObject {
 
         let managedContext = appDelegate.managedObjectContext
 
-        let fetchRequest: NSFetchRequest = NSFetchRequest(entityName: accountEntityName)
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: accountEntityName)
 
         do {
 

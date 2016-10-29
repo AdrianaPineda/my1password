@@ -50,7 +50,7 @@ class AccountInfoTableViewController: UITableViewController {
         case password
         case url
 
-        static let allValues = [self.username, self.password, self.url]
+        static let allValues = [username, password, url]
 
         func position() -> Int {
             switch self {
@@ -173,9 +173,9 @@ class AccountInfoTableViewController: UITableViewController {
 
         self.disableFields()
 
-        self.username.text = self.currentAccount?.getUsername()
-        self.password.text = self.currentAccount?.getPassword()
-        self.url.text = self.currentAccount?.getUrl()
+        self.username.text = self.currentAccount?.value(forKey: "username") as! String?
+        self.password.text = self.currentAccount?.value(forKey: "password") as! String?
+        self.url.text = self.currentAccount?.value(forKey: "url") as! String?
     }
 
     fileprivate func disableFields() {
@@ -186,21 +186,21 @@ class AccountInfoTableViewController: UITableViewController {
 
     fileprivate func areFieldsValid() -> Bool {
 
-        if self.currentAccount == nil {
-            return false
-        }
-
-        if (self.currentAccount?.getUsername() ?? "").isEmpty {
-            return false
-        }
-
-        if (self.currentAccount?.getPassword() ?? "").isEmpty {
-            return false
-        }
-
-        if (self.currentAccount?.getUrl() ?? "").isEmpty {
-            return false
-        }
+//        if self.currentAccount == nil {
+//            return false
+//        }
+//
+//        if (self.currentAccount?.value(forKey: "username") ?? "").isEmpty {
+//            return false
+//        }
+//
+//        if (self.currentAccount?.value(forKey: "password") ?? "").isEmpty {
+//            return false
+//        }
+//
+//        if (self.currentAccount?.value(forKey: "url") ?? "").isEmpty {
+//            return false
+//        }
 
         return true
     }
@@ -336,7 +336,7 @@ class AccountInfoTableViewController: UITableViewController {
     // MARK: Update Account
     fileprivate func updateExistingAccount() -> Bool {
 
-        if self.currentAccount?.getId() == nil {
+        guard let currentAccount = self.currentAccount else {
             return false
         }
 
@@ -352,7 +352,7 @@ class AccountInfoTableViewController: UITableViewController {
             return false
         }
         
-        return self.accountsUseCase.updateAccount(<#T##account: NSManagedObject##NSManagedObject#>, username: usernameText, password: passwordText, url: urlText)
+        return self.accountsUseCase.updateAccount(currentAccount, username: usernameText, password: passwordText, url: urlText)
 
     }
 

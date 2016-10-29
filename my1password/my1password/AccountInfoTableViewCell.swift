@@ -18,7 +18,7 @@ class AccountInfoTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    override func copy(_ sender: AnyObject?) {
+    override func copy(_ sender: Any?) {
 
         let subviews = self.subviews
         for view in subviews {
