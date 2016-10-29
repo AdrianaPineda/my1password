@@ -248,9 +248,9 @@ class UserAccountsManager: NSObject {
 
     // MARK: - Keychain
     fileprivate func getSensitiveData(forKey key: String) -> String? {
-        
+
         if let data:[String: Any] = Locksmith.loadDataForUserAccount(userAccount: "test") {
-            
+
             return data[key] as? String
         }
 
@@ -258,11 +258,11 @@ class UserAccountsManager: NSObject {
     }
 
     fileprivate func saveSensitiveData(_ data: String, forKey key: String) {
-        
+
         do {
 
             try Locksmith.saveData(data: [key: data], forUserAccount: "test")
-        
+
         } catch {
             NSLog("ERRO")
         }
