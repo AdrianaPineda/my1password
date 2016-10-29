@@ -1,1 +1,2 @@
-github "soffes/SSKeychain"
+github "soffes/SAMKeychain"
+github "matthewpalmer/Locksmith"

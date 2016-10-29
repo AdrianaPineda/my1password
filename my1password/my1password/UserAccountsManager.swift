@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SSKeychain
+import Locksmith
 
 private let sharedInstance = UserAccountsManager()
 
@@ -248,15 +248,24 @@ class UserAccountsManager: NSObject {
 
     // MARK: - Keychain
     fileprivate func getSensitiveData(forKey key: String) -> String? {
-        if let currentInfo: String = SSKeychain.password(forService: keychainServiceId, account: key) {
-            return currentInfo
+        
+        if let data:[String: Any] = Locksmith.loadDataForUserAccount(userAccount: "test") {
+            
+            return data[key] as? String
         }
 
         return nil
     }
 
     fileprivate func saveSensitiveData(_ data: String, forKey key: String) {
-        SSKeychain.setPassword(data, forService: keychainServiceId, account: key)
+        
+        do {
+
+            try Locksmith.saveData(data: [key: data], forUserAccount: "test")
+        
+        } catch {
+            NSLog("ERRO")
+        }
     }
 
     // MARK: - Master Password
@@ -265,7 +274,7 @@ class UserAccountsManager: NSObject {
         let userDefaults: UserDefaults = UserDefaults.standard
         if let _: [String: AnyObject] = userDefaults.object(forKey: currentUserKey) as? [String: AnyObject] {
 
-            let savedPassword: String? = SSKeychain.password(forService: keychainServiceId, account: currentUserPassword)
+            let savedPassword: String? = self.getSensitiveData(forKey: currentUserPassword)
 
             if savedPassword != nil && password == savedPassword {
                 return true

@@ -11,8 +11,6 @@
 		01198F1C1AFFFDDB0036321A /* AccountInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */; };
 		0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */; };
 		01316B0B1CA77F5C007C6968 /* AccountInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */; };
-		0165F9A71C8B26EC0047ADAB /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */; };
-		0165F9A81C8B26EC0047ADAB /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01B7DABB1B00180700421693 /* accounts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DABA1B00180700421693 /* accounts_icon@2x.png */; };
 		01B7DABD1B001A8000421693 /* AccountsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */; };
 		01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */; };
@@ -23,7 +21,11 @@
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
+		7A690E6F1DC4F0EA00CD28C3 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; };
+		7A690E701DC4F0F500CD28C3 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */; };
+		7AB4EDC01DC4F63E002FD5A8 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; };
+		7AB4EDC21DC4F64C002FD5A8 /* Locksmith.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA2BCF1CE5795D00933303 /* UserTests.swift */; };
 		7ADA2BD21CE57D1C00933303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
@@ -63,9 +65,19 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0165F9A81C8B26EC0047ADAB /* SSKeychain.framework in Embed Frameworks */,
+				7A690E701DC4F0F500CD28C3 /* Locksmith.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AB4EDC11DC4F646002FD5A8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7AB4EDC21DC4F64C002FD5A8 /* Locksmith.framework in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -75,7 +87,6 @@
 		01198F1B1AFFFDDB0036321A /* AccountInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewController.swift; sourceTree = "<group>"; };
 		0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadTableViewDelegate.swift; sourceTree = "<group>"; };
 		01316B0A1CA77F5C007C6968 /* AccountInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewCell.swift; sourceTree = "<group>"; };
-		0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = "<group>"; };
 		01B7DABA1B00180700421693 /* accounts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts_icon@2x.png"; sourceTree = "<group>"; };
 		01B7DABC1B001A8000421693 /* AccountsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTableViewController.swift; sourceTree = "<group>"; };
 		01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +97,7 @@
 		7A4F213B1AC0594C00D4AB8C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A4F213D1AC0595800D4AB8C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountsManager.swift; sourceTree = "<group>"; };
+		7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		7ADA2BCF1CE5795D00933303 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTests.swift; path = Models/UserTests.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0165F9A71C8B26EC0047ADAB /* SSKeychain.framework in Frameworks */,
+				7A690E6F1DC4F0EA00CD28C3 /* Locksmith.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB4EDC01DC4F63E002FD5A8 /* Locksmith.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +249,7 @@
 		7AFECF231A927101001EF48C = {
 			isa = PBXGroup;
 			children = (
-				0165F9A61C8B26EC0047ADAB /* SSKeychain.framework */,
+				7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */,
 				7AFECF2E1A927101001EF48C /* my1password */,
 				7A096DD01DAF2F0C00768A2F /* Reusable */,
 				7AFECF441A927101001EF48C /* my1passwordTests */,
@@ -321,6 +334,7 @@
 				7AFECF3D1A927101001EF48C /* Sources */,
 				7AFECF3E1A927101001EF48C /* Frameworks */,
 				7AFECF3F1A927101001EF48C /* Resources */,
+				7AB4EDC11DC4F646002FD5A8 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -345,7 +359,13 @@
 				TargetAttributes = {
 					7AFECF2B1A927101001EF48C = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = L4LW2ZJSQA;
 						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					7AFECF401A927101001EF48C = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -583,6 +603,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -604,6 +625,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = my1passwordTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
