@@ -94,7 +94,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     fileprivate func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         self.filteredAccounts = self.accounts.filter { account in
 
-            guard let accountUsername = account.value(forKey: "username") else {
+            guard let accountUsername = account.username else {
                 return false
             }
 
@@ -139,7 +139,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
         cell.selectionStyle = UITableViewCellSelectionStyle.none
 
-        var currentAccount: NSManagedObject?
+        var currentAccount: Account?
         let cellRow: Int = indexPath.row
 
         if self.isSearching() && filteredAccounts.count > 0  && cellRow < filteredAccounts.count {
@@ -151,7 +151,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         }
 
         if currentAccount != nil {
-            cell.textLabel?.text = currentAccount!.value(forKey: "username") as? String
+            cell.textLabel?.text = currentAccount!.username
         }
 
         return cell

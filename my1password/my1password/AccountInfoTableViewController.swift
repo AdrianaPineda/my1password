@@ -173,9 +173,9 @@ class AccountInfoTableViewController: UITableViewController {
 
         self.disableFields()
 
-        self.username.text = self.currentAccount?.value(forKey: "username") as! String?
-        self.password.text = self.currentAccount?.value(forKey: "password") as! String?
-        self.url.text = self.currentAccount?.value(forKey: "url") as! String?
+        self.username.text = self.currentAccount?.username
+        self.password.text = self.currentAccount?.password
+        self.url.text = self.currentAccount?.url
     }
 
     fileprivate func disableFields() {
