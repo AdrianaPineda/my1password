@@ -28,6 +28,10 @@
 		7AB4EDC51DC571C9002FD5A8 /* AccountsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDC41DC571C9002FD5A8 /* AccountsAPI.swift */; };
 		7AB4EDD01DC573FE002FD5A8 /* Account+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDCE1DC573FE002FD5A8 /* Account+CoreDataClass.swift */; };
 		7AB4EDD11DC573FE002FD5A8 /* Account+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDCF1DC573FE002FD5A8 /* Account+CoreDataProperties.swift */; };
+		7AB4EDD61DC58039002FD5A8 /* AccountsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDD51DC58039002FD5A8 /* AccountsUseCaseTests.swift */; };
+		7AB4EDD81DC580A9002FD5A8 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDD71DC580A9002FD5A8 /* CoreDataHelpers.swift */; };
+		7AB4EDD91DC5829E002FD5A8 /* Account+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDCE1DC573FE002FD5A8 /* Account+CoreDataClass.swift */; };
+		7AB4EDDA1DC5829E002FD5A8 /* Account+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDCF1DC573FE002FD5A8 /* Account+CoreDataProperties.swift */; };
 		7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA2BCF1CE5795D00933303 /* UserTests.swift */; };
 		7ADA2BD21CE57D1C00933303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF311A927101001EF48C /* AppDelegate.swift */; };
@@ -103,6 +107,8 @@
 		7AB4EDC41DC571C9002FD5A8 /* AccountsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsAPI.swift; sourceTree = "<group>"; };
 		7AB4EDCE1DC573FE002FD5A8 /* Account+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7AB4EDCF1DC573FE002FD5A8 /* Account+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7AB4EDD51DC58039002FD5A8 /* AccountsUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsUseCaseTests.swift; sourceTree = "<group>"; };
+		7AB4EDD71DC580A9002FD5A8 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		7ADA2BCF1CE5795D00933303 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTests.swift; path = Models/UserTests.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF301A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -259,6 +265,30 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		7AB4EDD21DC57A5E002FD5A8 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				7AB4EDD31DC57A70002FD5A8 /* UseCases */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		7AB4EDD31DC57A70002FD5A8 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				7AB4EDD41DC57A76002FD5A8 /* Accounts */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		7AB4EDD41DC57A76002FD5A8 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				7AB4EDD51DC58039002FD5A8 /* AccountsUseCaseTests.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
 		7ADA2BCE1CE5793F00933303 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,8 +343,10 @@
 		7AFECF441A927101001EF48C /* my1passwordTests */ = {
 			isa = PBXGroup;
 			children = (
+				7AB4EDD21DC57A5E002FD5A8 /* Reusable */,
 				7ADA2BCE1CE5793F00933303 /* Models */,
 				7AFECF471A927101001EF48C /* my1passwordTests.swift */,
+				7AB4EDD71DC580A9002FD5A8 /* CoreDataHelpers.swift */,
 				7AFECF451A927101001EF48C /* Supporting Files */,
 			);
 			path = my1passwordTests;
@@ -469,9 +501,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB4EDD81DC580A9002FD5A8 /* CoreDataHelpers.swift in Sources */,
 				7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */,
+				7AB4EDD91DC5829E002FD5A8 /* Account+CoreDataClass.swift in Sources */,
 				7AFECF481A927101001EF48C /* my1passwordTests.swift in Sources */,
+				7AB4EDD61DC58039002FD5A8 /* AccountsUseCaseTests.swift in Sources */,
 				7ADA2BD21CE57D1C00933303 /* User.swift in Sources */,
+				7AB4EDDA1DC5829E002FD5A8 /* Account+CoreDataProperties.swift in Sources */,
 				0103ABE21CE7684500F51B82 /* AccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
