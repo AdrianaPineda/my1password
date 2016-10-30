@@ -4,13 +4,14 @@
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="accounts" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="accounts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" syncable="YES"/>
+        <relationship name="accounts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="user" inverseEntity="Account" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="User" positionX="-63" positionY="114" width="128" height="73"/>
     </elements>
 </model>
