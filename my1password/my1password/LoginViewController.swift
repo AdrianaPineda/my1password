@@ -75,8 +75,8 @@ class LoginViewController: UIViewController {
             return false
         }
 
-        let userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
-        return userAccountsManager.isMasterPasswordValid(forPassword: self.password.text!)
+        let passwordValid = UserUseCase().isMasterPasswordValid(password: self.password.text!)
+        return passwordValid
 
     }
 

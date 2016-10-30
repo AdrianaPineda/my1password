@@ -13,6 +13,7 @@ import CoreData
 extension User {
 
     private static let userEntityName = "User"
+    private static let accountsRelationshipName = "accounts"
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<User> {
         return NSFetchRequest<User>(entityName: userEntityName);
@@ -24,5 +25,11 @@ extension User {
 
     @NSManaged public var username: String?
     @NSManaged public var accounts: Account?
+
+    func addAccount(account: Account) {
+        let accounts = self.mutableSetValue(forKey: User.accountsRelationshipName)
+        accounts.add(account)
+
+    }
 
 }

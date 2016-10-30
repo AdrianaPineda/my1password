@@ -33,18 +33,20 @@ class AccountsUseCase: NSObject {
 
     }
 
-    func addAccount(_ username: String, password: String, url: String) -> Bool {
+    func addAccount(_ username: String, password: String, url: String, forUser user: User) -> Bool {
 
         let managedContext = appDelegate.managedObjectContext
 
-        guard let entity = Account.entity(forManagedContext: managedContext) else {
+        guard let accountEntity = Account.entity(forManagedContext: managedContext) else {
             return false
         }
 
-        let account = Account(entity: entity, insertInto: managedContext)
+        let account = Account(entity: accountEntity, insertInto: managedContext)
         account.username = username
         account.password = password
         account.url = url
+
+        user.addAccount(account: account)
 
         do {
 

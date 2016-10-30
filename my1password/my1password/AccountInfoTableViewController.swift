@@ -38,6 +38,7 @@ class AccountInfoTableViewController: UITableViewController {
 
     // MARK: - Properties
     fileprivate let accountsUseCase = AccountsUseCase()
+    var user: User? = nil
 
     // Possible View types
     enum ViewType {
@@ -330,7 +331,11 @@ class AccountInfoTableViewController: UITableViewController {
             return false
         }
 
-        return self.accountsUseCase.addAccount(usernameText, password: passwordText, url: urlText)
+        guard let user = user else {
+            return false
+        }
+
+        return self.accountsUseCase.addAccount(usernameText, password: passwordText, url: urlText, forUser: user)
     }
 
     // MARK: Update Account

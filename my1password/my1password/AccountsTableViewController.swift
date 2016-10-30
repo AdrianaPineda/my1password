@@ -196,6 +196,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
         let addAccountTableViewController = self.storyboard?.instantiateViewController(withIdentifier: addAccountTableViewControllerId) as! AccountInfoTableViewController
 
         addAccountTableViewController.delegate = self
+        addAccountTableViewController.user = user
 
         let navigationController = UINavigationController(rootViewController: addAccountTableViewController)
 
