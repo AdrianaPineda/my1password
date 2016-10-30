@@ -16,6 +16,8 @@
 		01B7DAD01B00286300421693 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B7DACF1B00286300421693 /* settings@2x.png */; };
 		7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */; };
 		7A096DD31DAF2F6E00768A2F /* AccountsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */; };
+		7A15A8321DC58CD3004E1B60 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDE91DC58A8F002FD5A8 /* User+CoreDataClass.swift */; };
+		7A15A8331DC58CD3004E1B60 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDEA1DC58A8F002FD5A8 /* User+CoreDataProperties.swift */; };
 		7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */; };
 		7A690E6F1DC4F0EA00CD28C3 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; };
@@ -188,12 +190,9 @@
 		0103ABEB1CE7826000F51B82 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */,
 				01B7DACD1B0026FE00421693 /* SettingsTableViewController.swift */,
 				7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */,
 				7A4F213B1AC0594C00D4AB8C /* User.swift */,
-				7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */,
-				7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -219,6 +218,7 @@
 		7A096DD01DAF2F0C00768A2F /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				7A15A8341DC58D18004E1B60 /* UI */,
 				7AB4EDC61DC572AA002FD5A8 /* Infrastructure */,
 				7A096DD11DAF2F3400768A2F /* UseCases */,
 			);
@@ -234,6 +234,22 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		7A15A8341DC58D18004E1B60 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0125EA5E1C7A52060042B2D9 /* ReloadTableViewDelegate.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		7A15A8351DC58D59004E1B60 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		7AAAE7301DB315900028B610 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +262,7 @@
 		7AAAE7311DB315960028B610 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				7A4F21411AC086AD00D4AB8C /* UserAccountsManager.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -253,6 +270,7 @@
 		7AB4EDC61DC572AA002FD5A8 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				7A15A8351DC58D59004E1B60 /* Utilities */,
 				7AB4EDC71DC572B1002FD5A8 /* Domain */,
 			);
 			path = Infrastructure;
@@ -512,7 +530,9 @@
 				7AFECF481A927101001EF48C /* my1passwordTests.swift in Sources */,
 				7AB4EDD61DC58039002FD5A8 /* AccountsUseCaseTests.swift in Sources */,
 				7ADA2BD21CE57D1C00933303 /* User.swift in Sources */,
+				7A15A8321DC58CD3004E1B60 /* User+CoreDataClass.swift in Sources */,
 				7AB4EDDA1DC5829E002FD5A8 /* Account+CoreDataProperties.swift in Sources */,
+				7A15A8331DC58CD3004E1B60 /* User+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
