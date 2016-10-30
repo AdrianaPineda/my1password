@@ -24,7 +24,7 @@ class AccountInfoTableViewController: UITableViewController {
     fileprivate let accountAddedAlertTitle = "Account added"
     fileprivate let accountAddedAlertMessage = "Your account was successfully added"
     fileprivate let revealMenuItemText = "Reveal"
-    fileprivate let concealMenuItemText = "Concel"
+    fileprivate let concealMenuItemText = "Conceal"
 
     // MARK: - Selectors
     fileprivate let copySelector: Selector = #selector(UIResponderStandardEditActions.copy(_:))
