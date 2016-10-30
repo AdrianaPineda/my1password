@@ -6,11 +6,12 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="accounts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" syncable="YES"/>
     </entity>
     <elements>
         <element name="Account" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="User" positionX="-63" positionY="114" width="128" height="73"/>
+        <element name="User" positionX="-63" positionY="114" width="128" height="90"/>
     </elements>
 </model>
