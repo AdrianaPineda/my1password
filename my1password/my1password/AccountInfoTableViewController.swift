@@ -69,7 +69,7 @@ class AccountInfoTableViewController: UITableViewController {
     fileprivate var viewType: ViewType = .add
 
     fileprivate let userAccountsManager = UserAccountsManager.userAccounts
-    fileprivate var currentAccount: NSManagedObject? = nil
+    fileprivate var currentAccount: Account? = nil
 
     // MARK: - Outlets
     @IBOutlet weak var username: UITextField!
@@ -98,7 +98,7 @@ class AccountInfoTableViewController: UITableViewController {
     }
 
     // MARK: - Current Account
-    func setAccount(_ account: NSManagedObject) {
+    func setAccount(_ account: Account) {
         self.currentAccount = account
     }
 

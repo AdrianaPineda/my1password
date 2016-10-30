@@ -27,6 +27,8 @@
 		7AB4EDC01DC4F63E002FD5A8 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; };
 		7AB4EDC21DC4F64C002FD5A8 /* Locksmith.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AB4EDC51DC571C9002FD5A8 /* AccountsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDC41DC571C9002FD5A8 /* AccountsAPI.swift */; };
+		7AB4EDD01DC573FE002FD5A8 /* Account+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDCE1DC573FE002FD5A8 /* Account+CoreDataClass.swift */; };
+		7AB4EDD11DC573FE002FD5A8 /* Account+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDCF1DC573FE002FD5A8 /* Account+CoreDataProperties.swift */; };
 		7ADA2BD01CE5795D00933303 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA2BCF1CE5795D00933303 /* UserTests.swift */; };
 		7ADA2BD21CE57D1C00933303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213B1AC0594C00D4AB8C /* User.swift */; };
 		7ADA2BD31CE57D1F00933303 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F213D1AC0595800D4AB8C /* Account.swift */; };
@@ -102,6 +104,8 @@
 		7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		7AB4EDC31DC4F773002FD5A8 /* my1password.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = my1password.entitlements; sourceTree = "<group>"; };
 		7AB4EDC41DC571C9002FD5A8 /* AccountsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsAPI.swift; sourceTree = "<group>"; };
+		7AB4EDCE1DC573FE002FD5A8 /* Account+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7AB4EDCF1DC573FE002FD5A8 /* Account+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7ADA2BCF1CE5795D00933303 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTests.swift; path = Models/UserTests.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF301A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 		7AB4EDC71DC572B1002FD5A8 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				7AB4EDCE1DC573FE002FD5A8 /* Account+CoreDataClass.swift */,
+				7AB4EDCF1DC573FE002FD5A8 /* Account+CoreDataProperties.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -449,6 +455,7 @@
 				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
 				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
 				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
+				7AB4EDD11DC573FE002FD5A8 /* Account+CoreDataProperties.swift in Sources */,
 				7AB4EDC51DC571C9002FD5A8 /* AccountsAPI.swift in Sources */,
 				7A096DCF1DAC8EBA00768A2F /* my1password.xcdatamodeld in Sources */,
 				7A4F213C1AC0594C00D4AB8C /* User.swift in Sources */,
@@ -459,6 +466,7 @@
 				7A4F21421AC086AD00D4AB8C /* UserAccountsManager.swift in Sources */,
 				7A4F213E1AC0595800D4AB8C /* Account.swift in Sources */,
 				01316B0B1CA77F5C007C6968 /* AccountInfoTableViewCell.swift in Sources */,
+				7AB4EDD01DC573FE002FD5A8 /* Account+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

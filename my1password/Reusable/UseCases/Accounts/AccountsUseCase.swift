@@ -14,7 +14,7 @@ class AccountsUseCase: NSObject {
     fileprivate let accountEntityName = "Account"
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    func loadAccounts() -> [NSManagedObject] {
+    func loadAccounts() -> [Account] {
 
         let managedContext = appDelegate.managedObjectContext
 
@@ -22,7 +22,7 @@ class AccountsUseCase: NSObject {
 
         do {
 
-            if let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject] {
+            if let results = try managedContext.fetch(fetchRequest) as? [Account] {
                 return results
             }
 

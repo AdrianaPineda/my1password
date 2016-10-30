@@ -23,8 +23,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     fileprivate let accountsUseCase = AccountsUseCase()
 
-    var accounts = [NSManagedObject]()
-    var filteredAccounts = [NSManagedObject]()
+    var accounts = [Account]()
+    var filteredAccounts = [Account]()
 
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
 
@@ -176,12 +176,11 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
             return
         }
 
-        if let currentAccount: NSManagedObject = self.accounts[accountRow] as NSManagedObject {
-            self.configureAccountInfoForEditSegue(segue, withAccount: currentAccount)
-        }
+        let currentAccount = self.accounts[accountRow]
+        self.configureAccountInfoForEditSegue(segue, withAccount: currentAccount)
     }
 
-    fileprivate func configureAccountInfoForEditSegue(_ segue: UIStoryboardSegue, withAccount account: NSManagedObject) {
+    fileprivate func configureAccountInfoForEditSegue(_ segue: UIStoryboardSegue, withAccount account: Account) {
 
         let nextController: AccountInfoTableViewController = segue.destination as! AccountInfoTableViewController
         nextController.setViewType(.edit)
