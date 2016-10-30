@@ -211,6 +211,7 @@
 		7A096DD01DAF2F0C00768A2F /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				7AB4EDC61DC572AA002FD5A8 /* Infrastructure */,
 				7A096DD11DAF2F3400768A2F /* UseCases */,
 			);
 			path = Reusable;
@@ -239,6 +240,21 @@
 			children = (
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		7AB4EDC61DC572AA002FD5A8 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				7AB4EDC71DC572B1002FD5A8 /* Domain */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		7AB4EDC71DC572B1002FD5A8 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		7ADA2BCE1CE5793F00933303 /* Models */ = {
