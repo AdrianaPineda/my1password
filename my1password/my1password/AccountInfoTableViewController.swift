@@ -28,8 +28,8 @@ class AccountInfoTableViewController: UITableViewController {
 
     // MARK: - Selectors
     fileprivate let copySelector: Selector = #selector(UIResponderStandardEditActions.copy(_:))
-    fileprivate let revealSelector: Selector = Selector("reveal:")
-    fileprivate let concealSelector: Selector = Selector("conceal:")
+    fileprivate let revealSelector: Selector = Selector(("reveal:"))
+    fileprivate let concealSelector: Selector = Selector(("conceal:"))
 
     fileprivate let saveAction: Selector = #selector(AccountInfoTableViewController.save)
     fileprivate let cancelAction: Selector = #selector(AccountInfoTableViewController.cancel)
