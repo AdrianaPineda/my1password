@@ -25,5 +25,6 @@ extension Account {
     @NSManaged public var password: String?
     @NSManaged public var url: String?
     @NSManaged public var username: String?
+    @NSManaged public var user: User?
 
 }
