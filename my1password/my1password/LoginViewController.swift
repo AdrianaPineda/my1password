@@ -58,7 +58,6 @@ class LoginViewController: UIViewController {
     fileprivate func performLogin() {
 
         self.resetFields()
-        UserAccountsManager.userAccounts.loadUserAccountsFromConfig()
         self.performSegue(withIdentifier: loginSegueIdentifier, sender: self)
     }
 

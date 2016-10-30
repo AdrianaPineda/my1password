@@ -69,7 +69,6 @@ class AccountInfoTableViewController: UITableViewController {
 
     fileprivate var viewType: ViewType = .add
 
-    fileprivate let userAccountsManager = UserAccountsManager.userAccounts
     fileprivate var currentAccount: Account? = nil
 
     // MARK: - Outlets

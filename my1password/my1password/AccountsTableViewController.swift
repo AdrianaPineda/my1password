@@ -20,7 +20,6 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     let addAccountSelector: Selector = #selector(AccountsTableViewController.addAccount)
 
     // MARK: - Properties
-    var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     fileprivate let accountsUseCase = AccountsUseCase()
 
     var user: User? = UserUseCase().loadUser()
