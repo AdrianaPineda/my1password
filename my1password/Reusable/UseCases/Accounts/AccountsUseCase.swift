@@ -11,37 +11,36 @@ import CoreData
 
 class AccountsUseCase: NSObject {
 
-    fileprivate let accountEntityName = "Account"
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
     func loadAccounts() -> [Account] {
 
         let managedContext = appDelegate.managedObjectContext
 
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: accountEntityName)
+        let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
 
         do {
 
-            if let results = try managedContext.fetch(fetchRequest) as? [Account] {
-                return results
-            }
+            return try managedContext.fetch(fetchRequest)
 
         } catch {
             return []
         }
 
-        return []
     }
 
     func addAccount(_ username: String, password: String, url: String) -> Bool {
 
         let managedContext = appDelegate.managedObjectContext
-        let entity = NSEntityDescription.entity(forEntityName: accountEntityName, in: managedContext)
 
-        let account = NSManagedObject(entity: entity!, insertInto: managedContext)
-        account.setValue(username, forKey: "username")
-        account.setValue(password, forKey: "password")
-        account.setValue(username, forKey: "url")
+        guard let entity = Account.entity(forManagedContext: managedContext) else {
+            return false
+        }
+
+        let account = Account(entity: entity, insertInto: managedContext)
+        account.username = username
+        account.password = password
+        account.url = url
 
         do {
 
@@ -53,11 +52,11 @@ class AccountsUseCase: NSObject {
         }
     }
     
-    func updateAccount(_ account: NSManagedObject, username: String, password: String, url: String) -> Bool {
+    func updateAccount(_ account: Account, username: String, password: String, url: String) -> Bool {
         
-        account.setValue(username, forKey: "username")
-        account.setValue(password, forKey: "password")
-        account.setValue(username, forKey: "url")
+        account.username = username
+        account.password = password
+        account.url = url
         
         do {
             

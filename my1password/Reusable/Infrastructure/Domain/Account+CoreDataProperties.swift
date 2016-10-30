@@ -12,8 +12,14 @@ import CoreData
 
 extension Account {
 
+    private static let accountEntityName = "Account"
+
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Account> {
-        return NSFetchRequest<Account>(entityName: "Account");
+        return NSFetchRequest<Account>(entityName: accountEntityName);
+    }
+
+    public class func entity(forManagedContext managedContext: NSManagedObjectContext) -> NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: accountEntityName, in: managedContext)
     }
 
     @NSManaged public var password: String?
