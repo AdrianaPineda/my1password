@@ -23,6 +23,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     var userAccountsManager: UserAccountsManager = UserAccountsManager.userAccounts
     fileprivate let accountsUseCase = AccountsUseCase()
 
+    var user: User? = UserUseCase().loadUser()
     var accounts = [Account]()
     var filteredAccounts = [Account]()
 
@@ -58,7 +59,7 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     fileprivate func configureUI() {
 
         // Load accounts
-        accounts = accountsUseCase.loadAccounts()
+        accounts = accountsUseCase.loadAccounts(forUser: user)
 
         // Configure right bar button
         self.configureRightBarButton()

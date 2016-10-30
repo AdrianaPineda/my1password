@@ -13,11 +13,15 @@ class AccountsUseCase: NSObject {
 
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    func loadAccounts() -> [Account] {
+    func loadAccounts(forUser user:User?) -> [Account] {
 
         let managedContext = appDelegate.managedObjectContext
 
         let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
+
+        if let user = user {
+            fetchRequest.predicate = NSPredicate(format: "user=%@", user)
+        }
 
         do {
 

@@ -191,4 +191,5 @@ class UserAccountsManager: NSObject {
 
         return false
     }
+
 }

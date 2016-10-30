@@ -36,6 +36,8 @@ class RegisterViewController: UIViewController {
     fileprivate var currentMasterPassword: String = ""
     fileprivate var currentStep: RegistrationStep = RegistrationStep.firstPassword
 
+    fileprivate let userUseCase: UserUseCase = UserUseCase()
+
     fileprivate enum RegistrationStep {
         case firstPassword
         case secondPassword
@@ -134,7 +136,12 @@ class RegisterViewController: UIViewController {
 
     fileprivate func configurePassword() {
 
-        UserAccountsManager.userAccounts.configureUser(withEmail: self.currentEmail, andPassword: self.currentMasterPassword)
+        let saveResult = userUseCase.saveUser(username: self.currentEmail, password: self.currentMasterPassword)
+
+        if !saveResult {
+            return
+        }
+
         self.currentStep = RegistrationStep.finish
         self.performSegue(withIdentifier: toUserHomeSegueId, sender: self)
 
