@@ -74,7 +74,7 @@ class LoginViewController: UIViewController {
             return false
         }
 
-        let passwordValid = UserUseCase().isMasterPasswordValid(password: self.password.text!)
+        let passwordValid = UserUseCase().isMasterPasswordValid(password: self.password.text!, forUser: "a")
         return passwordValid
 
     }

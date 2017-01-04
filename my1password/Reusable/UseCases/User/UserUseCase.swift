@@ -48,13 +48,18 @@ class UserUseCase: NSObject {
         return false
     }
 
-    func isMasterPasswordValid(password: String) -> Bool {
+    func isMasterPasswordValid(password: String, forUser user: String) -> Bool {
 
         guard let data: [String: Any] = Locksmith.loadDataForUserAccount(userAccount: keychainServiceId) else {
             return false
         }
-        // TODO: support several users
+
         for key in data.keys {
+            
+            if key != user {
+                continue
+            }
+
             if data[key] as? String == password {
                 return true
             }
