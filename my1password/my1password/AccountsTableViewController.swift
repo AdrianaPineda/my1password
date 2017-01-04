@@ -22,7 +22,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
     // MARK: - Properties
     fileprivate let accountsUseCase = AccountsUseCase()
 
-    var user: User? = UserUseCase().loadUser()
+    var username: String?
+    fileprivate var user: User?
     var accounts = [Account]()
     var filteredAccounts = [Account]()
 
@@ -57,6 +58,8 @@ class AccountsTableViewController: UITableViewController, ReloadTableViewDelegat
 
     fileprivate func configureUI() {
 
+        // Load user
+        user = UserUseCase().loadUser(withUsername: username)
         // Load accounts
         accounts = accountsUseCase.loadAccounts(forUser: user)
 

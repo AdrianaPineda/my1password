@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SSKeychain
 import CoreData
 
 @UIApplicationMain

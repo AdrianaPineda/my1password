@@ -50,13 +50,13 @@ class UserUseCase: NSObject {
 
     func isMasterPasswordValid(password: String, forUser user: String) -> Bool {
 
-        guard let data: [String: Any] = Locksmith.loadDataForUserAccount(userAccount: keychainServiceId) else {
+        guard let data: [String: Any] = Locksmith.loadDataForUserAccount(userAccount: user) else {
             return false
         }
 
         for key in data.keys {
             
-            if key != user {
+            if key != "password" {
                 continue
             }
 
@@ -72,7 +72,7 @@ class UserUseCase: NSObject {
 
         do {
 
-            try Locksmith.saveData(data: [key: data], forUserAccount: keychainServiceId)
+            try Locksmith.saveData(data: ["password": data], forUserAccount: key)
 
             return true
 
@@ -83,7 +83,11 @@ class UserUseCase: NSObject {
         }
     }
 
-    func loadUser() -> User? {
+    func loadUser(withUsername username: String?) -> User? {
+
+        guard let username = username else {
+            return nil
+        }
 
         if let user = self.user {
             return user
@@ -95,9 +99,15 @@ class UserUseCase: NSObject {
 
         do {
 
-            let user = try managedContext.fetch(fetchRequest)
+            let users = try managedContext.fetch(fetchRequest)
 
-            return user[0]
+            for currentUser in users {
+                if currentUser.username == username {
+                    return currentUser
+                }
+            }
+
+           return nil
 
         } catch {
             return nil
