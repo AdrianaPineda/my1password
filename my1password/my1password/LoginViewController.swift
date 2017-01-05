@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SSKeychain
 
 class LoginViewController: UIViewController {
 
@@ -20,6 +19,7 @@ class LoginViewController: UIViewController {
     fileprivate let okAlertActionTitle: String = "OK"
 
     // MARK: - Properties
+    @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
 
     // MARK: - Lifecycle
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
 
     // MARK: - Configure UI
     fileprivate func configureUI() {
-        self.password.becomeFirstResponder()
+        self.username.becomeFirstResponder()
     }
 
     // MARK: - Login
@@ -70,22 +70,40 @@ class LoginViewController: UIViewController {
     // MARK: Validate fields
     fileprivate func areFieldsValid() -> Bool {
 
-        if self.isPasswordEmpty(){
+        guard isUsernameValid() && isPasswordValid() else {
             return false
         }
 
-        let passwordValid = UserUseCase().isMasterPasswordValid(password: self.password.text!)
+        let passwordValid = UserUseCase().isMasterPasswordValid(password: self.password.text!, forUser: username.text!)
         return passwordValid
 
     }
 
-    fileprivate func isPasswordEmpty() -> Bool {
+    fileprivate func isUsernameValid() -> Bool {
 
-        if password.text == "" {
-            return true
+        guard let currentUsernameText = username.text else {
+            return false
         }
 
-        return false
+        if currentUsernameText.isEmpty {
+            return false
+        }
+
+        return true
+
+    }
+
+    fileprivate func isPasswordValid() -> Bool {
+
+        guard let currentPasswordText = password.text else {
+            return false
+        }
+
+        if currentPasswordText.isEmpty {
+            return false
+        }
+
+        return true
 
     }
 
@@ -95,6 +113,7 @@ class LoginViewController: UIViewController {
     }
 
     fileprivate func hideKeyBoard() -> Void {
+        self.username.resignFirstResponder()
         self.password.resignFirstResponder()
     }
 
@@ -108,6 +127,28 @@ class LoginViewController: UIViewController {
         alertController.addAction(alertAction)
 
         self.present(alertController, animated: true, completion: nil)
+    }
+
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == loginSegueIdentifier {
+
+            guard let userHomeTabBarController: UserHomeTabBarController = segue.destination as? UserHomeTabBarController else {
+                return
+            }
+
+            let controllers = userHomeTabBarController.childViewControllers
+
+            for controller in controllers {
+                guard let accountsViewController: AccountsTableViewController = controller as? AccountsTableViewController else {
+                    continue
+                }
+
+                accountsViewController.username = username.text
+            }
+
+        }
     }
 
 }
