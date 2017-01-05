@@ -14,26 +14,42 @@ class AccountsAPI: NSObject {
     fileprivate let apiServerUrl = "www.localhost.com"
     fileprivate let accountsEndpoint = "%@/users/%@/accounts"
 
-    func getAccounts(forUser userId: String, handler: @escaping ((Response?) -> (Void))) {
+    func getAccounts(forUser userId: String, handler: @escaping (([String: Any]?) -> (Void))) {
 
         let getAccountsUrl = String(format: accountsEndpoint, apiServerUrl, userId)
 
+        var request: HTTP
+
         do {
 
-            let request = try HTTP.GET(getAccountsUrl)
-            request.start { response in
+            request = try HTTP.GET(getAccountsUrl)
 
-                if let err = response.error {
-                    print("Error \(err.localizedDescription)")
-                    handler(nil)
+        } catch {
+            print("Error creating GET request")
+            handler(nil)
+            return
+        }
+
+        request.start { [unowned self] response in
+            if let err = response.error {
+                print("Error \(err.localizedDescription)")
+                handler(nil)
+                return
+            }
+
+            let responseData = response.data
+
+            do {
+
+                if let responseAsDictionary = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as? [String: Any] {
+                    handler(responseAsDictionary)
                     return
                 }
 
-                handler(response)
-
+            } catch {
+                print("Error parsing response to dictionary")
             }
 
-        } catch {
             handler(nil)
             return
         }
