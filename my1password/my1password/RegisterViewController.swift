@@ -136,7 +136,7 @@ class RegisterViewController: UIViewController {
 
     fileprivate func configurePassword() {
 
-        let saveResult = userUseCase.saveUser(username: self.currentEmail, password: self.currentMasterPassword)
+        let saveResult = userUseCase.saveUser(id: 1, username: self.currentEmail, password: self.currentMasterPassword)
 
         if !saveResult {
             return

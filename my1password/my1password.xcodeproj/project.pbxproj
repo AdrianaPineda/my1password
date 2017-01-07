@@ -34,6 +34,9 @@
 		7AB4EDE81DC58A26002FD5A8 /* my1password.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDE61DC58A26002FD5A8 /* my1password.xcdatamodeld */; };
 		7AB4EDEB1DC58A8F002FD5A8 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDE91DC58A8F002FD5A8 /* User+CoreDataClass.swift */; };
 		7AB4EDEC1DC58A8F002FD5A8 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDEA1DC58A8F002FD5A8 /* User+CoreDataProperties.swift */; };
+		7AD67DCD1E21717F0004C78F /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD67DCC1E21717F0004C78F /* SwiftHTTP.framework */; };
+		7AD67DCE1E21718A0004C78F /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD67DCC1E21717F0004C78F /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AD67DD01E2174C40004C78F /* UserAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD67DCF1E2174C40004C78F /* UserAPIClient.swift */; };
 		7AFECF321A927101001EF48C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFECF311A927101001EF48C /* AppDelegate.swift */; };
 		7AFECF371A927101001EF48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF351A927101001EF48C /* Main.storyboard */; };
 		7AFECF391A927101001EF48C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFECF381A927101001EF48C /* Images.xcassets */; };
@@ -70,6 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				7AD67DCE1E21718A0004C78F /* SwiftHTTP.framework in Embed Frameworks */,
 				7A690E701DC4F0F500CD28C3 /* Locksmith.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -109,6 +113,8 @@
 		7AB4EDE71DC58A26002FD5A8 /* my1password.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = my1password.xcdatamodel; sourceTree = "<group>"; };
 		7AB4EDE91DC58A8F002FD5A8 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7AB4EDEA1DC58A8F002FD5A8 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7AD67DCC1E21717F0004C78F /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
+		7AD67DCF1E2174C40004C78F /* UserAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIClient.swift; sourceTree = "<group>"; };
 		7AFECF2C1A927101001EF48C /* my1password.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my1password.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFECF301A927101001EF48C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFECF311A927101001EF48C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AD67DCD1E21717F0004C78F /* SwiftHTTP.framework in Frameworks */,
 				7A690E6F1DC4F0EA00CD28C3 /* Locksmith.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				7A15A8361DC58FB3004E1B60 /* UserUseCase.swift */,
+				7AD67DCF1E2174C40004C78F /* UserAPIClient.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -315,6 +323,7 @@
 		7AFECF231A927101001EF48C = {
 			isa = PBXGroup;
 			children = (
+				7AD67DCC1E21717F0004C78F /* SwiftHTTP.framework */,
 				7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */,
 				7AFECF2E1A927101001EF48C /* my1password */,
 				7A096DD01DAF2F0C00768A2F /* Reusable */,
@@ -493,6 +502,7 @@
 			files = (
 				7AFECF571A92A650001EF48C /* RegisterViewController.swift in Sources */,
 				0125EA5F1C7A52060042B2D9 /* ReloadTableViewDelegate.swift in Sources */,
+				7AD67DD01E2174C40004C78F /* UserAPIClient.swift in Sources */,
 				01198F1C1AFFFDDB0036321A /* AccountInfoTableViewController.swift in Sources */,
 				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
 				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
