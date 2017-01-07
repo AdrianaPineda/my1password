@@ -11,7 +11,7 @@ import SwiftHTTP
 
 class AccountsAPI: NSObject {
 
-    fileprivate let apiServerUrl = "www.localhost.com"
+    fileprivate let apiServerUrl = "www.localhost.com:8080"
     fileprivate let accountsEndpoint = "%@/users/%@/accounts"
 
     // MARK: - GET
