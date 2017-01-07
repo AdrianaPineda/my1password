@@ -14,7 +14,13 @@ class AccountsAPI: NSObject {
     fileprivate let apiServerUrl = "www.localhost.com"
     fileprivate let accountsEndpoint = "%@/users/%@/accounts"
 
-    func getAccounts(forUser userId: String, handler: @escaping (([String: Any]?) -> (Void))) {
+    // MARK: - GET
+    func getAccountsFromDictionary(dict: [String: Any]) -> [Account] {
+
+        return []
+    }
+
+    func getAccounts(forUser userId: String, handler: @escaping (([Account]?) -> (Void))) {
 
         let getAccountsUrl = String(format: accountsEndpoint, apiServerUrl, userId)
 
@@ -42,7 +48,9 @@ class AccountsAPI: NSObject {
             do {
 
                 if let responseAsDictionary = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as? [String: Any] {
-                    handler(responseAsDictionary)
+
+                    let accounts = self.getAccountsFromDictionary(dict: responseAsDictionary)
+                    handler(accounts)
                     return
                 }
 
@@ -53,5 +61,10 @@ class AccountsAPI: NSObject {
             handler(nil)
             return
         }
+    }
+
+    // MARK: - ADD
+    func addAccount() {
+
     }
 }
