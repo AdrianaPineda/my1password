@@ -23,6 +23,7 @@ extension User {
         return NSEntityDescription.entity(forEntityName: userEntityName, in: managedContext)
     }
 
+    @NSManaged public var id: NSNumber?
     @NSManaged public var username: String?
     @NSManaged public var accounts: Account?
 

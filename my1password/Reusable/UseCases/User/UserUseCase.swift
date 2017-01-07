@@ -18,7 +18,7 @@ class UserUseCase: NSObject {
 
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    func saveUser(username: String, password: String) -> Bool {
+    func saveUser(id: NSNumber, username: String, password: String) -> Bool {
 
         let managedContext = appDelegate.managedObjectContext
 
@@ -27,6 +27,7 @@ class UserUseCase: NSObject {
         }
 
         let user = User(entity: entity, insertInto: managedContext)
+        user.id = id
         user.username = username
 
         do {
@@ -42,7 +43,6 @@ class UserUseCase: NSObject {
 
         } catch {
             NSLog("ERROR")
-            return false
         }
 
         return false
