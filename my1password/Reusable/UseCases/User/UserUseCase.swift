@@ -19,52 +19,59 @@ class UserUseCase: NSObject {
 
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    func saveUser(userDTO: UserDTO, handler: @escaping ((Bool) -> (Void))) {
+    func saveUserLocally(userDTO: UserDTO) -> Bool {
+
+        guard let userId = userDTO.getId() else {
+            return false
+        }
+
+        let managedContext = self.appDelegate.managedObjectContext
+
+        guard let entity = User.entity(forManagedContext: managedContext) else {
+            return false
+        }
+
+        let user = User(entity: entity, insertInto: managedContext)
+        user.id = NSNumber(integerLiteral: userId)
+        user.username = userDTO.getUsername()
+
+        do {
+
+            try managedContext.save()
+
+            let sensitiveDataSaved = self.saveSensitiveData(userDTO.getPassword(), forKey: userDTO.getUsername())
+
+            if sensitiveDataSaved {
+                self.user = user
+                return true
+            }
+
+        } catch {
+            NSLog("ERROR")
+        }
+
+        return false
+
+    }
+
+    func createUser(userDTO: UserDTO, handler: @escaping ((Bool) -> (Void))) {
 
         // Make API call to create user
-        usersAPI.addUser(userDTO: userDTO) { [unowned self] (userId) -> (Void) in
+        usersAPI.createUser(userDTO: userDTO) { [unowned self] (userId) -> (Void) in
 
-            guard let userId = userId else {
-                handler(false)
-                return
-            }
-
-            let managedContext = self.appDelegate.managedObjectContext
-
-            guard let entity = User.entity(forManagedContext: managedContext) else {
-                handler(false)
-                return
-            }
-
-            let user = User(entity: entity, insertInto: managedContext)
-            user.id = NSNumber(integerLiteral: userId)
-            user.username = userDTO.getUsername()
-
-            do {
-
-                try managedContext.save()
-
-                let sensitiveDataSaved = self.saveSensitiveData(userDTO.getPassword(), forKey: userDTO.getUsername())
-
-                if sensitiveDataSaved {
-                    self.user = user
-                    handler(true)
-                    return
-                }
-
-            } catch {
-                NSLog("ERROR")
-            }
-
-            handler(false)
+            // Save user locally
+            let userSavedLocally = self.saveUserLocally(userDTO: userDTO)
+            handler(userSavedLocally)
 
         }
     }
 
-    func isMasterPasswordValid(password: String, forUser user: String) -> Bool {
+    func isMasterPasswordValid(password: String, forUser user: String, handler: @escaping ((Bool) -> (Void))) {
 
+        // 1. Check if user has been saved locally
         guard let data: [String: Any] = Locksmith.loadDataForUserAccount(userAccount: user) else {
-            return false
+            handler(false)
+            return
         }
 
         for key in data.keys {
@@ -74,11 +81,24 @@ class UserUseCase: NSObject {
             }
 
             if data[key] as? String == password {
-                return true
+                handler(true)
+                return
             }
         }
 
-        return false
+        // 2. Make API to get user
+        usersAPI.getUser(withUsername: user) { [unowned self] (user) -> (Void) in
+
+            if let user = user {
+                let userSavedLocally = self.saveUserLocally(userDTO: user)
+                handler(userSavedLocally)
+                return
+            }
+
+        }
+
+        handler(false)
+        return
     }
 
     fileprivate func saveSensitiveData(_ data: String, forKey key: String) -> Bool {

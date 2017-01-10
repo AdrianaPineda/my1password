@@ -44,14 +44,23 @@ class LoginViewController: UIViewController {
         self.hideKeyBoard()
 
         // Validate fields
-        if !self.areFieldsValid() {
-            self.resetFields()
-            self.showIvalidPasswordAlert()
-            return
-        }
+        self.areFieldsValid { [weak self] (success) -> (Void) in
 
-        // Login user
-        self.performLogin()
+            // Login user
+            if success {
+                DispatchQueue.main.async {
+                    self?.performLogin()
+                }
+
+                return
+            }
+
+            DispatchQueue.main.async {
+                self?.resetFields()
+                self?.showIvalidPasswordAlert()
+            }
+
+        }
 
     }
 
@@ -68,14 +77,14 @@ class LoginViewController: UIViewController {
     }
 
     // MARK: Validate fields
-    fileprivate func areFieldsValid() -> Bool {
+    fileprivate func areFieldsValid(handler: @escaping ((Bool) -> (Void))) {
 
         guard isUsernameValid() && isPasswordValid() else {
-            return false
+            handler(false)
+            return
         }
 
-        let passwordValid = UserUseCase().isMasterPasswordValid(password: self.password.text!, forUser: username.text!)
-        return passwordValid
+        UserUseCase().isMasterPasswordValid(password: self.password.text!, forUser: username.text!, handler: handler)
 
     }
 

@@ -138,7 +138,7 @@ class RegisterViewController: UIViewController {
 
         // TODO > Loading indicator
         let userDTO = UserDTO(withUsername: self.currentEmail, password: self.currentMasterPassword)
-        userUseCase.saveUser(userDTO: userDTO) {
+        userUseCase.createUser(userDTO: userDTO) {
             [weak self] (success) -> (Void) in
 
             guard success else {
