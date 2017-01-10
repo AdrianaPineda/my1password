@@ -22,8 +22,7 @@ class UserUseCase: NSObject {
     func saveUser(username: String, password: String, handler: @escaping ((Bool) -> (Void))) {
 
         // Make API call to create user
-        let user = UserDTO(withUserName: username, password: password)
-        usersAPI.addUser(user: user) { [unowned self] (userId) -> (Void) in
+        usersAPI.addUser(username: username, password: password) { [unowned self] (userId) -> (Void) in
 
             guard let userId = userId else {
                 handler(false)
