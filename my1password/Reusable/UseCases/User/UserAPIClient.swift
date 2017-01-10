@@ -14,7 +14,7 @@ class UserAPIClient: NSObject {
     fileprivate let apiServerUrl = "http://localhost:8080"
     fileprivate let usersEndpoint = "%@/users"
 
-    func addUser(username: String, password: String,  handler: @escaping ((Int?) -> (Void))) {
+    func addUser(username: String, password: String, handler: @escaping ((Int?) -> (Void))) {
 
         let createUserUrl = String(format: usersEndpoint, apiServerUrl)
 
