@@ -11,10 +11,10 @@ import SwiftHTTP
 
 class UserAPIClient: NSObject {
 
-    fileprivate let apiServerUrl = "www.localhost.com:8080"
+    fileprivate let apiServerUrl = "http://localhost:8080"
     fileprivate let usersEndpoint = "%@/users"
 
-    func addUser(user: User,  handler: @escaping ((Int?) -> (Void))) {
+    func addUser(user: UserDTO,  handler: @escaping ((Int?) -> (Void))) {
 
         let createUserUrl = String(format: usersEndpoint, apiServerUrl)
 
@@ -22,17 +22,18 @@ class UserAPIClient: NSObject {
 
         do {
 
-            request = try HTTP.POST(createUserUrl)
+            let params = ["username": user.getUserName(), "password": user.getPassword()]
+            request = try HTTP.POST(createUserUrl, parameters: params, requestSerializer: JSONParameterSerializer())
 
         } catch {
-            print("Error creating GET request")
+            print("Error creating POST request")
             handler(nil)
             return
         }
 
         request.start { response in
             if let err = response.error {
-                print("Error \(err.localizedDescription)")
+                print("Error \(err.description)")
                 handler(nil)
                 return
             }
@@ -43,16 +44,22 @@ class UserAPIClient: NSObject {
 
                 if let responseAsDictionary = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as? [String: Any] {
 
-                    if let userId: Int = responseAsDictionary["user_id"] as? Int {
+                    guard let user: [String: Any] = responseAsDictionary["user"] as? [String: Any]  else {
+                        handler(nil)
+                        return
+                    }
+
+                    if let userId = user["id"] as? Int {
                         handler(userId)
+                        return
                     }
                 }
 
             } catch {
                 print("Error parsing response to dictionary")
+                handler(nil)
             }
 
-            handler(nil)
             return
         }
     }

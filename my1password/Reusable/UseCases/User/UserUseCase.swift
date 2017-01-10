@@ -13,39 +13,53 @@ import Locksmith
 class UserUseCase: NSObject {
 
     fileprivate var user: User? = nil
+    fileprivate let usersAPI = UserAPIClient()
 
     let keychainServiceId: String = "com.adrianapineda"
 
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    func saveUser(id: NSNumber, username: String, password: String) -> Bool {
+    func saveUser(username: String, password: String, handler: @escaping ((Bool) -> (Void))) {
 
-        let managedContext = appDelegate.managedObjectContext
+        // Make API call to create user
+        let user = UserDTO(withUserName: username, password: password)
+        usersAPI.addUser(user: user) { [unowned self] (userId) -> (Void) in
 
-        guard let entity = User.entity(forManagedContext: managedContext) else {
-            return false
-        }
-
-        let user = User(entity: entity, insertInto: managedContext)
-        user.id = id
-        user.username = username
-
-        do {
-
-            try managedContext.save()
-
-            let sensitiveDataSaved = self.saveSensitiveData(password, forKey: username)
-
-            if sensitiveDataSaved {
-                self.user = user
-                return true
+            guard let userId = userId else {
+                handler(false)
+                return
             }
 
-        } catch {
-            NSLog("ERROR")
-        }
+            let managedContext = self.appDelegate.managedObjectContext
 
-        return false
+            guard let entity = User.entity(forManagedContext: managedContext) else {
+                handler(false)
+                return
+            }
+
+            let user = User(entity: entity, insertInto: managedContext)
+            user.id = NSNumber(integerLiteral: userId)
+            user.username = username
+
+            do {
+
+                try managedContext.save()
+
+                let sensitiveDataSaved = self.saveSensitiveData(password, forKey: username)
+
+                if sensitiveDataSaved {
+                    self.user = user
+                    handler(true)
+                    return
+                }
+
+            } catch {
+                NSLog("ERROR")
+            }
+
+            handler(false)
+
+        }
     }
 
     func isMasterPasswordValid(password: String, forUser user: String) -> Bool {
