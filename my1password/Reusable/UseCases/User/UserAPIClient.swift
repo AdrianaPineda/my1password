@@ -14,7 +14,7 @@ class UserAPIClient: NSObject {
     fileprivate let apiServerUrl = "http://localhost:8080"
     fileprivate let usersEndpoint = "%@/users"
 
-    func addUser(username: String, password: String, handler: @escaping ((Int?) -> (Void))) {
+    func addUser(userDTO: UserDTO, handler: @escaping ((Int?) -> (Void))) {
 
         let createUserUrl = String(format: usersEndpoint, apiServerUrl)
 
@@ -22,7 +22,7 @@ class UserAPIClient: NSObject {
 
         do {
 
-            let params = ["username": username, "password": password]
+            let params = ["username": userDTO.getUsername(), "password": userDTO.getPassword()]
             request = try HTTP.POST(createUserUrl, parameters: params, requestSerializer: JSONParameterSerializer())
 
         } catch {

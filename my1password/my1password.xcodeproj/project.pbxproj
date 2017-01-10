@@ -18,6 +18,7 @@
 		7A096DD31DAF2F6E00768A2F /* AccountsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */; };
 		7A15A8321DC58CD3004E1B60 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4EDE91DC58A8F002FD5A8 /* User+CoreDataClass.swift */; };
 		7A15A8371DC58FB3004E1B60 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A15A8361DC58FB3004E1B60 /* UserUseCase.swift */; };
+		7A2D0E561E24894200FCC6F8 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2D0E551E24894200FCC6F8 /* UserDTO.swift */; };
 		7A690E6F1DC4F0EA00CD28C3 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; };
 		7A690E701DC4F0F500CD28C3 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A84D29A1AC0B98E00B111DA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */; };
@@ -98,6 +99,7 @@
 		7A01C3D61A92B52700905C16 /* UserHomeTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHomeTabBarController.swift; sourceTree = "<group>"; };
 		7A096DD21DAF2F6E00768A2F /* AccountsUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsUseCase.swift; sourceTree = "<group>"; };
 		7A15A8361DC58FB3004E1B60 /* UserUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		7A2D0E551E24894200FCC6F8 /* UserDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		7A690E6E1DC4F0EA00CD28C3 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		7A84D2991AC0B98E00B111DA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		7AB4EDC31DC4F773002FD5A8 /* my1password.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = my1password.entitlements; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				7A15A8361DC58FB3004E1B60 /* UserUseCase.swift */,
 				7AD67DCF1E2174C40004C78F /* UserAPIClient.swift */,
+				7A2D0E551E24894200FCC6F8 /* UserDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				01198F1C1AFFFDDB0036321A /* AccountInfoTableViewController.swift in Sources */,
 				7A01C3D71A92B52700905C16 /* UserHomeTabBarController.swift in Sources */,
 				01B7DACE1B0026FE00421693 /* SettingsTableViewController.swift in Sources */,
+				7A2D0E561E24894200FCC6F8 /* UserDTO.swift in Sources */,
 				7AFECF551A92941C001EF48C /* LoginViewController.swift in Sources */,
 				7AB4EDC51DC571C9002FD5A8 /* AccountsAPI.swift in Sources */,
 				7A096DD31DAF2F6E00768A2F /* AccountsUseCase.swift in Sources */,

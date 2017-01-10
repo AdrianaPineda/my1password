@@ -137,8 +137,8 @@ class RegisterViewController: UIViewController {
     fileprivate func configurePassword() {
 
         // TODO > Loading indicator
-
-        userUseCase.saveUser(username: self.currentEmail, password: self.currentMasterPassword) {
+        let userDTO = UserDTO(withUsername: self.currentEmail, password: self.currentMasterPassword)
+        userUseCase.saveUser(userDTO: userDTO) {
             [weak self] (success) -> (Void) in
 
             guard success else {

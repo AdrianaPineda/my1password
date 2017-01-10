@@ -19,10 +19,10 @@ class UserUseCase: NSObject {
 
     fileprivate let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    func saveUser(username: String, password: String, handler: @escaping ((Bool) -> (Void))) {
+    func saveUser(userDTO: UserDTO, handler: @escaping ((Bool) -> (Void))) {
 
         // Make API call to create user
-        usersAPI.addUser(username: username, password: password) { [unowned self] (userId) -> (Void) in
+        usersAPI.addUser(userDTO: userDTO) { [unowned self] (userId) -> (Void) in
 
             guard let userId = userId else {
                 handler(false)
@@ -38,13 +38,13 @@ class UserUseCase: NSObject {
 
             let user = User(entity: entity, insertInto: managedContext)
             user.id = NSNumber(integerLiteral: userId)
-            user.username = username
+            user.username = userDTO.getUsername()
 
             do {
 
                 try managedContext.save()
 
-                let sensitiveDataSaved = self.saveSensitiveData(password, forKey: username)
+                let sensitiveDataSaved = self.saveSensitiveData(userDTO.getPassword(), forKey: userDTO.getUsername())
 
                 if sensitiveDataSaved {
                     self.user = user
