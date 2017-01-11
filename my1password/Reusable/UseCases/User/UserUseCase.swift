@@ -66,39 +66,53 @@ class UserUseCase: NSObject {
         }
     }
 
-    func isMasterPasswordValid(password: String, forUser user: String, handler: @escaping ((Bool) -> (Void))) {
+    func isUserSavedLocally(password: String, user: String) -> Bool {
 
-        // 1. Check if user has been saved locally
         guard let data: [String: Any] = Locksmith.loadDataForUserAccount(userAccount: user) else {
-            handler(false)
-            return
+            return false
         }
 
         for key in data.keys {
-            
+
             if key != "password" {
                 continue
             }
 
             if data[key] as? String == password {
-                handler(true)
-                return
+                return true
             }
+        }
+
+        return false
+    }
+
+    func isMasterPasswordValid(password: String, forUser user: String, handler: @escaping ((Bool) -> (Void))) {
+
+        // 1. Check if user has been saved locally
+        if isUserSavedLocally(password: password, user: user) {
+            handler(true)
+            return
         }
 
         // 2. Make API to get user
         usersAPI.getUser(withUsername: user) { [unowned self] (user) -> (Void) in
 
-            if let user = user {
-                let userSavedLocally = self.saveUserLocally(userDTO: user)
-                handler(userSavedLocally)
+            guard let user = user else {
+                handler(false)
                 return
             }
 
+            guard user.getPassword() == password else {
+                handler(false)
+                return
+            }
+
+            let userSavedLocally = self.saveUserLocally(userDTO: user)
+            handler(userSavedLocally)
+            return
+
         }
 
-        handler(false)
-        return
     }
 
     fileprivate func saveSensitiveData(_ data: String, forKey key: String) -> Bool {
