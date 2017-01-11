@@ -136,14 +136,25 @@ class RegisterViewController: UIViewController {
 
     fileprivate func configurePassword() {
 
-        let saveResult = userUseCase.saveUser(username: self.currentEmail, password: self.currentMasterPassword)
+        // TODO > Loading indicator
+        let userDTO = UserDTO(withUsername: self.currentEmail, password: self.currentMasterPassword)
+        userUseCase.createUser(userDTO: userDTO) {
+            [weak self] (success) -> (Void) in
 
-        if !saveResult {
-            return
+            guard success else {
+                return
+            }
+
+            self?.currentStep = RegistrationStep.finish
+
+            if let toUserHomeSegueId = self?.toUserHomeSegueId {
+                DispatchQueue.main.async {
+                    self?.performSegue(withIdentifier: toUserHomeSegueId, sender: self)
+                }
+
+            }
+
         }
-
-        self.currentStep = RegistrationStep.finish
-        self.performSegue(withIdentifier: toUserHomeSegueId, sender: self)
 
     }
 

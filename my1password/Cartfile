@@ -1,2 +1,3 @@
 github "soffes/SAMKeychain"
 github "matthewpalmer/Locksmith"
+github "daltoniam/SwiftHTTP"
