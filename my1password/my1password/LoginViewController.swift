@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    fileprivate let userUseCase = UserUseCase()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -84,7 +85,7 @@ class LoginViewController: UIViewController {
             return
         }
 
-        UserUseCase().isMasterPasswordValid(password: self.password.text!, forUser: username.text!, handler: handler)
+        userUseCase.isMasterPasswordValid(password: self.password.text!, forUser: username.text!, handler: handler)
 
     }
 
